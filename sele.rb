@@ -28,4 +28,8 @@ item_price = d.find_element(:class,'item-price')
 puts item_price.text
 
 
+
+
+
+
 sleep 300
