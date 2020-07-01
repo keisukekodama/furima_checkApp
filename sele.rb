@@ -43,6 +43,13 @@ else
 end
 
 
+d.find_element(:class,"item-red-btn").click
 
+if /ログイン/ .match(d.page_source)
+  puts "◯ログインしていないユーザーは、商品の購入ボタンを押すと、ログインページへ遷移する" 
+else
+  puts "☒ログインしていないユーザーは、商品の購入ボタンを押すと、ログインページへ遷移しない" 
+  wait
+end
 
 sleep 300
