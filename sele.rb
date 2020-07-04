@@ -2,11 +2,11 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
-user_nickname = "社会人デビュ"
-user_email = "divde2@co.jp"
+user_nickname = "社会人ビュ"
+user_email = "divde2d@co.jp"
 user_password = "aaa111"
-user_first_name = "社会回"
-user_last_name = "出対回"
+user_first_name = "社回"
+user_last_name = "出回"
 user_first_name_kana = "シャカ"
 user_last_name_kana = "デタ"
 user_birth_date_1i = "1998"
@@ -16,7 +16,7 @@ user_birth_date_3i = "30"
 # 受講生のURLを記入
 url = "https://furima2020.herokuapp.com/" 
 
- d.get(url)
+d.get(url)
 d.find_element(:class,"purchase-btn").click
 if /ログイン/ .match(d.page_source)
   puts "◯ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移しました"
@@ -89,6 +89,18 @@ else
   wait
 end
 
+d.find_element(:class,"logout").click
+d.find_element(:class,"login").click 
+d.find_element(:id, 'user_email').send_keys(user_email)
+d.find_element(:id, 'user_password').send_keys(user_password)
+d.find_element(:class,"login-red-btn").click
+
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts "◯有効な情報でログインを行うと、トップページへ遷移する" 
+else
+  puts "☒有効な情報でログインを行うがトップページへ遷移しない" 
+  wait
+end
 
 
 
