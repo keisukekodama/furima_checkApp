@@ -13,6 +13,18 @@ user_birth_date_1i = "1998"
 user_birth_date_2i = "9"
 user_birth_date_3i = "30"
 
+item_image = "/Users/tech-camp/Desktop/coat.jpg"
+item_image_name = "coat.jpg"
+item_name = "コート"
+item_info = "今年イチオシのトレンチコート"
+item_category_id = "メンズ"
+item_sales_status_id ="目立った傷や汚れなし"
+item_shipping_fee_status_id = "着払い(購入者負担)"
+item_prefecture_id = "山口県"
+item_scheduled_delivery_id = "2~3日で発送"
+item_price = 40000
+
+blank = "---"
 # 受講生のURLを記入
 url = "https://furima2020.herokuapp.com/" 
 
@@ -102,6 +114,109 @@ else
   wait
 end
 
+
+
+
+
+
+d.find_element(:class,"purchase-btn").click
+
+d.find_element(:id,"item_name").send_keys(item_name) 
+d.find_element(:id,"item_info").send_keys(item_info)
+d.find_element(:id,"item_category_id").send_keys(item_category_id)
+d.find_element(:id,"item_sales_status_id").send_keys(item_sales_status_id)
+d.find_element(:id,"item_shipping_fee_status_id").send_keys(item_shipping_fee_status_id)
+d.find_element(:id,"item_prefecture_id").send_keys(item_prefecture_id)
+d.find_element(:id,"item_scheduled_delivery_id").send_keys(item_scheduled_delivery_id)
+d.find_element(:id,"item_price").send_keys(item_price)
+
+d.find_element(:class,"sell-btn").click
+
+if /Image can't be blank/.match(d.page_source)
+  puts "◯画像なしで商品出品を行うと、商品出品ページにて、エラーメッセージ が表示される" 
+else
+  puts "☒画像なしで商品出品を行っても、商品出品ページにて、エラーメッセージ が表示されない" 
+  wait
+end
+
+
+d.find_element(:id,"item_name").clear 
+d.find_element(:id,"item_info").clear
+d.find_element(:id,"item_category_id").send_keys(blank)
+d.find_element(:id,"item_sales_status_id").send_keys(blank)
+d.find_element(:id,"item_shipping_fee_status_id").send_keys(blank)
+d.find_element(:id,"item_prefecture_id").send_keys(blank)
+d.find_element(:id,"item_scheduled_delivery_id").send_keys(blank)
+d.find_element(:id,"item_price").clear
+
+
+d.find_element(:id,"item_image").send_keys(item_image)
+d.find_element(:id,"item_name").send_keys(item_name) 
+d.find_element(:id,"item_info").send_keys(item_info)
+d.find_element(:id,"item_category_id").send_keys(item_category_id)
+d.find_element(:id,"item_sales_status_id").send_keys(item_sales_status_id)
+
+d.find_element(:id,"item_prefecture_id").send_keys(item_prefecture_id)
+d.find_element(:id,"item_scheduled_delivery_id").send_keys(item_scheduled_delivery_id)
+d.find_element(:id,"item_price").send_keys(item_price)
+
+d.find_element(:class,"sell-btn").click
+
+if /Shipping fee status Select/.match(d.page_source)
+  puts "◯配送料の負担の記入なしで商品出品を行うと、商品出品ページにて、エラーメッセージが表示される" 
+else
+  puts "☒配送料の負担の記入なしで商品出品を行っても、商品出品ページにて、エラーメッセージが表示されない" 
+  wait
+end
+
+
+d.find_element(:id,"item_image").clear 
+d.find_element(:id,"item_name").clear 
+d.find_element(:id,"item_info").clear
+d.find_element(:id,"item_category_id").send_keys(blank)
+d.find_element(:id,"item_sales_status_id").send_keys(blank)
+d.find_element(:id,"item_shipping_fee_status_id").send_keys(blank)
+d.find_element(:id,"item_prefecture_id").send_keys(blank)
+d.find_element(:id,"item_scheduled_delivery_id").send_keys(blank)
+d.find_element(:id,"item_price").clear
+
+d.find_element(:id,"item_image").send_keys(item_image)
+d.find_element(:id,"item_name").send_keys(item_name) 
+d.find_element(:id,"item_info").send_keys(item_info)
+d.find_element(:id,"item_category_id").send_keys(item_category_id)
+d.find_element(:id,"item_sales_status_id").send_keys(item_sales_status_id)
+d.find_element(:id,"item_shipping_fee_status_id").send_keys(item_shipping_fee_status_id)
+d.find_element(:id,"item_prefecture_id").send_keys(item_prefecture_id)
+d.find_element(:id,"item_scheduled_delivery_id").send_keys(item_scheduled_delivery_id)
+d.find_element(:id,"item_price").send_keys(item_price)
+
+d.find_element(:class,"sell-btn").click
+
+
+if /#{item_name}/ .match(d.page_source)
+  puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、商品名が表示されている。" 
+else
+  puts "☒有効な情報を入力すると、商品名が表示されない。" 
+  wait
+end
+
+
+
+if /#{item_image_name}/ .match(d.page_source)
+  puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、画像が表示されている。" 
+else
+  puts "☒有効な情報を入力すると、画像が表示されない" 
+  wait
+end
+
+
+
+if /#{item_price}/.match(d.page_source)
+  puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、商品価格が表示されている。" 
+else
+  puts "☒有効な情報を入力すると、商品価格が表示されない" 
+  wait
+end
 
 
 sleep 300000000000000
