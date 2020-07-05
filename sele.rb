@@ -115,11 +115,6 @@ else
   wait
 end
 
-
-
-
-
-
 d.find_element(:class,"purchase-btn").click
 
 d.find_element(:id,"item_name").send_keys(item_name) 
