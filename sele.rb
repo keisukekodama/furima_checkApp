@@ -168,6 +168,28 @@ else
 end
 
 d.find_element(:class,"item-img-content").click 
+
+if /編集/.match(d.page_source)
+  puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示される" 
+else
+  puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示されない" 
+  wait
+end
+
+if /削除/.match(d.page_source)
+  puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「削除」のリンクが表示される" 
+else
+  puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「削除」のリンクが表示されない" 
+  wait
+end
+
+if /購入画面に進む/.match(d.page_source)
+  puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示される" 
+else
+  puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示されない" 
+  wait
+end
+
 d.find_element(:class,"item-red-btn").click
 
 d.find_element(:id,"item_info").clear
