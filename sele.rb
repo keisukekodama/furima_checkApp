@@ -17,6 +17,7 @@ item_image = "/Users/tech-camp/Desktop/coat.jpg"
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
+item_info_re = "昨年イチオシのトレンチコート"
 item_category_id = "メンズ"
 item_sales_status_id ="目立った傷や汚れなし"
 item_shipping_fee_status_id = "着払い(購入者負担)"
@@ -218,5 +219,26 @@ else
   wait
 end
 
+d.find_element(:class,"item-img-content").click 
+d.find_element(:class,"item-red-btn").click
+
+d.find_element(:id,"item_info").clear
+d.find_element(:class,"sell-btn").click
+if /Info can't be blank/.match(d.page_source)
+  puts "◯無効な情報で商品編集を行うと、商品編集ページにて、エラーメッセージ が表示される。" 
+else
+  puts "☒無効な情報で商品編集を行うと、商品編集ページにて、エラーメッセージ が表示されない" 
+  wait
+end
+
+d.find_element(:id,"item_info").send_keys(item_info_re)
+d.find_element(:class,"sell-btn").click
+
+if /#{item_info_re}/.match(d.page_source)
+  puts "◯有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
+else
+  puts "☒有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
+  wait
+end
 
 sleep 300000000000000
