@@ -35,6 +35,16 @@ item_prefecture_id = "山口県"
 item_scheduled_delivery_id = "2~3日で発送"
 item_price = 40000
 
+item_image2 = "/Users/tech-camp/Desktop/sunglass.jpg"
+item_name2 = "サングラス"
+item_info2 = "限定5品のサングラス"
+item_category_id2 = "メンズ"
+item_sales_status_id2 ="目立った傷や汚れなし"
+item_shipping_fee_status_id2 = "着払い(購入者負担)"
+item_prefecture_id2 = "群馬県"
+item_scheduled_delivery_id2 = "2~3日で発送"
+item_price2 = 30000
+
 number = 4242424242424242
 exp_month = 10
 exp_year = 30
@@ -47,8 +57,8 @@ phone_number = "02089001111"
 
 blank = "---"
 # 受講生のURLを記入
-url = "https://furima2020.herokuapp.com/" 
-# url = "http://localhost:3000/"
+# url = "https://furima2020.herokuapp.com/" 
+url = "http://localhost:3000/"
 d.get(url)
 
 d.find_element(:class,"sign-up").click
@@ -322,6 +332,7 @@ d.find_element(:id, 'user_birth_date_2i').send_keys(user_birth_date_2i2)
 d.find_element(:id, 'user_birth_date_3i').send_keys(user_birth_date_3i2)
 d.find_element(:class,"register-red-btn").click
 
+# d.find_element(:class,"login").click
 # d.find_element(:id, 'user_email').send_keys(user_email2)
 # d.find_element(:id, 'user_password').send_keys(user_password)
 # d.find_element(:class,"login-red-btn").click
@@ -361,5 +372,29 @@ else
 end
 
 d.find_element(:class,"furima-icon").click 
+
+d.find_element(:class,"purchase-btn").click
+d.find_element(:id,"item_image").send_keys(item_image2)
+d.find_element(:id,"item_name").send_keys(item_name2) 
+d.find_element(:id,"item_info").send_keys(item_info2)
+d.find_element(:id,"item_category_id").send_keys(item_category_id2)
+d.find_element(:id,"item_sales_status_id").send_keys(item_sales_status_id2)
+d.find_element(:id,"item_shipping_fee_status_id").send_keys(item_shipping_fee_status_id2)
+d.find_element(:id,"item_prefecture_id").send_keys(item_prefecture_id2)
+d.find_element(:id,"item_scheduled_delivery_id").send_keys(item_scheduled_delivery_id2)
+d.find_element(:id,"item_price").send_keys(item_price2)
+d.find_element(:class,"sell-btn").click
+
+d.find_element(:class,"item-img-content").click 
+d.find_element(:class,"item-destroy").click
+
+
+
+if /#{item_name2}/ .match(d.page_source)
+  puts "☒ログインした上で自分が出品した商品を削除をすると、商品が削除されない" 
+else
+  puts "◯ログインした上で自分が出品した商品を削除をすると、商品が削除される" 
+  wait
+end
 
 sleep 300000000000000
