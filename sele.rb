@@ -2,21 +2,21 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
-user_nickname = "会"
-user_email = "divsd@co.jp"
+user_nickname = "会町"
+user_email = "divssad@co.jp"
 user_password = "aaa111"
-user_first_name = "一致"
-user_last_name = "出"
+user_first_name = "出耒田"
+user_last_name = "傑"
 user_first_name_kana = "シカ"
 user_last_name_kana = "デタカウト"
 user_birth_date_1i = "1998"
 user_birth_date_2i = "9"
 user_birth_date_3i = "30"
 
-user_nickname2 = "学修点"
-user_email2 = "divsssd@co.jp"
-user_first_name2 = "庵生会津"
-user_last_name2 = "他郎手"
+user_nickname2 = "学修"
+user_email2 = "divsssafd@co.jp"
+user_first_name2 = "庵生"
+user_last_name2 = "他郎"
 user_first_name_kana2 = "セイアイ"
 user_last_name_kana2 = "ウナン"
 user_birth_date_1i2 = "2010"
@@ -57,8 +57,8 @@ phone_number = "02089001111"
 
 blank = "---"
 # 受講生のURLを記入
-# url = "https://furima2020.herokuapp.com/" 
-url = "http://localhost:3000/"
+url = "https://furima2020.herokuapp.com" 
+# url = "http://localhost:3000/"
 d.get(url)
 
 d.find_element(:class,"sign-up").click
@@ -85,7 +85,7 @@ if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯ニックネームが正常に登録されトップページに表示されている。" 
 else
   puts "☒ニックネームが正常に登録されずに、トップページに表示されない" 
-  wait
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 d.find_element(:class,"logout").click
@@ -100,7 +100,7 @@ if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯有効な情報でログインを行うと、トップページへ遷移する" 
 else
   puts "☒有効な情報でログインを行うがトップページへ遷移しない" 
-  wait
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 d.find_element(:class,"purchase-btn").click
@@ -120,7 +120,7 @@ if /Image can't be blank/.match(d.page_source)
   puts "◯画像なしで商品出品を行うと、商品出品ページにて、エラーメッセージ が表示される" 
 else
   puts "☒画像なしで商品出品を行っても、商品出品ページにて、エラーメッセージ が表示されない" 
-  wait
+  wait.until {d.find_element(:id,"item_name").displayed?}
 end
 
 
@@ -150,7 +150,7 @@ if /Shipping fee status Select/.match(d.page_source)
   puts "◯配送料の負担の記入なしで商品出品を行うと、商品出品ページにて、エラーメッセージが表示される" 
 else
   puts "☒配送料の負担の記入なしで商品出品を行っても、商品出品ページにて、エラーメッセージが表示されない" 
-  wait
+  wait.until {d.find_element(:id,"item_name").displayed?}
 end
 
 
@@ -181,7 +181,7 @@ if /#{item_name}/ .match(d.page_source)
   puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、商品名が表示されている。" 
 else
   puts "☒有効な情報を入力すると、商品名が表示されない。" 
-  wait
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 
@@ -190,7 +190,7 @@ if /#{item_image_name}/ .match(d.page_source)
   puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、画像が表示されている。" 
 else
   puts "☒有効な情報を入力すると、画像が表示されない" 
-  wait
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 
@@ -199,7 +199,7 @@ if /#{item_price}/.match(d.page_source)
   puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、商品価格が表示されている。" 
 else
   puts "☒有効な情報を入力すると、商品価格が表示されない" 
-  wait
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 d.find_element(:class,"item-img-content").click 
@@ -208,21 +208,21 @@ if /編集/.match(d.page_source)
   puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示される" 
 else
   puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示されない" 
-  wait
+  wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 if /削除/.match(d.page_source)
   puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「削除」のリンクが表示される" 
 else
   puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「削除」のリンクが表示されない" 
-  wait
+  wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 if /購入画面に進む/.match(d.page_source)
   puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示される" 
 else
   puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示されない" 
-  wait
+  wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 d.find_element(:class,"item-red-btn").click
@@ -233,7 +233,7 @@ if /Info can't be blank/.match(d.page_source)
   puts "◯無効な情報で商品編集を行うと、商品編集ページにて、エラーメッセージ が表示される。" 
 else
   puts "☒無効な情報で商品編集を行うと、商品編集ページにて、エラーメッセージ が表示されない" 
-  wait
+  wait.until {d.find_element(:id,"sell-btn").displayed?}
 end
 
 d.find_element(:id,"item_info").send_keys(item_info_re)
@@ -243,7 +243,7 @@ if /#{item_info_re}/.match(d.page_source)
   puts "◯有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
 else
   puts "☒有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
-  wait
+  wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 d.find_element(:class,"furima-icon").click
@@ -262,7 +262,7 @@ if /#{item_image_name}/ .match(d.page_source)
   puts "◯ログインしていないユーザーでも、商品の一覧表示を確認でき、出品画像が表示されている" 
 else
   puts "☒ログインしていないユーザーでも、商品の一覧表示を確認でき、出品画像が表示されていない" 
-  wait
+  wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 item_name = d.find_element(:class,'item-name')
@@ -276,35 +276,35 @@ if /編集/ .match(d.page_source)
   puts "☒ログインしていないユーザーでも、商品の編集が行える" 
 else
   puts "◯ログインしていないユーザーは、商品の編集が行えない。" 
-  wait
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
 if /削除/ .match(d.page_source)
   puts "☒ログインしていないユーザーでも、商品の削除が行える" 
 else
   puts "◯ログインしていないユーザーは、商品の削除が行えない。" 
-  wait
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
 if /購入画面に進む/.match(d.page_source)
   puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「購入」のリンクが表示される" 
 else
   puts "☒ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「購入」のリンクが表示されない" 
-  wait
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
 if /編集/ .match(d.page_source)
   puts "☒ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「編集」のリンクが表示される" 
 else
   puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「編集」のリンクが表示されない" 
-  wait
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
 if /削除/ .match(d.page_source)
   puts "☒ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「削除」のリンクが表示される" 
 else
   puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「削除」のリンクが表示されない" 
-  wait
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
 
@@ -314,7 +314,7 @@ if /ログイン/ .match(d.page_source)
   puts "◯ログインしていないユーザーは、商品の購入ボタンを押すと、ログインページへ遷移する" 
 else
   puts "☒ログインしていないユーザーは、商品の購入ボタンを押すと、ログインページへ遷移しない" 
-  wait
+  wait.until {d.find_element(:class,"login-red-btn").displayed?}
 end
 
 d.find_element(:class,"second-logo").click
@@ -360,7 +360,7 @@ if /Sold Out!!/ .match(d.page_source)
   puts "◯売却済みの商品は、「sould out」の文字が表示されるようになっている" 
 else
   puts "☒売却済みの商品は、「sould out」の文字が表示されない" 
-  wait
+  wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 
 d.find_element(:class,"item-img-content").click 
@@ -369,6 +369,7 @@ if /購入画面に進む/ .match(d.page_source)
   puts "☒売却済みの商品だが、購入できるようになっている" 
 else
   puts "◯売却済みの商品は、購入できないようになっている" 
+  wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 
 d.find_element(:class,"furima-icon").click 
@@ -394,7 +395,7 @@ if /#{item_name2}/ .match(d.page_source)
   puts "☒ログインした上で自分が出品した商品を削除をすると、商品が削除されない" 
 else
   puts "◯ログインした上で自分が出品した商品を削除をすると、商品が削除される" 
-  wait
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 sleep 300000000000000
