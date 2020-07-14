@@ -23,7 +23,7 @@ user_birth_date_1i2 = "2010"
 user_birth_date_2i2 = "4"
 user_birth_date_3i2 = "20"
 
-item_image = "/Users/tech-camp/Desktop/coat.jpg"
+item_image = "/Users/tech-camp/furima_checkApp/photo/coat.jpg"
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
@@ -35,7 +35,7 @@ item_prefecture_id = "山口県"
 item_scheduled_delivery_id = "2~3日で発送"
 item_price = 40000
 
-item_image2 = "/Users/tech-camp/Desktop/sunglass.jpg"
+item_image2 = "/Users/tech-camp/furima_checkApp/photo/sunglass.jpg"
 item_name2 = "サングラス"
 item_info2 = "限定5品のサングラス"
 item_category_id2 = "メンズ"
@@ -57,8 +57,8 @@ phone_number = "02089001111"
 
 blank = "---"
 # 受講生のURLを記入
-url = "https://furima2020.herokuapp.com" 
-# url = "http://localhost:3000/"
+# url = "https://furima2020.herokuapp.com" 
+url = "http://localhost:3000/"
 d.get(url)
 
 d.find_element(:class,"sign-up").click
@@ -397,5 +397,5 @@ else
   puts "◯ログインした上で自分が出品した商品を削除をすると、商品が削除される" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
-
+puts "LGTM"
 sleep 300000000000000
