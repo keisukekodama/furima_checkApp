@@ -56,8 +56,12 @@ addresses = "追手町１−１"
 phone_number = "02089001111"
 
 blank = "---"
-# 受講生のURLを記入
-url = "https://furima2020.herokuapp.com" 
+#basic認証のidとpass
+b_username = "ryutaro"
+b_password = "0823"
+http ="http://#{b_username}:#{b_password}@"
+# 受講生のURLをhttp://以降から記入記入
+url = "#{http}furima2020.herokuapp.com/"
 # url = "http://localhost:3000/"
 d.get(url)
 
