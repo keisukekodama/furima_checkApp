@@ -60,7 +60,7 @@ blank = "---"
 b_username = "ryutaro"
 b_password = "0823"
 http ="http://#{b_username}:#{b_password}@"
-# 受講生のURLをhttp://以降から記入記入
+# 受講生のURLをhttp://以降から記入
 url = "#{http}furima2020.herokuapp.com/"
 # url = "http://localhost:3000/"
 d.get(url)
