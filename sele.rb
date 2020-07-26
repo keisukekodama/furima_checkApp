@@ -2,26 +2,26 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
-user_nickname = "会町"
-user_email = "divssad@co.jp"
+user_nickname = "ナツ"
+user_email = "divss@co.jp"
 user_password = "aaa111"
-user_first_name = "出耒田"
-user_last_name = "傑"
-user_first_name_kana = "シカ"
-user_last_name_kana = "デタカウト"
-user_birth_date_1i = "1998"
-user_birth_date_2i = "9"
-user_birth_date_3i = "30"
+user_first_name = "長蛇"
+user_last_name = "那津"
+user_first_name_kana = "チョウダ"
+user_last_name_kana = "ナツ"
+user_birth_date_1i = "1991"
+user_birth_date_2i = "2"
+user_birth_date_3i = "10"
 
-user_nickname2 = "学修"
-user_email2 = "divsssafd@co.jp"
-user_first_name2 = "庵生"
-user_last_name2 = "他郎"
-user_first_name_kana2 = "セイアイ"
-user_last_name_kana2 = "ウナン"
-user_birth_date_1i2 = "2010"
-user_birth_date_2i2 = "4"
-user_birth_date_3i2 = "20"
+user_nickname2 = "ウサギ"
+user_email2 = "dssafdss@co.jp"
+user_first_name2 = "宇佐神"
+user_last_name2 = "心動"
+user_first_name_kana2 = "ウサミ"
+user_last_name_kana2 = "シンドウ"
+user_birth_date_1i2 = "1910"
+user_birth_date_2i2 = "1"
+user_birth_date_3i2 = "11"
 
 item_image = "/Users/tech-camp/furima_checkApp/photo/coat.jpg"
 item_image_name = "coat.jpg"
@@ -62,23 +62,35 @@ b_username = "admin"
 b_password = "2222"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-27004.herokuapp.com/"
-# url = "http://localhost:3000/"
+# url = "#{http}furima-27004.herokuapp.com/"
+url = "https://furima2020.herokuapp.com/"
 
 d.get(url)
 
 d.find_element(:class,"sign-up").click
+wait.until {d.find_element(:id, 'user_nickname').displayed?}
 d.find_element(:id, 'user_nickname').send_keys(user_nickname)
+wait.until {d.find_element(:id, 'user_email').displayed?}
 d.find_element(:id, 'user_email').send_keys(user_email)
+wait.until {d.find_element(:id, 'user_password').displayed?}
 d.find_element(:id, 'user_password').send_keys(user_password)
+wait.until {d.find_element(:id, 'user_password_confirmation').displayed?}
 d.find_element(:id, 'user_password_confirmation').send_keys(user_password)
+wait.until {d.find_element(:id, 'user_first_name').displayed?}
 d.find_element(:id, 'user_first_name').send_keys(user_first_name)
+wait.until {d.find_element(:id, 'user_last_name ').displayed?}
 d.find_element(:id, 'user_last_name ').send_keys(user_last_name )
+wait.until {d.find_element(:id, 'user_first_name_kana').displayed?}
 d.find_element(:id, 'user_first_name_kana').send_keys(user_first_name_kana)
+wait.until {d.find_element(:id, 'user_last_name_kana').displayed?}
 d.find_element(:id, 'user_last_name_kana').send_keys(user_last_name_kana)
+wait.until {d.find_element(:id, 'user_birth_date_1i').displayed?}
 d.find_element(:id, 'user_birth_date_1i').send_keys(user_birth_date_1i)
+wait.until {d.find_element(:id, 'user_birth_date_2i').displayed?}
 d.find_element(:id, 'user_birth_date_2i').send_keys(user_birth_date_2i)
+wait.until {d.find_element(:id, 'user_birth_date_3i').displayed?}
 d.find_element(:id, 'user_birth_date_3i').send_keys(user_birth_date_3i)
+
 d.find_element(:class,"register-red-btn").click
 
 # d.find_element(:class,"login").click 
@@ -110,22 +122,36 @@ else
 end
 
 d.find_element(:class,"purchase-btn").click
-
+wait.until {d.find_element(:id,"item_name").displayed?}
 d.find_element(:id,"item_name").send_keys(item_name) 
+
+wait.until {d.find_element(:id,"item_info").displayed?}
 d.find_element(:id,"item_info").send_keys(item_info)
+
+wait.until {d.find_element(:id,"item_category_id").displayed?}
 d.find_element(:id,"item_category_id").send_keys(item_category_id)
+
+wait.until {d.find_element(:id,"item_sales_status_id").displayed?}
 d.find_element(:id,"item_sales_status_id").send_keys(item_sales_status_id)
+
+wait.until {d.find_element(:id,"item_shipping_fee_status_id").displayed?}
 d.find_element(:id,"item_shipping_fee_status_id").send_keys(item_shipping_fee_status_id)
+
+wait.until {d.find_element(:id,"item_prefecture_id").displayed?}
 d.find_element(:id,"item_prefecture_id").send_keys(item_prefecture_id)
+
+wait.until {d.find_element(:id,"item_scheduled_delivery_id").displayed?}
 d.find_element(:id,"item_scheduled_delivery_id").send_keys(item_scheduled_delivery_id)
+
+wait.until {d.find_element(:id,"item_price").displayed?}
 d.find_element(:id,"item_price").send_keys(item_price)
 
 d.find_element(:class,"sell-btn").click
 
-if /Image can't be blank/.match(d.page_source)
-  puts "◯画像なしで商品出品を行うと、商品出品ページにて、エラーメッセージ が表示される" 
+if /商品の情報を入力/.match(d.page_source)
+  puts "◯画像なしで商品出品を行うと、商品出品ページリダイレクトされる" 
 else
-  puts "☒画像なしで商品出品を行っても、商品出品ページにて、エラーメッセージ が表示されない" 
+  puts "☒画像なしで商品出品を行っても、商品出品ページリダイレクトされない" 
   wait.until {d.find_element(:id,"item_name").displayed?}
 end
 
@@ -152,10 +178,10 @@ d.find_element(:id,"item_price").send_keys(item_price)
 
 d.find_element(:class,"sell-btn").click
 
-if /Shipping fee status Select/.match(d.page_source)
-  puts "◯配送料の負担の記入なしで商品出品を行うと、商品出品ページにて、エラーメッセージが表示される" 
+if /商品の情報を入力/.match(d.page_source)
+  puts "◯配送料の負担の記入なしで商品出品を行うと、商品出品ページリダイレクトされる" 
 else
-  puts "☒配送料の負担の記入なしで商品出品を行っても、商品出品ページにて、エラーメッセージが表示されない" 
+  puts "☒配送料の負担の記入なしで商品出品を行っても、商品出品ページリダイレクトされない" 
   wait.until {d.find_element(:id,"item_name").displayed?}
 end
 
@@ -235,10 +261,10 @@ d.find_element(:class,"item-red-btn").click
 
 d.find_element(:id,"item_info").clear
 d.find_element(:class,"sell-btn").click
-if /Info can't be blank/.match(d.page_source)
-  puts "◯無効な情報で商品編集を行うと、商品編集ページにて、エラーメッセージ が表示される。" 
+if /商品の情報を入力/.match(d.page_source)
+  puts "◯無効な情報で商品編集を行うと、商品出品ページリダイレクトされる" 
 else
-  puts "☒無効な情報で商品編集を行うと、商品編集ページにて、エラーメッセージ が表示されない" 
+  puts "☒無効な情報で商品編集を行うと、商品出品ページリダイレクトされない" 
   wait.until {d.find_element(:id,"sell-btn").displayed?}
 end
 
@@ -347,14 +373,31 @@ d.find_element(:class,"register-red-btn").click
 
 
 #クレジットカード情報入力画面に遷移
+wait.until {d.find_element(:id, 'number').displayed?}
 d.find_element(:id, 'number').send_keys(number)
+
+wait.until {d.find_element(:id, 'exp_month').displayed?}
 d.find_element(:id, 'exp_month').send_keys(exp_month)
+
+wait.until {d.find_element(:id, 'exp_year').displayed?}
 d.find_element(:id, 'exp_year').send_keys(exp_year)
+
+wait.until {d.find_element(:id, 'cvc').displayed?}
 d.find_element(:id, 'cvc').send_keys(cvc)
+
+wait.until {d.find_element(:id, 'postal_code').displayed?}
 d.find_element(:id, 'postal_code').send_keys(postal_code)
+
+wait.until {d.find_element(:id, 'prefecture').displayed?}
 d.find_element(:id, 'prefecture').send_keys(prefecture)
+
+wait.until {d.find_element(:id, 'city').displayed?}
 d.find_element(:id, 'city').send_keys(city)
+
+wait.until {d.find_element(:id, 'addresses').displayed?}
 d.find_element(:id, 'addresses').send_keys(addresses)
+
+wait.until {d.find_element(:id, 'phone_number').displayed?}
 d.find_element(:id, 'phone_number').send_keys(phone_number)
 
 d.find_element(:class,"buy-red-btn").click
