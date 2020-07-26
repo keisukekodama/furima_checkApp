@@ -65,6 +65,7 @@ http ="http://#{b_username}:#{b_password}@"
 # url = "#{http}furima-27004.herokuapp.com/"
 url = "https://furima2020.herokuapp.com/"
 
+
 d.get(url)
 
 d.find_element(:class,"sign-up").click
