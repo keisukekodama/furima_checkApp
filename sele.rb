@@ -62,8 +62,8 @@ b_username = "admin"
 b_password = "2222"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-# url = "#{http}furima-27004.herokuapp.com/"
-url = "https://furima2020.herokuapp.com/"
+url = "#{http}furima-27004.herokuapp.com/"
+# url = "https://furima2020.herokuapp.com/"
 
 
 d.get(url)
