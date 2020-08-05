@@ -88,7 +88,7 @@ d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 
 
 
-puts "生年月日を入力してください後、登録ボタンを押してください"
+puts "生年月日を入力してください。入力後、登録ボタンを押してください"
 wait.until {d.find_element(:class,"purchase-btn").displayed?}
 
 
