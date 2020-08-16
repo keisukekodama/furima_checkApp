@@ -417,6 +417,7 @@ puts "【説明】購入ボタン自体を消しているてる場合がある�
 sleep 1
 d.find_element(:class,"sign-up").click
 puts "新しいユーザーを登録する"
+sleep 1
 d.find_element(:id, 'nickname').send_keys(nickname2)
 d.find_element(:id, 'email').send_keys(email2)
 d.find_element(:id, 'password').send_keys(password)
@@ -438,24 +439,25 @@ d.find_element(:class,"item-red-btn").click
 # d.find_element(:id, 'email').send_keys(email2)
 # d.find_element(:id, 'password').send_keys(password)
 # d.find_element(:class,"login-red-btn").click
+# d.find_element(:class,"item-img-content").click
+# d.find_element(:class,"item-red-btn").click
 
 sleep 1
 
 
 
 #クレジットカード情報入力画面に遷移
-wait.until {d.find_element(:id, 'card-number').displayed?}
-d.find_element(:id, 'card-number').send_keys(card_number)
-puts "【説明】クレジットカードの番号記入"
+
+
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
-puts "【説明】クレジットカードの有効月を記入"
+
 wait.until {d.find_element(:id, 'card-exp-year').displayed?}
 d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
-puts "【説明】クレジットカードの有効月を記入"
+
 wait.until {d.find_element(:id, 'card-cvc').displayed?}
 d.find_element(:id, 'card-cvc').send_keys(card_cvc)
-puts "【説明】購入時、クレジットカードの情報を都度入力できる"
+
 wait.until {d.find_element(:id, 'postal-code').displayed?}
 d.find_element(:id, 'postal-code').send_keys(postal_code)
 
@@ -470,7 +472,60 @@ d.find_element(:id, 'addresses').send_keys(addresses)
 
 wait.until {d.find_element(:id, 'phone-number').displayed?}
 d.find_element(:id, 'phone-number').send_keys(phone_number)
+
+
+d.find_element(:class,"buy-red-btn").click
+
+
+if /クレジットカード情報入力/ .match(d.page_source)
+  puts "!カード番号が入力されていない無い場合は、決済できない" 
+else
+  puts "!カード番号が入力されていない無い場合でも、決済できる" 
+  wait.until {d.find_element(:class,"sold-out").displayed?}
+end
+
+puts "◯正しいクレジットカードの情報で無い場合は、決済できない"
+
+
+
+
+
+d.find_element(:id, 'postal-code').clear
+d.find_element(:id, 'prefecture').send_keys(blank)
+d.find_element(:id, 'city').clear
+sleep 2
+d.find_element(:id, 'addresses').clear
+d.find_element(:id, 'phone-number').clear
+
+
+
+wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').send_keys(card_number)
+puts "【説明】クレジットカードの番号記入"
+wait.until {d.find_element(:id, 'card-exp-month').displayed?}
+d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
+puts "【説明】クレジットカードの有効月を記入"
+wait.until {d.find_element(:id, 'card-exp-year').displayed?}
+d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
+puts "【説明】クレジットカードの有効年を記入"
+wait.until {d.find_element(:id, 'card-cvc').displayed?}
+d.find_element(:id, 'card-cvc').send_keys(card_cvc)
 puts "◯購入時、クレジットカードの情報を都度入力できる"
+wait.until {d.find_element(:id, 'postal-code').displayed?}
+d.find_element(:id, 'postal-code').send_keys(postal_code)
+
+wait.until {d.find_element(:id, 'prefecture').displayed?}
+d.find_element(:id, 'prefecture').send_keys(prefecture)
+
+wait.until {d.find_element(:id, 'city').displayed?}
+d.find_element(:id, 'city').send_keys(city)
+
+wait.until {d.find_element(:id, 'addresses').displayed?}
+d.find_element(:id, 'addresses').send_keys(addresses)
+
+wait.until {d.find_element(:id, 'phone-number').displayed?}
+d.find_element(:id, 'phone-number').send_keys(phone_number)
+puts "◯購入時、配送先の住所情報も都度入力できる"
 
 d.find_element(:class,"buy-red-btn").click
 
@@ -524,5 +579,5 @@ if /#{item_name2}/ .match(d.page_source)
 else
   puts "◯出品者だけが商品情報を削除できる" 
 end
-puts "LGTM"
+puts "プログラム終了"
 sleep 300000000000000
