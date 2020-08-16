@@ -308,7 +308,7 @@ end
 
 sleep 1
 d.find_element(:class,"item-red-btn").click
-sleep 3
+sleep 1
 d.find_element(:id,"item-info").clear
 d.find_element(:class,"sell-btn").click
 if /商品の情報を入力/.match(d.page_source)
@@ -382,7 +382,7 @@ end
 #   wait.until {d.find_element(:class,"item-red-btn").displayed?}
 # end
 
-sleep 2
+sleep 1
 
 
 if /編集/ .match(d.page_source)
@@ -403,7 +403,7 @@ else
   puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「削除」のリンクが表示されない" 
 end
 
-sleep 2
+sleep 1
 puts "【説明】購入ボタン自体を消しているてる場合があるので一度、サインアップする"
 # d.find_element(:class,"item-red-btn").click
 
@@ -487,7 +487,7 @@ else
   wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 
-sleep 2
+sleep 1
 
 d.find_element(:class,"item-img-content").click 
 
