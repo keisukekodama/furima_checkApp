@@ -3,12 +3,12 @@ wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
 nickname = "ナツ"
-email = "divss@co.jp"
+email = "divs2s@co.jp"
 password = "aaa111"
-first_name = "長蛇"
-last_name= "那津"
-first_name_kana = "チョウダ"
-last_name_kana = "ナツ"
+first_name = "長末蛇"
+last_name= "那津葉"
+first_name_kana = "タョウダ"
+last_name_kana = "ナツテ"
 user_birth_date_1i = "1991"
 user_birth_date_2i = "2"
 user_birth_date_3i = "10"
@@ -32,7 +32,7 @@ item_category = "メンズ"
 item_sales_status ="目立った傷や汚れなし"
 item_shipping_fee_status = "着払い(購入者負担)"
 item_prefecture = "山口県"
-item_scheduled_delivery = "2~3日で発送"
+item_scheduled_delivery = "1~2日で発送"
 item_price = 40000
 
 item_image2 = "/Users/tech-camp/furima_checkApp/photo/sunglass.jpg"
@@ -58,17 +58,61 @@ phone_number = "02089001111"
 blank = "---"
 
 #basic認証のidとpass
-b_username = "nickname"
-b_password = "anonymous"
+b_username = "kentaro"
+b_password = "1997"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-28318.herokuapp.com/"
-# url = "http://localhost:3000/"
+# url = "#{http}furima-28375.herokuapp.com/"
+url = "http://localhost:3000/"
 
 
 d.get(url)
 
 d.find_element(:class,"sign-up").click
+wait.until {d.find_element(:id, 'nickname').displayed?}
+
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
+else
+  puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+
+puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
+
+
+
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
 wait.until {d.find_element(:id, 'email').displayed?}
@@ -93,7 +137,7 @@ wait.until {d.find_element(:class,"purchase-btn").displayed?}
 
 
 
-##ログイン
+# #ログイン
 # d.find_element(:class,"login").click 
 # d.find_element(:id, 'email').send_keys(email)
 # d.find_element(:id, 'password').send_keys(password)
@@ -101,9 +145,9 @@ wait.until {d.find_element(:class,"purchase-btn").displayed?}
 
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
-  puts "◯ニックネームが正常に登録されトップページに表示されている。" 
+  puts "◯必須項目を入力し、ユーザー登録ができる" 
 else
-  puts "☒ニックネームが正常に登録されずに、トップページに表示されない" 
+  puts "☒必須項目を入力し、ユーザー登録ができていない" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
@@ -116,9 +160,9 @@ d.find_element(:class,"login-red-btn").click
 puts "アカウント1でログイン"
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
-  puts "◯有効な情報でログインを行うと、トップページへ遷移する" 
+  puts "◯ログイン/ログアウトができる" 
 else
-  puts "☒有効な情報でログインを行うがトップページへ遷移しない" 
+  puts "☒ログイン/ログアウトができない" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
@@ -150,9 +194,9 @@ d.find_element(:id,"item-price").send_keys(item_price)
 d.find_element(:class,"sell-btn").click
 
 if /商品の情報を入力/.match(d.page_source)
-  puts "◯画像なしで商品出品を行うと、商品出品ページリダイレクトされる" 
+  puts "◯画像が0枚の場合は、出品できない" 
 else
-  puts "☒画像なしで商品出品を行っても、商品出品ページリダイレクトされない" 
+  puts "☒画像が0枚の場合は、出品できる" 
   wait.until {d.find_element(:id,"item-name").displayed?}
 end
 
@@ -167,7 +211,7 @@ d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
 d.find_element(:id,"item-price").clear
 
 
-d.find_element(:id,"item_image").send_keys(item_image)
+d.find_element(:id,"item-image").send_keys(item_image)
 d.find_element(:id,"item-name").send_keys(item_name) 
 d.find_element(:id,"item-info").send_keys(item_info)
 d.find_element(:id,"item-category").send_keys(item_category)
@@ -180,14 +224,14 @@ d.find_element(:id,"item-price").send_keys(item_price)
 d.find_element(:class,"sell-btn").click
 
 if /商品の情報を入力/.match(d.page_source)
-  puts "◯配送料の負担の記入なしで商品出品を行うと、商品出品ページリダイレクトされる" 
+  puts "!配送料の負担の記入なしで商品出品を行うと、商品出品ページリダイレクトされる" 
 else
-  puts "☒配送料の負担の記入なしで商品出品を行っても、商品出品ページリダイレクトされない" 
+  puts "!配送料の負担の記入なしで商品出品を行っても、商品出品ページリダイレクトされない" 
   wait.until {d.find_element(:id,"item-name").displayed?}
 end
+puts "◯必須項目が一つでも欠けている場合は、出品ができない"
 
-
-d.find_element(:id,"item_image").clear 
+d.find_element(:id,"item-image").clear 
 d.find_element(:id,"item-name").clear 
 d.find_element(:id,"item-info").clear
 d.find_element(:id,"item-category").send_keys(blank)
@@ -197,7 +241,7 @@ d.find_element(:id,"item-prefecture").send_keys(blank)
 d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
 d.find_element(:id,"item-price").clear
 
-d.find_element(:id,"item_image").send_keys(item_image)
+d.find_element(:id,"item-image").send_keys(item_image)
 d.find_element(:id,"item-name").send_keys(item_name) 
 d.find_element(:id,"item-info").send_keys(item_info)
 d.find_element(:id,"item-category").send_keys(item_category)
@@ -211,61 +255,66 @@ d.find_element(:class,"sell-btn").click
 
 
 if /#{item_name}/ .match(d.page_source)
-  puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、商品名が表示されている。" 
+  puts "!有効な情報を入力するとトップページへ遷移し、商品名が表示されている。" 
 else
-  puts "☒有効な情報を入力すると、商品名が表示されない。" 
+  puts "!有効な情報を入力しても、商品名が表示されない。" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 
 
 if /#{item_image_name}/ .match(d.page_source)
-  puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、画像が表示されている。" 
+  puts "！有効な情報を入力するとトップページへ遷移し、画像が表示されている。" 
 else
-  puts "☒有効な情報を入力すると、画像が表示されない" 
+  puts "!有効な情報を入力しても、画像が表示されない" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
 
 
 if /#{item_price}/.match(d.page_source)
-  puts "◯有効な情報を入力すると、レコードが1つ増え、トップページへ遷移し、商品価格が表示されている。" 
+  puts "!有効な情報を入力するとトップページへ遷移し、商品価格が表示されている。" 
 else
-  puts "☒有効な情報を入力すると、商品価格が表示されない" 
+  puts "!有効な情報を入力しても商品価格が表示されない" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
+
+puts "◯必須項目を入力した上で出品ができる"
+puts "◯出品した商品の一覧表示ができている"
+puts "◯「画像/価格/商品名」の3つの情報について表示できている"
 
 d.find_element(:class,"item-img-content").click 
 
 if /編集/.match(d.page_source)
-  puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示される" 
+  puts "!ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示される" 
 else
-  puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示されない" 
+  puts "!ログインした上で自分が出品した商品詳細ページへアクセスしたが、「編集」のリンクが表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 if /削除/.match(d.page_source)
-  puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「削除」のリンクが表示される" 
+  puts "!ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「削除」のリンクが表示される" 
 else
-  puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「削除」のリンクが表示されない" 
+  puts "!ログインした上で自分が出品した商品詳細ページへアクセスしたが、「削除」のリンクが表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 if /購入画面に進む/.match(d.page_source)
-  puts "☒ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示される" 
+  puts "!ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示される" 
 else
-  puts "◯ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示されない" 
+  puts "!ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「購入」のリンクが表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
+sleep 1
 d.find_element(:class,"item-red-btn").click
-
+sleep 3
 d.find_element(:id,"item-info").clear
 d.find_element(:class,"sell-btn").click
 if /商品の情報を入力/.match(d.page_source)
-  puts "◯無効な情報で商品編集を行うと、商品出品ページリダイレクトされる" 
+  puts "◯無効な情報で商品編集を行うと、商品編集ができない" 
 else
-  puts "☒無効な情報で商品編集を行うと、商品出品ページリダイレクトされない" 
+  puts "☒無効な情報でも商品編集を行うと、商品編集ができる" 
   wait.until {d.find_element(:id,"sell-btn").displayed?}
 end
 
@@ -273,85 +322,101 @@ d.find_element(:id,"item-info").send_keys(item_info_re)
 d.find_element(:class,"sell-btn").click
 
 if /#{item_info_re}/.match(d.page_source)
-  puts "◯有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
+  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
 else
-  puts "☒有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
+  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
+puts "◯何も編集せずに更新をしても画像無しの商品にならない"
+puts "◯商品情報（商品画像・商品名・商品の状態など）を変更できる"
 d.find_element(:class,"furima-icon").click
 
 
 d.find_element(:class,"logout").click
 d.find_element(:class,"purchase-btn").click
 if /ログイン/ .match(d.page_source)
-  puts "◯ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移しました"
+  puts "!ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移しました"
 else
-  puts "☒ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移できませんでした"
+  puts "!ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移できませんでした"
 end
+
+puts "◯ログインしているユーザーだけが、出品ページへ遷移できる"
 d.find_element(:class,"second-logo").click
 
+
 if /#{item_image_name}/ .match(d.page_source)
-  puts "◯ログインしていないユーザーでも、商品の一覧表示を確認でき、出品画像が表示されている" 
+  puts "!ログインしていないユーザーでも、商品の一覧表示を確認でき、出品画像が表示されている" 
 else
-  puts "☒ログインしていないユーザーでも、商品の一覧表示を確認でき、出品画像が表示されていない" 
+  puts "!ログインしていないユーザーでも、商品の一覧表示を確認でき、出品画像が表示されていない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
 item_name = d.find_element(:class,'item-name')
-puts "◯商品名は" +item_name.text
+puts "!商品名は" +item_name.text
 
 item_price = d.find_element(:class,'item-price')
-puts "◯商品価格は" + item_price.text
+puts "!商品価格は" + item_price.text
 
 d.find_element(:class,"item-img-content").click
 if /編集/ .match(d.page_source)
   puts "☒ログインしていないユーザーでも、商品の編集が行える" 
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 else
   puts "◯ログインしていないユーザーは、商品の編集が行えない。" 
-  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
 if /削除/ .match(d.page_source)
-  puts "☒ログインしていないユーザーでも、商品の削除が行える" 
+  puts "☒ログインしていないユーザーでも、商品の削除が行える"
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 else
   puts "◯ログインしていないユーザーは、商品の削除が行えない。" 
-  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
-if /購入画面に進む/.match(d.page_source)
-  puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「購入」のリンクが表示される" 
-else
-  puts "☒ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「購入」のリンクが表示されない" 
-  wait.until {d.find_element(:class,"item-red-btn").displayed?}
-end
+
+
+# if /購入画面に進む/.match(d.page_source)
+#   puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「購入」のリンクが表示される" 
+# else
+#   puts "☒ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「購入」のリンクが表示されない" 
+#   wait.until {d.find_element(:class,"item-red-btn").displayed?}
+# end
+
+sleep 2
+
 
 if /編集/ .match(d.page_source)
-  puts "☒ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「編集」のリンクが表示される" 
-else
-  puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「編集」のリンクが表示されない" 
+  puts "!ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「編集」のリンクが表示される" 
   wait.until {d.find_element(:class,"item-red-btn").displayed?}
+else
+  puts "!ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「編集」のリンクが表示されない" 
 end
+
+puts "◯出品者だけが編集ページに遷移できる"
+puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
+puts "◯出品者にしか、商品編集・削除のリンクが踏めないようになっている"
 
 if /削除/ .match(d.page_source)
   puts "☒ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「削除」のリンクが表示される" 
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 else
   puts "◯ログインした上で自分が出品していない商品詳細ページへアクセスした場合は、「削除」のリンクが表示されない" 
-  wait.until {d.find_element(:class,"item-red-btn").displayed?}
 end
 
+sleep 2
+puts "【説明】購入ボタン自体を消しているてる場合があるので一度、サインアップする"
+# d.find_element(:class,"item-red-btn").click
 
-d.find_element(:class,"item-red-btn").click
+# if /会員情報入力/ .match(d.page_source)
+#   puts "!ログインしていない状態で購入ボタンを押すとログインページに遷移する。" 
+# else
+#   puts "!ログインしていない状態で購入ボタンを押すとログインページに遷移しない。" 
+#   wait.until {d.find_element(:id,"email").displayed?}
+# end
 
-if /ログイン/ .match(d.page_source)
-  puts "◯ログインしていないユーザーは、商品の購入ボタンを押すと、ログインページへ遷移する" 
-else
-  puts "☒ログインしていないユーザーは、商品の購入ボタンを押すと、ログインページへ遷移しない" 
-  wait.until {d.find_element(:class,"login-red-btn").displayed?}
-end
-
-d.find_element(:class,"second-logo").click
+sleep 1
 d.find_element(:class,"sign-up").click
+puts "新しいユーザーを登録する"
 d.find_element(:id, 'nickname').send_keys(nickname2)
 d.find_element(:id, 'email').send_keys(email2)
 d.find_element(:id, 'password').send_keys(password)
@@ -360,32 +425,37 @@ d.find_element(:id, 'first-name').send_keys(first_name2)
 d.find_element(:id, 'last-name').send_keys(user_last_name2)
 d.find_element(:id, 'first-name-kana').send_keys(first_name_kana2)
 d.find_element(:id, 'last-name-kana').send_keys(last_name_kana2)
-
 puts "生年月日を入力してください後、登録ボタンを押してください"
-wait.until {d.find_element(:class,"purchase-btn").displayed?}
+wait.until {d.find_element(:class, 'new-items').displayed?}
+puts "【説明】商品出品ページに遷移してしまうためトップページに遷移後、商品購入画面に遷移する。"
 
-##ログイン
+d.find_element(:class,"items-sell-header").click
+d.find_element(:class,"item-img-content").click
+d.find_element(:class,"item-red-btn").click
+
+# #ログイン
 # d.find_element(:class,"login").click
 # d.find_element(:id, 'email').send_keys(email2)
 # d.find_element(:id, 'password').send_keys(password)
 # d.find_element(:class,"login-red-btn").click
 
+sleep 1
 
 
 
 #クレジットカード情報入力画面に遷移
 wait.until {d.find_element(:id, 'card-number').displayed?}
 d.find_element(:id, 'card-number').send_keys(card_number)
-
+puts "【説明】クレジットカードの番号記入"
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
-
+puts "【説明】クレジットカードの有効月を記入"
 wait.until {d.find_element(:id, 'card-exp-year').displayed?}
 d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
-
+puts "【説明】クレジットカードの有効月を記入"
 wait.until {d.find_element(:id, 'card-cvc').displayed?}
 d.find_element(:id, 'card-cvc').send_keys(card_cvc)
-
+puts "【説明】購入時、クレジットカードの情報を都度入力できる"
 wait.until {d.find_element(:id, 'postal-code').displayed?}
 d.find_element(:id, 'postal-code').send_keys(postal_code)
 
@@ -400,32 +470,39 @@ d.find_element(:id, 'addresses').send_keys(addresses)
 
 wait.until {d.find_element(:id, 'phone-number').displayed?}
 d.find_element(:id, 'phone-number').send_keys(phone_number)
+puts "◯購入時、クレジットカードの情報を都度入力できる"
 
 d.find_element(:class,"buy-red-btn").click
-puts "クレジットカード情報登録完了"
+
 
 wait.until {d.find_element(:class,"furima-icon").displayed?}
+puts "◯クレジットカード決済ができる"
 
-if /Sold Out!!/ .match(d.page_source)
+
+
+if /Sold Out/ .match(d.page_source)
   puts "◯売却済みの商品は、「sould out」の文字が表示されるようになっている" 
 else
   puts "☒売却済みの商品は、「sould out」の文字が表示されない" 
   wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 
+sleep 2
+
 d.find_element(:class,"item-img-content").click 
 
 if /購入画面に進む/ .match(d.page_source)
-  puts "☒売却済みの商品だが、購入できるようになっている" 
-else
-  puts "◯売却済みの商品は、購入できないようになっている" 
+  puts "☒購入した商品だが、再度購入できる状態になっている" 
   wait.until {d.find_element(:class,"sold-out").displayed?}
+else
+  puts "◯購入した商品は、再度購入できない状態になっている" 
+  
 end
 
 d.find_element(:class,"furima-icon").click 
 
 d.find_element(:class,"purchase-btn").click
-d.find_element(:id,"item_image").send_keys(item_image2)
+d.find_element(:id,"item-image").send_keys(item_image2)
 d.find_element(:id,"item-name").send_keys(item_name2) 
 d.find_element(:id,"item-info").send_keys(item_info2)
 d.find_element(:id,"item-category").send_keys(item_category2)
@@ -442,10 +519,10 @@ d.find_element(:class,"item-destroy").click
 
 
 if /#{item_name2}/ .match(d.page_source)
-  puts "☒ログインした上で自分が出品した商品を削除をすると、商品が削除されない" 
-else
-  puts "◯ログインした上で自分が出品した商品を削除をすると、商品が削除される" 
+  puts "☒出品者だけが商品情報を削除できない" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
+else
+  puts "◯出品者だけが商品情報を削除できる" 
 end
 puts "LGTM"
 sleep 300000000000000
