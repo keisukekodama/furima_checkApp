@@ -2,8 +2,8 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
-nickname = "クスンジュン"
-email = "divs32s@co.jp"
+nickname = "ク・スンジュン"
+email = "divs2s@co.jp"
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -58,106 +58,106 @@ phone_number = "02089001111"
 blank = "---"
 
 #basic認証のidとpass
-b_username = "test"
-b_password = "2121"
+b_username = "kentaro"
+b_password = "1997"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-28344.herokuapp.com/"
-# url = "http://localhost:3000/"
+# url = "#{http}furima-28375.herokuapp.com/"
+url = "http://localhost:3000/"
 
 
 d.get(url)
 
-# d.find_element(:class,"sign-up").click
-# wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:class,"sign-up").click
+wait.until {d.find_element(:id, 'nickname').displayed?}
 
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').send_keys(email)
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').send_keys(password)
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').send_keys(password)
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').send_keys(first_name)
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').send_keys(last_name)
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-
-
-# if /会員情報入力/ .match(d.page_source)
-#   puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
-# else
-#   puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
-#   wait.until {d.find_element(:id,"nickname").displayed?}
-# end
-
-# puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
-
-
-
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').clear
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').clear
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').clear
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').clear
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').clear
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').clear
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').clear
-
-# wait.until {d.find_element(:id, 'nickname').displayed?}
-# d.find_element(:id, 'nickname').send_keys(nickname)
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').send_keys(email)
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').send_keys(password)
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').send_keys(password)
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').send_keys(first_name)
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').send_keys(last_name)
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-
-
-
-# puts "生年月日を入力してください。入力後、登録ボタンを押してください"
-# wait.until {d.find_element(:class,"purchase-btn").displayed?}
-
-
-
-#ログイン
-d.find_element(:class,"login").click 
+wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
-d.find_element(:class,"login-red-btn").click
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 
 
-# if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
-#   puts "◯必須項目を入力し、ユーザー登録ができる" 
-# else
-#   puts "☒必須項目を入力し、ユーザー登録ができていない" 
-#   wait.until {d.find_element(:class,"purchase-btn").displayed?}
-# end
+if /会員情報入力/ .match(d.page_source)
+  puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
+else
+  puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
 
-# d.find_element(:class,"logout").click
+puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
+
+
+
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+
+
+puts "生年月日を入力してください。入力後、登録ボタンを押してください"
+wait.until {d.find_element(:class,"purchase-btn").displayed?}
+
+
+
+# #ログイン
 # d.find_element(:class,"login").click 
 # d.find_element(:id, 'email').send_keys(email)
 # d.find_element(:id, 'password').send_keys(password)
 # d.find_element(:class,"login-red-btn").click
 
-# puts "アカウント1でログイン"
+
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts "◯必須項目を入力し、ユーザー登録ができる" 
+else
+  puts "☒必須項目を入力し、ユーザー登録ができていない" 
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
+end
+
+d.find_element(:class,"logout").click
+d.find_element(:class,"login").click 
+d.find_element(:id, 'email').send_keys(email)
+d.find_element(:id, 'password').send_keys(password)
+d.find_element(:class,"login-red-btn").click
+
+puts "アカウント1でログイン"
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯ログイン/ログアウトができる" 
@@ -166,15 +166,14 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
+d.find_element(:class,"purchase-btn-text").click
 
 
-
-if !d.find_element(:class,"purchase-btn").click
-  
+if /purchase-btn/.match(d.page_source)
+  d.find_element(:class,"purchase-btn").click
 else
-  d.find_element(:class,"purchase-btn-text").click
-end
 
+end
 wait.until {d.find_element(:id,"item-name").displayed?}
 d.find_element(:id,"item-name").send_keys(item_name) 
 
@@ -218,7 +217,7 @@ d.find_element(:id,"item-prefecture").send_keys(blank)
 d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
 d.find_element(:id,"item-price").clear
 
-wait.until {d.find_element(:id,"item-image").displayed?}
+
 d.find_element(:id,"item-image").send_keys(item_image)
 d.find_element(:id,"item-name").send_keys(item_name) 
 d.find_element(:id,"item-info").send_keys(item_info)
@@ -323,12 +322,12 @@ end
 d.find_element(:id,"item-info").send_keys(item_info_re)
 d.find_element(:class,"sell-btn").click
 
-# if /#{item_info_re}/.match(d.page_source)
-#   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
-# else
-#   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
-#   wait.until {d.find_element(:class,"detail-item").displayed?}
-# end
+if /#{item_info_re}/.match(d.page_source)
+  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
+else
+  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
+  wait.until {d.find_element(:class,"detail-item").displayed?}
+end
 
 puts "◯何も編集せずに更新をしても画像無しの商品にならない"
 puts "◯商品情報（商品画像・商品名・商品の状態など）を変更できる"
@@ -336,13 +335,14 @@ d.find_element(:class,"furima-icon").click
 
 
 d.find_element(:class,"logout").click
+d.find_element(:class,"purchase-btn-text").click
 
-if !d.find_element(:class,"purchase-btn").click
-  
+
+if /purchase-btn/.match(d.page_source)
+  d.find_element(:class,"purchase-btn").click
 else
-  d.find_element(:class,"purchase-btn-text").click
-end
 
+end
 if /ログイン/ .match(d.page_source)
   puts "!ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移しました"
 else
@@ -555,10 +555,11 @@ end
 
 d.find_element(:class,"furima-icon").click 
 
-if !d.find_element(:class,"purchase-btn").click
-  
+d.find_element(:class,"purchase-btn-text").click
+if /purchase-btn/.match(d.page_source)
+  d.find_element(:class,"purchase-btn").click
 else
-  d.find_element(:class,"purchase-btn-text").click
+
 end
 
 d.find_element(:id,"item-image").send_keys(item_image2)
