@@ -2,8 +2,10 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
+
 nickname = "kusunnjyun"
 email = "divs3s@co.jp"
+
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -46,6 +48,7 @@ phone_number = "02089001111"
 blank = "--"
 
 #basic認証のidとpass
+
 b_username = "daisuke"
 b_password = "6147"
 http ="http://#{b_username}:#{b_password}@"
@@ -54,10 +57,12 @@ url = "#{http}furima-28111.herokuapp.com/"
 # url = "http://localhost:3000/"
 
 
+
 d.get(url)
 
 d.find_element(:class,"sign-up").click
 wait.until {d.find_element(:id, 'nickname').displayed?}
+
 
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
@@ -85,6 +90,21 @@ end
 puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
 
 
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
 
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').clear
@@ -100,6 +120,7 @@ wait.until {d.find_element(:id, 'first-name-kana').displayed?}
 d.find_element(:id, 'first-name-kana').clear
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').clear
+
 
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
@@ -132,6 +153,7 @@ wait.until {d.find_element(:class,"purchase-btn").displayed?}
 # d.find_element(:class,"login-red-btn").click
 
 
+
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯必須項目を入力し、ユーザー登録ができる" 
 else
@@ -139,13 +161,16 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
+
 d.find_element(:class,"logout").click
 d.find_element(:class,"login").click 
 d.find_element(:id, 'email').send_keys(email)
 d.find_element(:id, 'password').send_keys(password)
 d.find_element(:class,"login-red-btn").click
 
+
 # puts "アカウント1でログイン"
+
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯ログイン/ログアウトができる" 
@@ -213,7 +238,7 @@ d.find_element(:id,"item-prefecture").send_keys(blank)
 d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
 d.find_element(:id,"item-price").clear
 
-wait.until {d.find_element(:id,"item-image").displayed?}
+
 d.find_element(:id,"item-image").send_keys(item_image)
 d.find_element(:id,"item-name").send_keys(item_name) 
 d.find_element(:id,"item-info").send_keys(item_info)
@@ -344,10 +369,12 @@ d.find_element(:class,"sell-btn").click
 
 if /#{item_info_re}/.match(d.page_source)
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
+
 elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"item-img-content").click
   wait.until {d.find_element(:class,"detail-item").displayed?}
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている。" 
+
 else
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
@@ -359,10 +386,14 @@ d.find_element(:class,"furima-icon").click
 
 
 d.find_element(:class,"logout").click
+d.find_element(:class,"purchase-btn-text").click
+
 
 d.get("#{url}/items/new")
 
 
+
+end
 if /ログイン/ .match(d.page_source)
   puts "!ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移しました"
 elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
@@ -579,6 +610,8 @@ else
   puts "◯購入した商品は、再度購入できない状態になっている" 
   d.find_element(:class,"furima-icon").click 
 end
+
+
 
 
 d.get("#{url}/items/new")
