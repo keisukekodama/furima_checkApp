@@ -2,47 +2,37 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
-nickname = "ク・スンジュン"
-email = "divs2s@co.jp"
+
+nickname = "kusunnjyun"
+email = "divs3s@co.jp"
+
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
 first_name_kana = "アイ"
 last_name_kana = "フジチャク"
-user_birth_date_1i = "1991"
-user_birth_date_2i = "2"
-user_birth_date_3i = "10"
 
-nickname2 = "クラス"
-email2 = "dssafdss@co.jp"
+nickname2 = "class"
+email2 = "dssafds@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
 last_name_kana2 = "クラス"
-user_birth_date_1i2 = "1910"
-user_birth_date_2i2 = "1"
-user_birth_date_3i2 = "11"
 
-item_image = "/Users/tech-camp/furima_checkApp/photo/coat.jpg"
+
+item_image = ""
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
 item_info_re = "昨年イチオシのトレンチコート"
-item_category = "メンズ"
-item_sales_status ="目立った傷や汚れなし"
-item_shipping_fee_status = "着払い(購入者負担)"
-item_prefecture = "山口県"
-item_scheduled_delivery = "1~2日で発送"
+value = '2'
+
 item_price = 40000
 
-item_image2 = "/Users/tech-camp/furima_checkApp/photo/sunglass.jpg"
+item_image2 = ""
 item_name2 = "サングラス"
 item_info2 = "限定5品のサングラス"
-item_category2 = "メンズ"
-item_sales_status2 ="目立った傷や汚れなし"
-item_shipping_fee_status2 = "着払い(購入者負担)"
-item_prefecture2 = "群馬県"
-item_scheduled_delivery2 = "2~3日で発送"
+
 item_price2 = 30000
 
 card_number = 4242424242424242
@@ -55,21 +45,24 @@ city = "会津若松市"
 addresses = "追手町１−１"
 phone_number = "02089001111"
 
-blank = "---"
+blank = "--"
 
 #basic認証のidとpass
-b_username = "kentaro"
-b_password = "1997"
+
+b_username = "daisuke"
+b_password = "6147"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-# url = "#{http}furima-28375.herokuapp.com/"
-url = "http://localhost:3000/"
+url = "#{http}furima-28111.herokuapp.com/"
+# url = "http://localhost:3000/"
+
 
 
 d.get(url)
 
 d.find_element(:class,"sign-up").click
 wait.until {d.find_element(:id, 'nickname').displayed?}
+
 
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
@@ -97,6 +90,21 @@ end
 puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
 
 
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
 
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').clear
@@ -112,6 +120,7 @@ wait.until {d.find_element(:id, 'first-name-kana').displayed?}
 d.find_element(:id, 'first-name-kana').clear
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').clear
+
 
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
@@ -144,6 +153,7 @@ wait.until {d.find_element(:class,"purchase-btn").displayed?}
 # d.find_element(:class,"login-red-btn").click
 
 
+
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯必須項目を入力し、ユーザー登録ができる" 
 else
@@ -151,13 +161,16 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
+
 d.find_element(:class,"logout").click
 d.find_element(:class,"login").click 
 d.find_element(:id, 'email').send_keys(email)
 d.find_element(:id, 'password').send_keys(password)
 d.find_element(:class,"login-red-btn").click
 
-puts "アカウント1でログイン"
+
+# puts "アカウント1でログイン"
+
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯ログイン/ログアウトができる" 
@@ -166,14 +179,9 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
-d.find_element(:class,"purchase-btn-text").click
+d.get("#{url}/items/new")
 
 
-if /purchase-btn/.match(d.page_source)
-  d.find_element(:class,"purchase-btn").click
-else
-
-end
 wait.until {d.find_element(:id,"item-name").displayed?}
 d.find_element(:id,"item-name").send_keys(item_name) 
 
@@ -181,19 +189,32 @@ wait.until {d.find_element(:id,"item-info").displayed?}
 d.find_element(:id,"item-info").send_keys(item_info)
 
 wait.until {d.find_element(:id,"item-category").displayed?}
-d.find_element(:id,"item-category").send_keys(item_category)
+item_category_element = d.find_element(:id,"item-category")
+item_category = Selenium::WebDriver::Support::Select.new(item_category_element)
+item_category.select_by(:value, value)
+
 
 wait.until {d.find_element(:id,"item-sales-status").displayed?}
-d.find_element(:id,"item-sales-status").send_keys(item_sales_status)
+item_sales_status_element = d.find_element(:id,"item-sales-status")
+item_sales_status = Selenium::WebDriver::Support::Select.new(item_sales_status_element)
+item_sales_status.select_by(:value, value)
+
 
 wait.until {d.find_element(:id,"item-shipping-fee-status").displayed?}
-d.find_element(:id,"item-shipping-fee-status").send_keys(item_shipping_fee_status)
+item_shipping_fee_status_element = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_element)
+item_shipping_fee_status.select_by(:value, value)
 
 wait.until {d.find_element(:id,"item-prefecture").displayed?}
-d.find_element(:id,"item-prefecture").send_keys(item_prefecture)
+item_prefecture_element = d.find_element(:id,"item-prefecture")
+item_prefecture = Selenium::WebDriver::Support::Select.new(item_prefecture_element)
+item_prefecture.select_by(:value, value)
+
 
 wait.until {d.find_element(:id,"item-scheduled-delivery").displayed?}
-d.find_element(:id,"item-scheduled-delivery").send_keys(item_scheduled_delivery)
+item_scheduled_delivery_element = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_element)
+item_scheduled_delivery.select_by(:value, value)
 
 wait.until {d.find_element(:id,"item-price").displayed?}
 d.find_element(:id,"item-price").send_keys(item_price)
@@ -221,11 +242,25 @@ d.find_element(:id,"item-price").clear
 d.find_element(:id,"item-image").send_keys(item_image)
 d.find_element(:id,"item-name").send_keys(item_name) 
 d.find_element(:id,"item-info").send_keys(item_info)
-d.find_element(:id,"item-category").send_keys(item_category)
-d.find_element(:id,"item-sales-status").send_keys(item_sales_status)
 
-d.find_element(:id,"item-prefecture").send_keys(item_prefecture)
-d.find_element(:id,"item-scheduled-delivery").send_keys(item_scheduled_delivery)
+item_category_element = d.find_element(:id,"item-category")
+item_category = Selenium::WebDriver::Support::Select.new(item_category_element)
+item_category.select_by(:value, value)
+
+item_sales_status_element = d.find_element(:id,"item-sales-status")
+item_sales_status = Selenium::WebDriver::Support::Select.new(item_sales_status_element)
+item_sales_status.select_by(:value, value)
+
+item_prefecture_element = d.find_element(:id,"item-prefecture")
+item_prefecture = Selenium::WebDriver::Support::Select.new(item_prefecture_element)
+item_prefecture.select_by(:value, value)
+item_scheduled_delivery_element = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_element)
+item_scheduled_delivery.select_by(:value, value)
+
+
+
+
 d.find_element(:id,"item-price").send_keys(item_price)
 
 d.find_element(:class,"sell-btn").click
@@ -251,11 +286,21 @@ d.find_element(:id,"item-price").clear
 d.find_element(:id,"item-image").send_keys(item_image)
 d.find_element(:id,"item-name").send_keys(item_name) 
 d.find_element(:id,"item-info").send_keys(item_info)
-d.find_element(:id,"item-category").send_keys(item_category)
-d.find_element(:id,"item-sales-status").send_keys(item_sales_status)
-d.find_element(:id,"item-shipping-fee-status").send_keys(item_shipping_fee_status)
-d.find_element(:id,"item-prefecture").send_keys(item_prefecture)
-d.find_element(:id,"item-scheduled-delivery").send_keys(item_scheduled_delivery)
+item_category_element = d.find_element(:id,"item-category")
+item_category = Selenium::WebDriver::Support::Select.new(item_category_element)
+item_category.select_by(:value, value)
+item_sales_status_element = d.find_element(:id,"item-sales-status")
+item_sales_status = Selenium::WebDriver::Support::Select.new(item_sales_status_element)
+item_sales_status.select_by(:value, value)
+item_shipping_fee_status_element = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_element)
+item_shipping_fee_status.select_by(:value, value)
+item_prefecture_element = d.find_element(:id,"item-prefecture")
+item_prefecture = Selenium::WebDriver::Support::Select.new(item_prefecture_element)
+item_prefecture.select_by(:value, value)
+item_scheduled_delivery_element = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_element)
+item_scheduled_delivery.select_by(:value, value)
 d.find_element(:id,"item-price").send_keys(item_price)
 
 d.find_element(:class,"sell-btn").click
@@ -324,6 +369,12 @@ d.find_element(:class,"sell-btn").click
 
 if /#{item_info_re}/.match(d.page_source)
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
+
+elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  d.find_element(:class,"item-img-content").click
+  wait.until {d.find_element(:class,"detail-item").displayed?}
+  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている。" 
+
 else
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
@@ -338,19 +389,22 @@ d.find_element(:class,"logout").click
 d.find_element(:class,"purchase-btn-text").click
 
 
-if /purchase-btn/.match(d.page_source)
-  d.find_element(:class,"purchase-btn").click
-else
+d.get("#{url}/items/new")
+
+
 
 end
 if /ログイン/ .match(d.page_source)
   puts "!ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移しました"
+elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts "!ログインしていない状態で商品出品ページへアクセスすると、トップページへ遷移しました"
+
 else
   puts "!ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移できませんでした"
+  d.find_element(:class,"second-logo").click
 end
 
 puts "◯ログインしているユーザーだけが、出品ページへ遷移できる"
-d.find_element(:class,"second-logo").click
 
 
 if /#{item_image_name}/ .match(d.page_source)
@@ -546,30 +600,40 @@ sleep 1
 d.find_element(:class,"item-img-content").click 
 
 if /購入画面に進む/ .match(d.page_source)
-  puts "☒購入した商品だが、再度購入できる状態になっている" 
-  wait.until {d.find_element(:class,"sold-out").displayed?}
+  puts "☒購入した商品だが、再度購入ボタンが表示されている"
+  d.find_element(:class,"item-red-btn").click
+  wait.until {d.find_element(:class,"furima-icon").displayed?}
+   
+  puts "◯しかし、購入した商品は、再度購入できない状態になっている"
+  d.find_element(:class,"furima-icon").click 
 else
   puts "◯購入した商品は、再度購入できない状態になっている" 
-  
+  d.find_element(:class,"furima-icon").click 
 end
 
-d.find_element(:class,"furima-icon").click 
 
-d.find_element(:class,"purchase-btn-text").click
-if /purchase-btn/.match(d.page_source)
-  d.find_element(:class,"purchase-btn").click
-else
 
-end
 
+d.get("#{url}/items/new")
+wait.until {d.find_element(:id,"item-image").displayed?}
 d.find_element(:id,"item-image").send_keys(item_image2)
 d.find_element(:id,"item-name").send_keys(item_name2) 
 d.find_element(:id,"item-info").send_keys(item_info2)
-d.find_element(:id,"item-category").send_keys(item_category2)
-d.find_element(:id,"item-sales-status").send_keys(item_sales_status2)
-d.find_element(:id,"item-shipping-fee-status").send_keys(item_shipping_fee_status2)
-d.find_element(:id,"item-prefecture").send_keys(item_prefecture2)
-d.find_element(:id,"item-scheduled-delivery").send_keys(item_scheduled_delivery2)
+item_category_element = d.find_element(:id,"item-category")
+item_category = Selenium::WebDriver::Support::Select.new(item_category_element)
+item_category.select_by(:value, value)
+item_sales_status_element = d.find_element(:id,"item-sales-status")
+item_sales_status = Selenium::WebDriver::Support::Select.new(item_sales_status_element)
+item_sales_status.select_by(:value, value)
+item_shipping_fee_status_element = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_element)
+item_shipping_fee_status.select_by(:value, value)
+item_prefecture_element = d.find_element(:id,"item-prefecture")
+item_prefecture = Selenium::WebDriver::Support::Select.new(item_prefecture_element)
+item_prefecture.select_by(:value, value)
+item_scheduled_delivery_element = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_element)
+item_scheduled_delivery.select_by(:value, value)
 d.find_element(:id,"item-price").send_keys(item_price2)
 d.find_element(:class,"sell-btn").click
 
