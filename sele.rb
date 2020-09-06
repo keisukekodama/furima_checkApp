@@ -2,10 +2,8 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
-
 nickname = "kusunnjyun"
 email = "divs3s@co.jp"
-
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -48,7 +46,6 @@ phone_number = "02089001111"
 blank = "--"
 
 #basic認証のidとpass
-
 b_username = "daisuke"
 b_password = "6147"
 http ="http://#{b_username}:#{b_password}@"
@@ -57,12 +54,10 @@ url = "#{http}furima-28111.herokuapp.com/"
 # url = "http://localhost:3000/"
 
 
-
 d.get(url)
 
 d.find_element(:class,"sign-up").click
 wait.until {d.find_element(:id, 'nickname').displayed?}
-
 
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
@@ -90,21 +85,6 @@ end
 puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
 
 
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').clear
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').clear
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').clear
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').clear
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').clear
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').clear
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').clear
-
 
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').clear
@@ -120,7 +100,6 @@ wait.until {d.find_element(:id, 'first-name-kana').displayed?}
 d.find_element(:id, 'first-name-kana').clear
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').clear
-
 
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
@@ -153,7 +132,6 @@ wait.until {d.find_element(:class,"purchase-btn").displayed?}
 # d.find_element(:class,"login-red-btn").click
 
 
-
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯必須項目を入力し、ユーザー登録ができる" 
 else
@@ -161,16 +139,13 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
-
 d.find_element(:class,"logout").click
 d.find_element(:class,"login").click 
 d.find_element(:id, 'email').send_keys(email)
 d.find_element(:id, 'password').send_keys(password)
 d.find_element(:class,"login-red-btn").click
 
-
 # puts "アカウント1でログイン"
-
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯ログイン/ログアウトができる" 
@@ -238,7 +213,7 @@ d.find_element(:id,"item-prefecture").send_keys(blank)
 d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
 d.find_element(:id,"item-price").clear
 
-
+wait.until {d.find_element(:id,"item-image").displayed?}
 d.find_element(:id,"item-image").send_keys(item_image)
 d.find_element(:id,"item-name").send_keys(item_name) 
 d.find_element(:id,"item-info").send_keys(item_info)
@@ -352,9 +327,9 @@ else
 end
 
 
-sleep 1
+wait.until {d.find_element(:class,"item-red-btn").displayed?}
 d.find_element(:class,"item-red-btn").click
-sleep 1
+
 d.find_element(:id,"item-info").clear
 d.find_element(:class,"sell-btn").click
 if /商品の情報を入力/.match(d.page_source)
@@ -369,12 +344,10 @@ d.find_element(:class,"sell-btn").click
 
 if /#{item_info_re}/.match(d.page_source)
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
-
 elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"item-img-content").click
   wait.until {d.find_element(:class,"detail-item").displayed?}
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている。" 
-
 else
   puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
@@ -386,16 +359,15 @@ d.find_element(:class,"furima-icon").click
 
 
 d.find_element(:class,"logout").click
-d.find_element(:class,"purchase-btn-text").click
-
 
 d.get("#{url}/items/new")
 
 
-
-end
-if /ログイン/ .match(d.page_source)
+if /会員情報入力/ .match(d.page_source)
   puts "!ログインしていない状態で商品出品ページへアクセスすると、ログインページへ遷移しました"
+  wait.until {d.find_element(:class,"second-logo").displayed?}
+  d.find_element(:class,"second-logo").click
+
 elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "!ログインしていない状態で商品出品ページへアクセスすると、トップページへ遷移しました"
 
@@ -406,7 +378,7 @@ end
 
 puts "◯ログインしているユーザーだけが、出品ページへ遷移できる"
 
-
+wait.until {d.find_element(:class, "item-img-content").displayed?}
 if /#{item_image_name}/ .match(d.page_source)
   puts "!ログインしていないユーザーでも、商品の一覧表示を確認でき、出品画像が表示されている" 
 else
@@ -438,7 +410,7 @@ end
 puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
 
 
-sleep 1
+
 
 
 
@@ -447,11 +419,11 @@ sleep 1
 
 puts "【説明】購入ボタン自体を消しているてる場合があるので一度、サインアップする"
 
-sleep 1
+wait.until {d.find_element(:class,"sign-up").displayed?}
 d.manage.delete_all_cookies
 d.find_element(:class,"sign-up").click
 puts "新しいユーザーを登録する"
-sleep 1
+wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname2)
 d.find_element(:id, 'email').send_keys(email2)
 d.find_element(:id, 'password').send_keys(password)
@@ -473,8 +445,8 @@ puts "【説明】商品出品ページに遷移してしまうためトップ�
 # d.find_element(:class,"login-red-btn").click
 
 
-sleep 1
 
+wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click
 if /編集/ .match(d.page_source)
   puts "!ログインした上で自分が出品していない商品詳細ページへアクセスした場合に、「編集」のリンクが表示される" 
@@ -546,7 +518,7 @@ puts "◯正しいクレジットカードの情報で無い場合は、決済�
 d.find_element(:id, 'postal-code').clear
 d.find_element(:id, 'prefecture').send_keys(blank)
 d.find_element(:id, 'city').clear
-sleep 2
+wait.until {d.find_element(:id, 'addresses').displayed?}
 d.find_element(:id, 'addresses').clear
 d.find_element(:id, 'phone-number').clear
 
@@ -595,8 +567,8 @@ else
   wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 
-sleep 1
 
+wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
 
 if /購入画面に進む/ .match(d.page_source)
@@ -610,8 +582,6 @@ else
   puts "◯購入した商品は、再度購入できない状態になっている" 
   d.find_element(:class,"furima-icon").click 
 end
-
-
 
 
 d.get("#{url}/items/new")
