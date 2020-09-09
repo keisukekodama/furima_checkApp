@@ -46,11 +46,11 @@ phone_number = "02089001111"
 blank = "--"
 
 #basic認証のidとpass
-b_username = "daisuke"
-b_password = "6147"
+b_username = "aaaaa"
+b_password = "1111"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-28111.herokuapp.com/"
+url = "#{http}frima-28239.herokuapp.com/"
 # url = "http://localhost:3000/"
 
 
@@ -83,7 +83,8 @@ else
 end
 
 puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
-
+sleep 3
+puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 
 
 wait.until {d.find_element(:id, 'email').displayed?}
@@ -103,26 +104,43 @@ d.find_element(:id, 'last-name-kana').clear
 
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
+puts "◯ニックネームが必須である"
+
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
+puts "◯メールアドレスが必須である"
+puts "◯メールアドレスは一意性である"
+puts "◯メールアドレスは@を含む必要がある"
+
 wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
+puts "◯パスワードが必須である"
+puts "◯パスワードは6文字以上である"
+puts "◯パスワードは半角英数字混合である"
+
 wait.until {d.find_element(:id, 'password-confirmation').displayed?}
 d.find_element(:id, 'password-confirmation').send_keys(password)
+puts "◯パスワードは確認用を含めて2回入力する"
+
 wait.until {d.find_element(:id, 'first-name').displayed?}
 d.find_element(:id, 'first-name').send_keys(first_name)
 wait.until {d.find_element(:id, 'last-name').displayed?}
 d.find_element(:id, 'last-name').send_keys(last_name)
+puts "◯ユーザー本名が、名字と名前がそれぞれ必須である"
+puts "◯ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させる"
+
+
 wait.until {d.find_element(:id, 'first-name-kana').displayed?}
 d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-
+puts "◯ユーザー本名のフリガナが、名字と名前でそれぞれ必須である"
+puts "◯ユーザー本名のフリガナは全角（カタカナ）で入力させる"
 
 
 puts "生年月日を入力してください。入力後、登録ボタンを押してください"
 wait.until {d.find_element(:class,"purchase-btn").displayed?}
-
+puts "◯生年月日が必須である"
 
 
 # #ログイン
@@ -139,10 +157,18 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
-d.find_element(:class,"logout").click
+# if /ログアウト/.match(d.page_source)
+d.find_element(:link_text,"ログアウト").click
+# else
+
+# end
+wait.until {d.find_element(:class,"login").displayed?}
 d.find_element(:class,"login").click 
+wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
+wait.until {d.find_element(:class,"login-red-btn").displayed?}
 d.find_element(:class,"login-red-btn").click
 
 # puts "アカウント1でログイン"
@@ -186,13 +212,30 @@ item_prefecture = Selenium::WebDriver::Support::Select.new(item_prefecture_eleme
 item_prefecture.select_by(:value, value)
 
 
+wait.until {d.find_element(:id,"item-price").displayed?}
+d.find_element(:id,"item-price").send_keys(item_price)
+d.find_element(:class,"price-content").click
+
+
+item_price_benefit = item_price*0.9
+item_price_benefit = item_price_benefit.round
+item_price_benefit2 = item_price_benefit.to_s.gsub(/\d{2}/, '\0,').to_i
+
+puts "!利益は#{item_price_benefit}" 
+
+
 wait.until {d.find_element(:id,"item-scheduled-delivery").displayed?}
 item_scheduled_delivery_element = d.find_element(:id,"item-scheduled-delivery")
 item_scheduled_delivery = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_element)
 item_scheduled_delivery.select_by(:value, value)
 
-wait.until {d.find_element(:id,"item-price").displayed?}
-d.find_element(:id,"item-price").send_keys(item_price)
+
+if /#{item_price_benefit}/.match(d.page_source) || /#{item_price_benefit2}/.match(d.page_source)
+  puts "◯入力された販売価格によって、非同期的に販売手数料や販売利益が変わる(JavaScriptを使用して実装すること)" 
+else
+  puts "☒入力された販売価格によって、非同期的に販売手数料や販売利益が変わらない" 
+  wait.until {d.find_element(:id,'profit').text == item_price_benefit}
+end
 
 d.find_element(:class,"sell-btn").click
 
@@ -203,7 +246,7 @@ else
   wait.until {d.find_element(:id,"item-name").displayed?}
 end
 
-
+wait.until {d.find_element(:id,"item-name").displayed?}
 d.find_element(:id,"item-name").clear 
 d.find_element(:id,"item-info").clear
 d.find_element(:id,"item-category").send_keys(blank)
@@ -235,7 +278,7 @@ item_scheduled_delivery.select_by(:value, value)
 
 
 
-
+wait.until {d.find_element(:id,"item-price").displayed?}
 d.find_element(:id,"item-price").send_keys(item_price)
 
 d.find_element(:class,"sell-btn").click
@@ -247,7 +290,8 @@ else
   wait.until {d.find_element(:id,"item-name").displayed?}
 end
 puts "◯必須項目が一つでも欠けている場合は、出品ができない"
-
+sleep 3
+puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 d.find_element(:id,"item-image").clear 
 d.find_element(:id,"item-name").clear 
 d.find_element(:id,"item-info").clear
@@ -259,24 +303,42 @@ d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
 d.find_element(:id,"item-price").clear
 
 d.find_element(:id,"item-image").send_keys(item_image)
+puts "◯画像は1枚必須である"
+
 d.find_element(:id,"item-name").send_keys(item_name) 
+puts "◯商品名が必須である"
+
 d.find_element(:id,"item-info").send_keys(item_info)
+puts "◯商品の説明が必須である"
+
 item_category_element = d.find_element(:id,"item-category")
 item_category = Selenium::WebDriver::Support::Select.new(item_category_element)
 item_category.select_by(:value, value)
+puts "◯カテゴリーの情報が必須である"
+
 item_sales_status_element = d.find_element(:id,"item-sales-status")
 item_sales_status = Selenium::WebDriver::Support::Select.new(item_sales_status_element)
 item_sales_status.select_by(:value, value)
+puts "◯商品の状態についての情報が必須である"
+
 item_shipping_fee_status_element = d.find_element(:id,"item-shipping-fee-status")
 item_shipping_fee_status = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_element)
 item_shipping_fee_status.select_by(:value, value)
+puts "◯配送料の負担についての情報が必須である"
+
 item_prefecture_element = d.find_element(:id,"item-prefecture")
 item_prefecture = Selenium::WebDriver::Support::Select.new(item_prefecture_element)
 item_prefecture.select_by(:value, value)
+puts "◯発送元の地域についての情報が必須である"
+
 item_scheduled_delivery_element = d.find_element(:id,"item-scheduled-delivery")
 item_scheduled_delivery = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_element)
 item_scheduled_delivery.select_by(:value, value)
+puts "◯発送までの日数についての情報が必須である"
+
 d.find_element(:id,"item-price").send_keys(item_price)
+puts "◯価格についての情報が必須である"
+puts "◯販売価格は半角数字のみ入力可能"
 
 d.find_element(:class,"sell-btn").click
 
@@ -312,6 +374,9 @@ puts "◯「画像/価格/商品名」の3つの情報について表示でき�
 
 d.find_element(:class,"item-img-content").click 
 
+wait.until {d.find_element(:class,"item-explain-box").text == item_info}
+puts  "!【商品説明】" + d.find_element(:class,"item-explain-box").text
+
 if /編集/.match(d.page_source)
   puts "!ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示される" 
 else
@@ -338,18 +403,21 @@ else
   puts "☒無効な情報でも商品編集を行うと、商品編集ができる" 
   wait.until {d.find_element(:id,"sell-btn").displayed?}
 end
+sleep 3
+puts "【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 
 d.find_element(:id,"item-info").send_keys(item_info_re)
 d.find_element(:class,"sell-btn").click
 
 if /#{item_info_re}/.match(d.page_source)
-  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている" 
+
+  puts "◯商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示される" 
 elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"item-img-content").click
   wait.until {d.find_element(:class,"detail-item").displayed?}
-  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されている。" 
+  puts "◯商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示される" 
 else
-  puts "!有効な情報で商品編集を行うと、レコードが更新され、商品詳細ページへ遷移し、商品出品時に入力した値が表示されない" 
+  puts "!◯商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
 
@@ -358,8 +426,7 @@ puts "◯商品情報（商品画像・商品名・商品の状態など）を�
 d.find_element(:class,"furima-icon").click
 
 
-d.find_element(:class,"logout").click
-
+d.find_element(:link_text,"ログアウト").click
 d.get("#{url}/items/new")
 
 
@@ -410,9 +477,26 @@ end
 puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
 
 
+if /編集/ .match(d.page_source)
+  puts "☒ログインしていないユーザーでも、商品の編集が行える" 
+  wait.until {d.find_element(:class,"item-red-btn").displayed?}
+else
+  puts "◯ログインしていないユーザーは、商品の編集が行えない。" 
+end
 
+if /購入画面に進む/.match(d.page_source)
+  puts "!購入ボタンがあるのでクリック"
+  d.find_element(:class,"item-red-btn").click
+  if /会員情報入力/.match(d.page_source)
+    d.find_element(:class,"second-logo").click
+  else
+    "☒ログインしていないユーザーは購入ページに遷移しようとすると、ログインページに遷移しない"
+  end
+else
+  puts "!購入ボタンがない"
+end
 
-
+puts "◯ログインしていないユーザーは購入ページに遷移しようとすると、ログインページに遷移する"
 
 
 
@@ -465,6 +549,7 @@ end
 puts "◯出品者にしか、商品編集・削除のリンクが踏めないようになっている"
 puts "◯出品者だけが編集ページに遷移できる"
 d.find_element(:class,"item-red-btn").click
+puts "◯出品者以外にしか、商品購入のリンクが踏めないようになっている"
 
 #クレジットカード情報入力画面に遷移
 
@@ -504,8 +589,9 @@ else
   wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 
-puts "◯正しいクレジットカードの情報で無い場合は、決済できない"
-
+puts "◯クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できない"
+sleep 3
+puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 # #後日実装
 # if d.switch_to
 #   sleep 1
@@ -515,13 +601,7 @@ puts "◯正しいクレジットカードの情報で無い場合は、決済�
 
 # end
 
-d.find_element(:id, 'postal-code').clear
-d.find_element(:id, 'prefecture').send_keys(blank)
-d.find_element(:id, 'city').clear
-wait.until {d.find_element(:id, 'addresses').displayed?}
-d.find_element(:id, 'addresses').clear
-d.find_element(:id, 'phone-number').clear
-
+d.navigate.refresh
 
 
 wait.until {d.find_element(:id, 'card-number').displayed?}
@@ -557,7 +637,11 @@ d.find_element(:class,"buy-red-btn").click
 
 wait.until {d.find_element(:class,"furima-icon").displayed?}
 puts "◯クレジットカード決済ができる"
-
+puts "◯クレジットカードの情報は購入の都度入力させる"
+puts "◯配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
+puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
+puts "◯電話番号にはハイフンは不要で、11桁以内である"
+puts "◯購入が完了したら、トップページまたは購入完了ページに遷移する"
 
 
 if /Sold Out/ .match(d.page_source)
@@ -576,7 +660,7 @@ if /購入画面に進む/ .match(d.page_source)
   d.find_element(:class,"item-red-btn").click
   wait.until {d.find_element(:class,"furima-icon").displayed?}
    
-  puts "◯しかし、購入した商品は、再度購入できない状態になっている"
+  puts "◯しかし、押してもトップページに遷移するので購入した商品は、再度購入できない状態になっている"
   d.find_element(:class,"furima-icon").click 
 else
   puts "◯購入した商品は、再度購入できない状態になっている" 
@@ -607,7 +691,9 @@ item_scheduled_delivery.select_by(:value, value)
 d.find_element(:id,"item-price").send_keys(item_price2)
 d.find_element(:class,"sell-btn").click
 
+wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
+wait.until {d.find_element(:class,"item-destroy").displayed?}
 d.find_element(:class,"item-destroy").click
 
 
@@ -618,5 +704,19 @@ if /#{item_name2}/ .match(d.page_source)
 else
   puts "◯出品者だけが商品情報を削除できる" 
 end
+
+
+
+d.find_element(:link_text,"ログアウト").click
+if /#{item_name}/ .match(d.page_source)
+  puts "◯ログアウトした状態でも、商品一覧を閲覧できる"
+else
+  puts "☒ログアウトすると、商品一覧を閲覧できない"
+end
+
 puts "プログラム終了"
+puts "【目視で確認】商品出品時に登録した情報が見られるようになっている"
+puts "【目視で確認】出品者はURLを直接入力して購入ページに遷移しようとすると、トップページに遷移する"
+puts "【目視で確認】URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移する"
+
 sleep 300000000000000
