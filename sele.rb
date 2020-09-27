@@ -18,7 +18,7 @@ first_name_kana2 = "イテウォン"
 last_name_kana2 = "クラス"
 
 
-item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
+item_image = ""
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
@@ -27,7 +27,7 @@ value = '2'
 
 item_price = 40000
 
-item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
+item_image2 = ""
 item_name2 = "サングラス"
 item_info2 = "限定5品のサングラス"
 
@@ -46,12 +46,12 @@ phone_number = "02089001111"
 blank = "--"
 
 #basic認証のidとpass
-b_username = "admin"
-b_password = "2222"
+b_username = "earlgrey"
+b_password = "1101"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-# url = "#{http}furima-287456.herokuapp.com/"
-url = "http://localhost:3000/"
+url = "#{http}furima-29349.herokuapp.com/"
+# url = "http://localhost:3000/"
 
 
 d.get(url)
@@ -165,6 +165,7 @@ d.find_element(:link_text,"ログアウト").click
 # else
 
 # end
+
 wait.until {d.find_element(:class,"login").displayed?}
 d.find_element(:class,"login").click 
 wait.until {d.find_element(:id, 'email').displayed?}
@@ -394,8 +395,9 @@ puts "◯「画像/価格/商品名」の3つの情報について表示でき�
 d.find_element(:class,"item-img-content").click 
 
 wait.until{d.find_element(:class,"item-explain-box")}
-if d.find_element(:class,"item-explain-box").text == item_info_re
-  puts  "!【商品説明】" + d.find_element(:class,"item-explain-box").text
+
+if d.find_element(:class,"item-explain-box").text == item_info
+  puts  "!【商品説明は表示できている】" + d.find_element(:class,"item-explain-box").text
 else
   puts "☒商品説明が表示されない"
 end
@@ -756,6 +758,7 @@ end
 
 
 d.find_element(:link_text,"ログアウト").click
+wait.until {d.find_element(:class,"purchase-btn").displayed?}
 if /#{item_name}/ .match(d.page_source)
   puts "◯ログアウトした状態でも、商品一覧を閲覧できる"
 else
