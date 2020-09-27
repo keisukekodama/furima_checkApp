@@ -18,7 +18,7 @@ first_name_kana2 = "イテウォン"
 last_name_kana2 = "クラス"
 
 
-item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
+item_image = ""
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
@@ -27,7 +27,7 @@ value = '2'
 
 item_price = 40000
 
-item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
+item_image2 = ""
 item_name2 = "サングラス"
 item_info2 = "限定5品のサングラス"
 
@@ -50,8 +50,8 @@ b_username = "admin"
 b_password = "2222"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-# url = "#{http}furima-287456.herokuapp.com/"
-url = "http://localhost:3000/"
+url = "#{http}furima-287456.herokuapp.com/"
+# url = "http://localhost:3000/"
 
 
 d.get(url)
