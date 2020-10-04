@@ -18,7 +18,7 @@ first_name_kana2 = "イテウォン"
 last_name_kana2 = "クラス"
 
 
-item_image = ""
+item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
@@ -27,7 +27,7 @@ value = '2'
 
 item_price = 40000
 
-item_image2 = ""
+item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
 item_name2 = "サングラス"
 item_info2 = "限定5品のサングラス"
 
@@ -46,11 +46,11 @@ phone_number = "02089001111"
 blank = "--"
 
 #basic認証のidとpass
-b_username = "earlgrey"
-b_password = "1101"
+b_username = "hikichi"
+b_password = "197871"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-29349.herokuapp.com/"
+# url = "#{http}furima-29750-29750.herokuapp.com/"
 # url = "http://localhost:3000/"
 
 
@@ -187,6 +187,7 @@ end
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
+  sleep 3
   if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"purchase-btn-text").click
   puts "!出品ページに遷移2"
@@ -196,6 +197,7 @@ if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
     end
   end
 else
+  d.get(url+"/items/new")
   puts "!出品ページに遷移できない"
   sleep 300
 end
@@ -394,15 +396,6 @@ puts "◯「画像/価格/商品名」の3つの情報について表示でき�
 #商品表示が昇順か降順
 d.find_element(:class,"item-img-content").click 
 
-wait.until{d.find_element(:class,"item-explain-box")}
-
-if d.find_element(:class,"item-explain-box").text == item_info
-  puts  "!【商品説明は表示できている】" + d.find_element(:class,"item-explain-box").text
-else
-  puts "☒商品説明が表示されない"
-end
-
-
 if /編集/.match(d.page_source)
   puts "!ログインした上で自分が出品した商品詳細ページへアクセスした場合は、「編集」のリンクが表示される" 
 else
@@ -429,6 +422,7 @@ else
   puts "☒無効な情報でも商品編集を行うと、商品編集ができる" 
   wait.until {d.find_element(:id,"sell-btn").displayed?}
 end
+
 sleep 3
 puts "【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 
@@ -561,11 +555,13 @@ puts "【説明】商品出品ページに遷移してしまうためトップ�
 
 
 
-# #ログイン
+# #ログイン2
 # d.find_element(:class,"login").click
 # d.find_element(:id, 'email').send_keys(email2)
 # d.find_element(:id, 'password').send_keys(password)
 # d.find_element(:class,"login-red-btn").click
+
+puts "【説明】nickname2でログイン"
 
 
 
@@ -591,10 +587,9 @@ puts "◯出品者だけが編集ページに遷移できる"
 wait.until {d.find_element(:class, "item-red-btn").displayed?}
 d.find_element(:class,"item-red-btn").click
 puts "◯出品者以外にしか、商品購入のリンクが踏めないようになっている"
+#チェック機能追加
 
 #クレジットカード情報入力画面に遷移
-
-
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
 
@@ -666,6 +661,9 @@ wait.until {d.find_element(:id, 'phone-number').displayed?}
 d.find_element(:id, 'phone-number').send_keys(phone_number)
 puts "◯購入時、配送先の住所情報も都度入力できる"
 
+order_url_coat = d.current_url
+puts "コート購入画面のURL→  "+ order_url_coat
+
 d.find_element(:class,"buy-red-btn").click
 
 
@@ -685,6 +683,14 @@ else
   wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 
+d.get(order_url_coat)
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts "◯URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移する"
+else
+  puts "☒URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移しない"
+  puts "!手動でトップページに遷移するとプログラムが動きます。"
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
+end
 
 wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
@@ -701,7 +707,7 @@ else
   d.find_element(:class,"furima-icon").click 
 end
 
-sleep 3
+# wait.until {d.find_element(:id,"FURIMAが選ばれる3つの理由").displayed?}
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
@@ -715,10 +721,9 @@ if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   end
 else
   puts "!出品ページに遷移できない"
-  sleep 300
 end
   
-sleep 3
+
 wait.until {d.find_element(:id,"item-image").displayed?}
 d.find_element(:id,"item-image").send_keys(item_image2)
 d.find_element(:id,"item-name").send_keys(item_name2) 
@@ -741,22 +746,68 @@ item_scheduled_delivery.select_by(:value, value)
 d.find_element(:id,"item-price").send_keys(item_price2)
 d.find_element(:class,"sell-btn").click
 
+wait.until {d.find_element(:class,"purchase-btn").displayed?}
+d.find_element(:link_text,"ログアウト").click
+#ログイン1
+d.find_element(:class,"login").click 
+d.find_element(:id, 'email').send_keys(email)
+d.find_element(:id, 'password').send_keys(password)
+d.find_element(:class,"login-red-btn").click
+wait.until {d.find_element(:class,"item-img-content").displayed?}
+d.find_element(:class,"item-img-content").click 
+
+wait.until {d.find_element(:class,"item-red-btn").displayed?}
+d.find_element(:class,"item-red-btn").click
+order_url_glasses = d.current_url
+puts "サングラス購入画面のURL→  "+ order_url_glasses
+d.get(url)
+
+wait.until {d.find_element(:class,"purchase-btn").displayed?}
+d.find_element(:link_text,"ログアウト").click
+
+d.get(order_url_glasses)
+if /会員情報入力/ .match(d.page_source)
+  puts "！ログインしていない状態でURLを直接入力し購入ページに遷移しようとするとログインページに遷移する"
+  puts "◯ログインしていないユーザーは購入ページに遷移しようとすると、ログインページに遷移する"
+else
+  puts "☒ログインしていないユーザーは購入ページに遷移しようとしても、ログインページに遷移しない"
+  puts  "!手動でログインページに遷移するとプログラムが動きます。"
+  wait.until {d.find_element(:id,"email").displayed?}
+end
+
+
+#ログイン2
+wait.until {d.find_element(:id,"email").displayed?}
+d.find_element(:id, 'email').send_keys(email2)
+d.find_element(:id, 'password').send_keys(password)
+d.find_element(:class,"login-red-btn").click
+
+d.get(order_url_glasses)
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts "◯出品者はURLを直接入力して購入ページに遷移しようとすると、トップページに遷移する"
+else
+  puts "☒出品者がURLを直接入力して購入ページに遷移しようとすると、トップページに遷移しない"
+  puts  "!手動でトップページに遷移するとプログラムが動きます。"
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
+end
+
+
 wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
 wait.until {d.find_element(:class,"item-destroy").displayed?}
 d.find_element(:class,"item-destroy").click
-
-
-
+item_name2 = "サングラス"
 if /#{item_name2}/ .match(d.page_source)
   puts "☒出品者だけが商品情報を削除できない" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 else
   puts "◯出品者だけが商品情報を削除できる" 
-end
+end 
 
 
 
+item_name = "コート"
+wait.until {d.find_element(:class,"purchase-btn").displayed?}
 d.find_element(:link_text,"ログアウト").click
 wait.until {d.find_element(:class,"purchase-btn").displayed?}
 if /#{item_name}/ .match(d.page_source)
@@ -765,9 +816,18 @@ else
   puts "☒ログアウトすると、商品一覧を閲覧できない"
 end
 
+d.find_element(:class,"item-img-content").click 
+
+wait.until{d.find_element(:class,"item-explain-box")}
+if d.find_element(:class,"item-explain-box").text == item_info
+  puts  "!【商品説明は表示できている】" + d.find_element(:class,"item-explain-box").text
+else
+  puts "☒商品説明が表示されない"
+
+end
+
 puts "プログラム終了"
 puts "【目視で確認】商品出品時に登録した情報が見られるようになっている"
-puts "【目視で確認】出品者はURLを直接入力して購入ページに遷移しようとすると、トップページに遷移する"
-puts "【目視で確認】URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移する"
+puts "【目視で確認】新規登録、商品出品、商品購入の際にエラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 
 sleep 300000000000000
