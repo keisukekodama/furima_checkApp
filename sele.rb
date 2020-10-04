@@ -18,7 +18,7 @@ first_name_kana2 = "イテウォン"
 last_name_kana2 = "クラス"
 
 
-item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
+item_image = ""
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
@@ -27,7 +27,7 @@ value = '2'
 
 item_price = 40000
 
-item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
+item_image2 = ""
 item_name2 = "サングラス"
 item_info2 = "限定5品のサングラス"
 
@@ -50,7 +50,7 @@ b_username = "hikichi"
 b_password = "197871"
 http ="http://#{b_username}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-# url = "#{http}furima-29750-29750.herokuapp.com/"
+url = "#{http}furima-29750-29750.herokuapp.com/"
 # url = "http://localhost:3000/"
 
 
@@ -586,7 +586,7 @@ puts "◯出品者だけが編集ページに遷移できる"
 
 wait.until {d.find_element(:class, "item-red-btn").displayed?}
 d.find_element(:class,"item-red-btn").click
-puts "◯出品者以外にしか、商品購入のリンクが踏めないようになっている"
+
 #チェック機能追加
 
 #クレジットカード情報入力画面に遷移
@@ -794,6 +794,13 @@ end
 
 wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
+if /購入画面に進む/ .match(d.page_source)
+  puts "☒出品者でも、商品購入のリンクが踏めるようになっている"
+else
+  puts "◯出品者以外にしか、商品購入のリンクが踏めないようになっている" 
+end
+
+
 wait.until {d.find_element(:class,"item-destroy").displayed?}
 d.find_element(:class,"item-destroy").click
 item_name2 = "サングラス"
