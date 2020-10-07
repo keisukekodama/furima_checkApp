@@ -8,7 +8,7 @@ b_id = "admin"
 b_password = "2222"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-29347.herokuapp.com/"
+url = "#{http}"
 
 item_image = ""
 item_image2 = ""
