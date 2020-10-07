@@ -2,6 +2,18 @@ require 'selenium-webdriver'
 wait = Selenium::WebDriver::Wait.new(:timeout => 180000)
 d = Selenium::WebDriver.for :chrome
 
+
+#basic認証のidとpass
+b_id = "admin"
+b_password = "2222"
+http ="http://#{b_id}:#{b_password}@"
+# 受講生のURLをhttp://以降から記入
+url = "#{http}furima-29347.herokuapp.com/"
+
+item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
+item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
+
+
 nickname = "kusunnjyun"
 email = "divss4s@co.jp"
 password = "aaa111"
@@ -18,7 +30,7 @@ first_name_kana2 = "イテウォン"
 last_name_kana2 = "クラス"
 
 
-item_image = ""
+
 item_image_name = "coat.jpg"
 item_name = "コート"
 item_info = "今年イチオシのトレンチコート"
@@ -27,7 +39,7 @@ value = '2'
 
 item_price = 40000
 
-item_image2 = ""
+
 item_name2 = "サングラス"
 item_info2 = "限定5品のサングラス"
 
@@ -45,12 +57,6 @@ phone_number = "02089001111"
 
 blank = "--"
 
-#basic認証のidとpass
-b_username = "hikichi"
-b_password = "197871"
-http ="http://#{b_username}:#{b_password}@"
-# 受講生のURLをhttp://以降から記入
-url = "#{http}furima-29750-29750.herokuapp.com/"
 # url = "http://localhost:3000/"
 
 
@@ -696,14 +702,15 @@ wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
 
 if /購入画面に進む/ .match(d.page_source)
-  puts "☒購入した商品だが、再度購入ボタンが表示されている"
+  puts "!購入した商品だが、再度購入ボタンが表示されている"
   d.find_element(:class,"item-red-btn").click
   wait.until {d.find_element(:class,"furima-icon").displayed?}
    
   puts "◯しかし、押してもトップページに遷移するので購入した商品は、再度購入できない状態になっている"
   d.find_element(:class,"furima-icon").click 
 else
-  puts "◯購入した商品は、再度購入できない状態になっている" 
+  puts "☒URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移しない"
+  puts "!手動でトップページに遷移するとプログラムが動きます。"
   d.find_element(:class,"furima-icon").click 
 end
 
@@ -826,7 +833,7 @@ end
 d.find_element(:class,"item-img-content").click 
 
 wait.until{d.find_element(:class,"item-explain-box")}
-if d.find_element(:class,"item-explain-box").text == item_info
+if d.find_element(:class,"item-explain-box").text == item_info_re
   puts  "!【商品説明は表示できている】" + d.find_element(:class,"item-explain-box").text
 else
   puts "☒商品説明が表示されない"
@@ -836,5 +843,7 @@ end
 puts "プログラム終了"
 puts "【目視で確認】商品出品時に登録した情報が見られるようになっている"
 puts "【目視で確認】新規登録、商品出品、商品購入の際にエラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
-
+puts "【目視で確認】basic認証が実装されている" 
+puts "【目視で確認】ログイン/ログアウトによって、ヘッダーにてユーザーへ表示する情報が変わる"
+puts "【目視で確認】画像が表示されており、画像がリンク切れなどになっていない"
 sleep 300000000000000
