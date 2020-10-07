@@ -10,8 +10,8 @@ http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 url = "#{http}furima-29347.herokuapp.com/"
 
-item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
-item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
+item_image = ""
+item_image2 = ""
 
 
 nickname = "kusunnjyun"
