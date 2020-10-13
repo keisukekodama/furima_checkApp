@@ -8,14 +8,14 @@ b_id = "admin"
 b_password = "2222"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}"
+url = "#{http}furima-29685.herokuapp.com/"
 
-item_image = ""
-item_image2 = ""
+item_image = "/Users/tech-camp/dwhelper/projects2/furima_checkApp/photo/coat.jpg"
+item_image2 = "/Users/tech-camp/dwhelper/projects2/furima_checkApp/photo/sunglass.jpg"
 
 
 nickname = "kusunnjyun"
-email = "divss4s@co.jp"
+email = "divss4sa@co.jp"
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -23,7 +23,7 @@ first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf5s@co.jp"
+email2 = "dssaf4s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
