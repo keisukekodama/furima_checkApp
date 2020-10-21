@@ -5,25 +5,25 @@ d = Selenium::WebDriver.for :chrome
 
 #basic認証のidとpass
 b_id = "admin"
-b_password = "2222"
+b_password = "3333"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-29347.herokuapp.com/"
+# url = "#{http}furima-30547.herokuapp.com/"
 
 item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
 item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
 
 
 nickname = "kusunnjyun"
-email = "divss4s@co.jp"
-password = "aaa111"
+email = "divss45s@co.jp"
+password = "Aaa111"
 first_name = "愛"
 last_name= "不時着"
 first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf5s@co.jp"
+email2 = "dssaf56s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
@@ -55,108 +55,108 @@ city = "会津若松市"
 addresses = "追手町１−１"
 phone_number = "02089001111"
 
-blank = "--"
+blank = "0"
 
-# url = "http://localhost:3000/"
+url = "http://localhost:3000/"
 
 
 d.get(url)
 
-d.find_element(:class,"sign-up").click
-wait.until {d.find_element(:id, 'nickname').displayed?}
+# d.find_element(:class,"sign-up").click
+# wait.until {d.find_element(:id, 'nickname').displayed?}
 
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').send_keys(email)
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').send_keys(password)
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').send_keys(password)
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').send_keys(first_name)
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').send_keys(last_name)
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-
-
-d.find_element(:class,"register-red-btn").click
-
-
-if /会員情報入力/ .match(d.page_source)
-  puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
-else
-  puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
-  wait.until {d.find_element(:id,"nickname").displayed?}
-end
-
-puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
-sleep 3
-puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
-
-
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').clear
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').clear
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').clear
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').clear
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').clear
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').clear
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').clear
-
-wait.until {d.find_element(:id, 'nickname').displayed?}
-d.find_element(:id, 'nickname').send_keys(nickname)
-puts "◯ニックネームが必須である"
-
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').send_keys(email)
-puts "◯メールアドレスが必須である"
-puts "◯メールアドレスは一意性である"
-puts "◯メールアドレスは@を含む必要がある"
-
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').send_keys(password)
-puts "◯パスワードが必須である"
-puts "◯パスワードは6文字以上である"
-puts "◯パスワードは半角英数字混合である"
-
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').send_keys(password)
-puts "◯パスワードは確認用を含めて2回入力する"
-
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').send_keys(first_name)
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').send_keys(last_name)
-puts "◯ユーザー本名が、名字と名前がそれぞれ必須である"
-puts "◯ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させる"
-
-
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-puts "◯ユーザー本名のフリガナが、名字と名前でそれぞれ必須である"
-puts "◯ユーザー本名のフリガナは全角（カタカナ）で入力させる"
-
-
-puts "生年月日を入力してください。入力後、登録ボタンを押してください"
-wait.until {d.find_element(:class,"purchase-btn").displayed?}
-puts "◯生年月日が必須である"
-
-
-# #ログイン
-# d.find_element(:class,"login").click 
+# wait.until {d.find_element(:id, 'email').displayed?}
 # d.find_element(:id, 'email').send_keys(email)
+# wait.until {d.find_element(:id, 'password').displayed?}
 # d.find_element(:id, 'password').send_keys(password)
-# d.find_element(:class,"login-red-btn").click
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').send_keys(password)
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').send_keys(first_name)
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').send_keys(last_name)
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+
+# d.find_element(:class,"register-red-btn").click
+
+
+# if /会員情報入力/ .match(d.page_source)
+#   puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
+# else
+#   puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
+#   wait.until {d.find_element(:id,"nickname").displayed?}
+# end
+
+# puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
+# sleep 3
+# puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
+
+
+# wait.until {d.find_element(:id, 'email').displayed?}
+# d.find_element(:id, 'email').clear
+# wait.until {d.find_element(:id, 'password').displayed?}
+# d.find_element(:id, 'password').clear
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').clear
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').clear
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').clear
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').clear
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').clear
+
+# wait.until {d.find_element(:id, 'nickname').displayed?}
+# d.find_element(:id, 'nickname').send_keys(nickname)
+# puts "◯ニックネームが必須である"
+
+# wait.until {d.find_element(:id, 'email').displayed?}
+# d.find_element(:id, 'email').send_keys(email)
+# puts "◯メールアドレスが必須である"
+# puts "◯メールアドレスは一意性である"
+# puts "◯メールアドレスは@を含む必要がある"
+
+# wait.until {d.find_element(:id, 'password').displayed?}
+# d.find_element(:id, 'password').send_keys(password)
+# puts "◯パスワードが必須である"
+# puts "◯パスワードは6文字以上である"
+# puts "◯パスワードは半角英数字混合である"
+
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').send_keys(password)
+# puts "◯パスワードは確認用を含めて2回入力する"
+
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').send_keys(first_name)
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').send_keys(last_name)
+# puts "◯ユーザー本名が、名字と名前がそれぞれ必須である"
+# puts "◯ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させる"
+
+
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+# puts "◯ユーザー本名のフリガナが、名字と名前でそれぞれ必須である"
+# puts "◯ユーザー本名のフリガナは全角（カタカナ）で入力させる"
+
+
+# puts "生年月日を入力してください。入力後、登録ボタンを押してください"
+# wait.until {d.find_element(:class,"purchase-btn").displayed?}
+# puts "◯生年月日が必須である"
+
+
+#ログイン
+d.find_element(:class,"login").click 
+d.find_element(:id, 'email').send_keys(email)
+d.find_element(:id, 'password').send_keys(password)
+d.find_element(:class,"login-red-btn").click
 
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
@@ -222,6 +222,7 @@ item_category = Selenium::WebDriver::Support::Select.new(item_category_element)
 item_category.select_by(:value, value)
 
 
+
 wait.until {d.find_element(:id,"item-sales-status").displayed?}
 item_sales_status_element = d.find_element(:id,"item-sales-status")
 item_sales_status = Selenium::WebDriver::Support::Select.new(item_sales_status_element)
@@ -276,11 +277,26 @@ end
 wait.until {d.find_element(:id,"item-name").displayed?}
 d.find_element(:id,"item-name").clear 
 d.find_element(:id,"item-info").clear
-d.find_element(:id,"item-category").send_keys(blank)
-d.find_element(:id,"item-sales-status").send_keys(blank)
-d.find_element(:id,"item-shipping-fee-status").send_keys(blank)
-d.find_element(:id,"item-prefecture").send_keys(blank)
-d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
+item_category_blank = d.find_element(:id,"item-category")
+item_category_blank = Selenium::WebDriver::Support::Select.new(item_category_blank)
+item_category_blank.select_by(:value, blank)
+
+item_sales_status_blank = d.find_element(:id,"item-sales-status")
+item_sales_status_blank = Selenium::WebDriver::Support::Select.new(item_sales_status_blank )
+item_sales_status_blank.select_by(:value, blank)
+
+item_shipping_fee_status_blank = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status_blank = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_blank )
+item_shipping_fee_status_blank.select_by(:value, blank)
+
+item_prefecture_blank = d.find_element(:id,"item-prefecture")
+item_prefecture_blank = Selenium::WebDriver::Support::Select.new(item_prefecture_blank )
+item_prefecture_blank.select_by(:value, blank)
+
+item_scheduled_delivery_blank = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery_blank = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_blank )
+item_scheduled_delivery_blank.select_by(:value, blank)
+
 d.find_element(:id,"item-price").clear
 
 wait.until {d.find_element(:id,"item-image").displayed?}
@@ -322,11 +338,27 @@ puts "◯【目視で確認】エラーハンドリングができているこ�
 d.find_element(:id,"item-image").clear 
 d.find_element(:id,"item-name").clear 
 d.find_element(:id,"item-info").clear
-d.find_element(:id,"item-category").send_keys(blank)
-d.find_element(:id,"item-sales-status").send_keys(blank)
-d.find_element(:id,"item-shipping-fee-status").send_keys(blank)
-d.find_element(:id,"item-prefecture").send_keys(blank)
-d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
+item_category_blank = d.find_element(:id,"item-category")
+item_category_blank = Selenium::WebDriver::Support::Select.new(item_category_blank)
+item_category_blank.select_by(:value, blank)
+
+item_sales_status_blank = d.find_element(:id,"item-sales-status")
+item_sales_status_blank = Selenium::WebDriver::Support::Select.new(item_sales_status_blank )
+item_sales_status_blank.select_by(:value, blank)
+
+item_shipping_fee_status_blank = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status_blank = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_blank )
+item_shipping_fee_status_blank.select_by(:value, blank)
+
+item_prefecture_blank = d.find_element(:id,"item-prefecture")
+item_prefecture_blank = Selenium::WebDriver::Support::Select.new(item_prefecture_blank )
+item_prefecture_blank.select_by(:value, blank)
+
+item_scheduled_delivery_blank = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery_blank = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_blank )
+item_scheduled_delivery_blank.select_by(:value, blank)
+
+
 d.find_element(:id,"item-price").clear
 
 d.find_element(:id,"item-image").send_keys(item_image)
@@ -594,7 +626,8 @@ wait.until {d.find_element(:class, "item-red-btn").displayed?}
 d.find_element(:class,"item-red-btn").click
 
 #チェック機能追加
-
+order_url_coat = d.current_url
+puts "コート購入画面のURL→  "+ order_url_coat
 #クレジットカード情報入力画面に遷移
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
@@ -667,8 +700,7 @@ wait.until {d.find_element(:id, 'phone-number').displayed?}
 d.find_element(:id, 'phone-number').send_keys(phone_number)
 puts "◯購入時、配送先の住所情報も都度入力できる"
 
-order_url_coat = d.current_url
-puts "コート購入画面のURL→  "+ order_url_coat
+
 
 d.find_element(:class,"buy-red-btn").click
 
@@ -694,6 +726,7 @@ if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移する"
 else
   puts "☒URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移しない"
+  puts 1
   puts "!手動でトップページに遷移するとプログラムが動きます。"
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
