@@ -55,9 +55,9 @@ city = "会津若松市"
 addresses = "追手町１−１"
 phone_number = "02089001111"
 
-blank = "0"
+blank = "1"
 
-# url = "http://localhost:3000/"
+url = "http://localhost:3000/"
 
 
 d.get(url)
@@ -190,18 +190,18 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
-if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
-  sleep 3
-  if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts 1
+elsif /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn-text").click
   puts "!出品ページに遷移2"
-    if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts 2
+elsif /出品する/ .match(d.page_source)
     d.find_element(:class,"purchase-btn-icon").click
     puts "!出品ページに遷移3"
-    end
-  end
+  puts 3
 else
   d.get(url+"/items/new")
   puts "!出品ページに遷移できない"
@@ -485,20 +485,17 @@ d.find_element(:class,"furima-icon").click
 
 
 d.find_element(:link_text,"ログアウト").click
-if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
-  if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn-text").click
   puts "!出品ページに遷移2"
-    if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
     d.find_element(:class,"purchase-btn-icon").click
     puts "!出品ページに遷移3"
-    end
-  end
 else
   puts "!出品ページに遷移できない"
-  sleep 300
 end
 
 if /会員情報入力/ .match(d.page_source)
@@ -748,17 +745,15 @@ else
 end
 
 # wait.until {d.find_element(:id,"FURIMAが選ばれる3つの理由").displayed?}
-if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
-  if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn-text").click
   puts "!出品ページに遷移2"
-    if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
     d.find_element(:class,"purchase-btn-icon").click
     puts "!出品ページに遷移3"
-    end
-  end
 else
   puts "!出品ページに遷移できない"
 end
