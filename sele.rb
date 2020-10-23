@@ -5,10 +5,10 @@ d = Selenium::WebDriver.for :chrome
 
 #basic認証のidとpass
 b_id = "admin"
-b_password = "3333"
+b_password = "1234"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-# url = "#{http}furima-30547.herokuapp.com/"
+url = "#{http}furima-29859.herokuapp.com/"
 
 item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
 item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
@@ -57,106 +57,106 @@ phone_number = "02089001111"
 
 blank = "0"
 
-url = "http://localhost:3000/"
+# url = "http://localhost:3000/"
 
 
 d.get(url)
 
-# d.find_element(:class,"sign-up").click
-# wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:class,"sign-up").click
+wait.until {d.find_element(:id, 'nickname').displayed?}
 
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').send_keys(email)
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').send_keys(password)
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').send_keys(password)
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').send_keys(first_name)
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').send_keys(last_name)
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-
-
-# d.find_element(:class,"register-red-btn").click
-
-
-# if /会員情報入力/ .match(d.page_source)
-#   puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
-# else
-#   puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
-#   wait.until {d.find_element(:id,"nickname").displayed?}
-# end
-
-# puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
-# sleep 3
-# puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
-
-
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').clear
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').clear
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').clear
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').clear
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').clear
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').clear
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').clear
-
-# wait.until {d.find_element(:id, 'nickname').displayed?}
-# d.find_element(:id, 'nickname').send_keys(nickname)
-# puts "◯ニックネームが必須である"
-
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').send_keys(email)
-# puts "◯メールアドレスが必須である"
-# puts "◯メールアドレスは一意性である"
-# puts "◯メールアドレスは@を含む必要がある"
-
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').send_keys(password)
-# puts "◯パスワードが必須である"
-# puts "◯パスワードは6文字以上である"
-# puts "◯パスワードは半角英数字混合である"
-
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').send_keys(password)
-# puts "◯パスワードは確認用を含めて2回入力する"
-
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').send_keys(first_name)
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').send_keys(last_name)
-# puts "◯ユーザー本名が、名字と名前がそれぞれ必須である"
-# puts "◯ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させる"
-
-
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-# puts "◯ユーザー本名のフリガナが、名字と名前でそれぞれ必須である"
-# puts "◯ユーザー本名のフリガナは全角（カタカナ）で入力させる"
-
-
-# puts "生年月日を入力してください。入力後、登録ボタンを押してください"
-# wait.until {d.find_element(:class,"purchase-btn").displayed?}
-# puts "◯生年月日が必須である"
-
-
-#ログイン
-d.find_element(:class,"login").click 
+wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
-d.find_element(:class,"login-red-btn").click
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+
+d.find_element(:class,"register-red-btn").click
+
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
+else
+  puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+
+puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
+sleep 3
+puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
+
+
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+puts "◯ニックネームが必須である"
+
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+puts "◯メールアドレスが必須である"
+puts "◯メールアドレスは一意性である"
+puts "◯メールアドレスは@を含む必要がある"
+
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password)
+puts "◯パスワードが必須である"
+puts "◯パスワードは6文字以上である"
+puts "◯パスワードは半角英数字混合である"
+
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password)
+puts "◯パスワードは確認用を含めて2回入力する"
+
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+puts "◯ユーザー本名が、名字と名前がそれぞれ必須である"
+puts "◯ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させる"
+
+
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+puts "◯ユーザー本名のフリガナが、名字と名前でそれぞれ必須である"
+puts "◯ユーザー本名のフリガナは全角（カタカナ）で入力させる"
+
+
+puts "生年月日を入力してください。入力後、登録ボタンを押してください"
+wait.until {d.find_element(:class,"purchase-btn").displayed?}
+puts "◯生年月日が必須である"
+
+
+# #ログイン
+# d.find_element(:class,"login").click 
+# d.find_element(:id, 'email').send_keys(email)
+# d.find_element(:id, 'password').send_keys(password)
+# d.find_element(:class,"login-red-btn").click
 
 
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
