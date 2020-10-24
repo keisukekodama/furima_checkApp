@@ -4,11 +4,11 @@ d = Selenium::WebDriver.for :chrome
 
 
 #basic認証のidとpass
-b_id = "admin"
-b_password = "1234"
+b_id = "admin0315"
+b_password = "333444"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-29859.herokuapp.com/"
+url = "#{http}furima-30543.herokuapp.com/"
 
 item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
 item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
@@ -57,7 +57,7 @@ phone_number = "02089001111"
 
 blank = "1"
 
-url = "http://localhost:3000/"
+# url = "http://localhost:3000/"
 
 
 d.get(url)
@@ -735,11 +735,9 @@ if /購入画面に進む/ .match(d.page_source)
   puts "!購入した商品だが、再度購入ボタンが表示されている"
   d.find_element(:class,"item-red-btn").click
   wait.until {d.find_element(:class,"furima-icon").displayed?}
-   
   puts "◯しかし、押してもトップページに遷移するので購入した商品は、再度購入できない状態になっている"
   d.find_element(:class,"furima-icon").click 
 else
-  puts "☒URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移しない"
   puts "!手動でトップページに遷移するとプログラムが動きます。"
   d.find_element(:class,"furima-icon").click 
 end
