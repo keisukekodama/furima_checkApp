@@ -5,25 +5,27 @@ d = Selenium::WebDriver.for :chrome
 
 #basic認証のidとpass
 b_id = "admin"
-b_password = "2222"
+b_password = "1111"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
-url = "#{http}furima-29685.herokuapp.com/"
 
-item_image = "/Users/tech-camp/dwhelper/projects2/furima_checkApp/photo/coat.jpg"
-item_image2 = "/Users/tech-camp/dwhelper/projects2/furima_checkApp/photo/sunglass.jpg"
+url = "#{http}furima-11111.herokuapp.com/"
+
+
+item_image = ""
+item_image2 = ""
 
 
 nickname = "kusunnjyun"
-email = "divss4sa@co.jp"
-password = "aaa111"
+email = "divss45s@co.jp"
+password = "Aaa111"
 first_name = "愛"
 last_name= "不時着"
 first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf4s@co.jp"
+email2 = "dssaf56s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
@@ -55,7 +57,7 @@ city = "会津若松市"
 addresses = "追手町１−１"
 phone_number = "02089001111"
 
-blank = "--"
+blank = "1"
 
 # url = "http://localhost:3000/"
 
@@ -190,18 +192,18 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
-if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
-  sleep 3
-  if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts 1
+elsif /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn-text").click
   puts "!出品ページに遷移2"
-    if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts 2
+elsif /出品する/ .match(d.page_source)
     d.find_element(:class,"purchase-btn-icon").click
     puts "!出品ページに遷移3"
-    end
-  end
+  puts 3
 else
   d.get(url+"/items/new")
   puts "!出品ページに遷移できない"
@@ -220,6 +222,7 @@ wait.until {d.find_element(:id,"item-category").displayed?}
 item_category_element = d.find_element(:id,"item-category")
 item_category = Selenium::WebDriver::Support::Select.new(item_category_element)
 item_category.select_by(:value, value)
+
 
 
 wait.until {d.find_element(:id,"item-sales-status").displayed?}
@@ -276,11 +279,26 @@ end
 wait.until {d.find_element(:id,"item-name").displayed?}
 d.find_element(:id,"item-name").clear 
 d.find_element(:id,"item-info").clear
-d.find_element(:id,"item-category").send_keys(blank)
-d.find_element(:id,"item-sales-status").send_keys(blank)
-d.find_element(:id,"item-shipping-fee-status").send_keys(blank)
-d.find_element(:id,"item-prefecture").send_keys(blank)
-d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
+item_category_blank = d.find_element(:id,"item-category")
+item_category_blank = Selenium::WebDriver::Support::Select.new(item_category_blank)
+item_category_blank.select_by(:value, blank)
+
+item_sales_status_blank = d.find_element(:id,"item-sales-status")
+item_sales_status_blank = Selenium::WebDriver::Support::Select.new(item_sales_status_blank )
+item_sales_status_blank.select_by(:value, blank)
+
+item_shipping_fee_status_blank = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status_blank = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_blank )
+item_shipping_fee_status_blank.select_by(:value, blank)
+
+item_prefecture_blank = d.find_element(:id,"item-prefecture")
+item_prefecture_blank = Selenium::WebDriver::Support::Select.new(item_prefecture_blank )
+item_prefecture_blank.select_by(:value, blank)
+
+item_scheduled_delivery_blank = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery_blank = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_blank )
+item_scheduled_delivery_blank.select_by(:value, blank)
+
 d.find_element(:id,"item-price").clear
 
 wait.until {d.find_element(:id,"item-image").displayed?}
@@ -322,11 +340,27 @@ puts "◯【目視で確認】エラーハンドリングができているこ�
 d.find_element(:id,"item-image").clear 
 d.find_element(:id,"item-name").clear 
 d.find_element(:id,"item-info").clear
-d.find_element(:id,"item-category").send_keys(blank)
-d.find_element(:id,"item-sales-status").send_keys(blank)
-d.find_element(:id,"item-shipping-fee-status").send_keys(blank)
-d.find_element(:id,"item-prefecture").send_keys(blank)
-d.find_element(:id,"item-scheduled-delivery").send_keys(blank)
+item_category_blank = d.find_element(:id,"item-category")
+item_category_blank = Selenium::WebDriver::Support::Select.new(item_category_blank)
+item_category_blank.select_by(:value, blank)
+
+item_sales_status_blank = d.find_element(:id,"item-sales-status")
+item_sales_status_blank = Selenium::WebDriver::Support::Select.new(item_sales_status_blank )
+item_sales_status_blank.select_by(:value, blank)
+
+item_shipping_fee_status_blank = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status_blank = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_blank )
+item_shipping_fee_status_blank.select_by(:value, blank)
+
+item_prefecture_blank = d.find_element(:id,"item-prefecture")
+item_prefecture_blank = Selenium::WebDriver::Support::Select.new(item_prefecture_blank )
+item_prefecture_blank.select_by(:value, blank)
+
+item_scheduled_delivery_blank = d.find_element(:id,"item-scheduled-delivery")
+item_scheduled_delivery_blank = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_blank )
+item_scheduled_delivery_blank.select_by(:value, blank)
+
+
 d.find_element(:id,"item-price").clear
 
 d.find_element(:id,"item-image").send_keys(item_image)
@@ -453,20 +487,17 @@ d.find_element(:class,"furima-icon").click
 
 
 d.find_element(:link_text,"ログアウト").click
-if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
-  if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn-text").click
   puts "!出品ページに遷移2"
-    if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
     d.find_element(:class,"purchase-btn-icon").click
     puts "!出品ページに遷移3"
-    end
-  end
 else
   puts "!出品ページに遷移できない"
-  sleep 300
 end
 
 if /会員情報入力/ .match(d.page_source)
@@ -594,7 +625,8 @@ wait.until {d.find_element(:class, "item-red-btn").displayed?}
 d.find_element(:class,"item-red-btn").click
 
 #チェック機能追加
-
+order_url_coat = d.current_url
+puts "コート購入画面のURL→  "+ order_url_coat
 #クレジットカード情報入力画面に遷移
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
@@ -667,8 +699,7 @@ wait.until {d.find_element(:id, 'phone-number').displayed?}
 d.find_element(:id, 'phone-number').send_keys(phone_number)
 puts "◯購入時、配送先の住所情報も都度入力できる"
 
-order_url_coat = d.current_url
-puts "コート購入画面のURL→  "+ order_url_coat
+
 
 d.find_element(:class,"buy-red-btn").click
 
@@ -694,6 +725,7 @@ if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移する"
 else
   puts "☒URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移しない"
+  puts 1
   puts "!手動でトップページに遷移するとプログラムが動きます。"
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
@@ -705,27 +737,23 @@ if /購入画面に進む/ .match(d.page_source)
   puts "!購入した商品だが、再度購入ボタンが表示されている"
   d.find_element(:class,"item-red-btn").click
   wait.until {d.find_element(:class,"furima-icon").displayed?}
-   
   puts "◯しかし、押してもトップページに遷移するので購入した商品は、再度購入できない状態になっている"
   d.find_element(:class,"furima-icon").click 
 else
-  puts "☒URLを直接入力して購入済みの商品ページへ遷移しようとすると、トップページに遷移しない"
   puts "!手動でトップページに遷移するとプログラムが動きます。"
   d.find_element(:class,"furima-icon").click 
 end
 
 # wait.until {d.find_element(:id,"FURIMAが選ばれる3つの理由").displayed?}
-if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
-  if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn-text").click
   puts "!出品ページに遷移2"
-    if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+elsif /出品する/ .match(d.page_source)
     d.find_element(:class,"purchase-btn-icon").click
     puts "!出品ページに遷移3"
-    end
-  end
 else
   puts "!出品ページに遷移できない"
 end
