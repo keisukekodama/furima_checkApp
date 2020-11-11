@@ -4,21 +4,21 @@ d = Selenium::WebDriver.for :chrome
 
 
 #basic認証のidとpass
-b_id = "admin"
-b_password = "1111"
+b_id = "Catastor"
+b_password = "wrongpassword"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-11111.herokuapp.com/"
+url = "#{http}furima-30441.herokuapp.com/"
 
 
-item_image = ""
-item_image2 = ""
+item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
+item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
 
 
 nickname = "kusunnjyun"
-email = "divss45s@co.jp"
-password = "Aaa111"
+email = "divssd5s@co.jp"
+password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
 first_name_kana = "アイ"
@@ -57,7 +57,7 @@ city = "会津若松市"
 addresses = "追手町１−１"
 phone_number = "02089001111"
 
-blank = "0"
+blank = "1"
 
 # url = "http://localhost:3000/"
 
@@ -544,7 +544,7 @@ else
   puts "◯ログインしていないユーザーは、商品の削除が行えない。" 
 end
 
-puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
+# puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
 
 
 if /編集/ .match(d.page_source)
