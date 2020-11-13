@@ -57,7 +57,7 @@ city = "会津若松市"
 addresses = "追手町１−１"
 phone_number = "02089001111"
 
-blank = "0"
+blank = "1"
 
 # url = "http://localhost:3000/"
 
