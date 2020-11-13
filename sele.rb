@@ -12,8 +12,8 @@ http ="http://#{b_id}:#{b_password}@"
 url = "#{http}furima-11111.herokuapp.com/"
 
 
-item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
-item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
+item_image = ""
+item_image2 = ""
 
 
 nickname = "kusunnjyun"
@@ -59,7 +59,7 @@ phone_number = "02089001111"
 
 blank = "1"
 
-url = "http://localhost:3000/"
+# url = "http://localhost:3000/"
 
 
 d.get(url)
@@ -196,14 +196,14 @@ if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
   puts 1
-# elsif /出品する/ .match(d.page_source)
-#   d.find_element(:class,"purchase-btn-text").click
-#   puts "!出品ページに遷移2"
-#   puts 2
-# elsif /出品する/ .match(d.page_source)
-#     d.find_element(:class,"purchase-btn-icon").click
-#     puts "!出品ページに遷移3"
-#   puts 3
+elsif /出品する/ .match(d.page_source)
+  d.find_element(:class,"purchase-btn-text").click
+  puts "!出品ページに遷移2"
+  puts 2
+elsif /出品する/ .match(d.page_source)
+    d.find_element(:class,"purchase-btn-icon").click
+    puts "!出品ページに遷移3"
+  puts 3
 else
   d.get(url+"/items/new")
   puts "!出品ページに遷移できない"
