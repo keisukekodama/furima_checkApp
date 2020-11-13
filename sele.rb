@@ -4,12 +4,12 @@ d = Selenium::WebDriver.for :chrome
 
 
 #basic認証のidとpass
-b_id = "admin0315"
-b_password = "333444"
+b_id = "admin"
+b_password = "1111"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}"
+url = "#{http}furima-11111.herokuapp.com/"
 
 
 item_image = ""
@@ -17,15 +17,15 @@ item_image2 = ""
 
 
 nickname = "kusunnjyun"
-email = "divss45s@co.jp"
-password = "Aaa111"
+email = "divssd53s@co.jp"
+password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
 first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf56s@co.jp"
+email2 = "dssaf16s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
@@ -314,24 +314,30 @@ item_sales_status_element = d.find_element(:id,"item-sales-status")
 item_sales_status = Selenium::WebDriver::Support::Select.new(item_sales_status_element)
 item_sales_status.select_by(:value, value)
 
+item_shipping_fee_status_element = d.find_element(:id,"item-shipping-fee-status")
+item_shipping_fee_status = Selenium::WebDriver::Support::Select.new(item_shipping_fee_status_element)
+item_shipping_fee_status.select_by(:value, value)
+
 item_prefecture_element = d.find_element(:id,"item-prefecture")
 item_prefecture = Selenium::WebDriver::Support::Select.new(item_prefecture_element)
 item_prefecture.select_by(:value, value)
+
+
 item_scheduled_delivery_element = d.find_element(:id,"item-scheduled-delivery")
 item_scheduled_delivery = Selenium::WebDriver::Support::Select.new(item_scheduled_delivery_element)
 item_scheduled_delivery.select_by(:value, value)
 
 
 
-wait.until {d.find_element(:id,"item-price").displayed?}
-d.find_element(:id,"item-price").send_keys(item_price)
+# wait.until {d.find_element(:id,"item-price").displayed?}
+# d.find_element(:id,"item-price").send_keys(item_price)
 
 d.find_element(:class,"sell-btn").click
 
 if /商品の情報を入力/.match(d.page_source)
-  puts "!配送料の負担の記入なしで商品出品を行うと、商品出品ページリダイレクトされる" 
+  puts "!価格の記入なしで商品出品を行うと、商品出品ページリダイレクトされる" 
 else
-  puts "!配送料の負担の記入なしで商品出品を行っても、商品出品ページリダイレクトされない" 
+  puts "!価格の記入なしで商品出品を行っても、商品出品ページリダイレクトされない" 
   wait.until {d.find_element(:id,"item-name").displayed?}
 end
 puts "◯必須項目が一つでも欠けている場合は、出品ができない"
@@ -544,7 +550,7 @@ else
   puts "◯ログインしていないユーザーは、商品の削除が行えない。" 
 end
 
-puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
+
 
 
 if /編集/ .match(d.page_source)
@@ -867,6 +873,8 @@ else
   puts "☒商品説明が表示されない"
 
 end
+puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
+
 
 puts "プログラム終了"
 puts "【目視で確認】商品出品時に登録した情報が見られるようになっている"
