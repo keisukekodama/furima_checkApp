@@ -59,7 +59,7 @@ phone_number = "02089001111"
 
 blank = "1"
 
-# url = "http://localhost:3000/"
+url = "http://localhost:3000/"
 
 
 d.get(url)
@@ -196,14 +196,14 @@ if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
   puts "!出品ページに遷移1"
   puts 1
-elsif /出品する/ .match(d.page_source)
-  d.find_element(:class,"purchase-btn-text").click
-  puts "!出品ページに遷移2"
-  puts 2
-elsif /出品する/ .match(d.page_source)
-    d.find_element(:class,"purchase-btn-icon").click
-    puts "!出品ページに遷移3"
-  puts 3
+# elsif /出品する/ .match(d.page_source)
+#   d.find_element(:class,"purchase-btn-text").click
+#   puts "!出品ページに遷移2"
+#   puts 2
+# elsif /出品する/ .match(d.page_source)
+#     d.find_element(:class,"purchase-btn-icon").click
+#     puts "!出品ページに遷移3"
+#   puts 3
 else
   d.get(url+"/items/new")
   puts "!出品ページに遷移できない"
@@ -550,7 +550,7 @@ else
   puts "◯ログインしていないユーザーは、商品の削除が行えない。" 
 end
 
-# puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
+
 
 
 if /編集/ .match(d.page_source)
@@ -873,6 +873,8 @@ else
   puts "☒商品説明が表示されない"
 
 end
+puts "◯ログアウトした状態でも、商品詳細ページを閲覧できる"
+
 
 puts "プログラム終了"
 puts "【目視で確認】商品出品時に登録した情報が見られるようになっている"
