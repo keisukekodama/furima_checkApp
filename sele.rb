@@ -12,12 +12,12 @@ http ="http://#{b_id}:#{b_password}@"
 url = "#{http}furima-11111.herokuapp.com/"
 
 
-item_image = ""
-item_image2 = ""
+item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
+item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
 
 
 nickname = "kusunnjyun"
-email = "divssd53s@co.jp"
+email = "divssd23s@co.jp"
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -25,7 +25,7 @@ first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf16s@co.jp"
+email2 = "dssaf26s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
@@ -59,7 +59,7 @@ phone_number = "02089001111"
 
 blank = "1"
 
-# url = "http://localhost:3000/"
+url = "http://localhost:3000/"
 
 
 d.get(url)
@@ -475,18 +475,17 @@ puts "【目視で確認】エラーハンドリングができていること�
 d.find_element(:id,"item-info").send_keys(item_info_re)
 d.find_element(:class,"sell-btn").click
 
+item_info_re = "昨年イチオシのトレンチコート"
 if /#{item_info_re}/.match(d.page_source)
-
   puts "◯商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示される" 
 elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"item-img-content").click
   wait.until {d.find_element(:class,"detail-item").displayed?}
   puts "◯商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示される" 
 else
-  puts "☒商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示されない" 
+  puts "☒商品説明が表示されないまたは、商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
-
 puts "◯何も編集せずに更新をしても画像無しの商品にならない"
 puts "◯商品情報（商品画像・商品名・商品の状態など）を変更できる"
 d.find_element(:class,"furima-icon").click
@@ -738,7 +737,7 @@ end
 
 wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
-
+sleep 3
 if /購入画面に進む/ .match(d.page_source)
   puts "!購入した商品だが、再度購入ボタンが表示されている"
   d.find_element(:class,"item-red-btn").click
@@ -749,7 +748,7 @@ else
   puts "!手動でトップページに遷移するとプログラムが動きます。"
   d.find_element(:class,"furima-icon").click 
 end
-
+sleep 3
 # wait.until {d.find_element(:id,"FURIMAが選ばれる3つの理由").displayed?}
 if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
@@ -763,7 +762,7 @@ elsif /出品する/ .match(d.page_source)
 else
   puts "!出品ページに遷移できない"
 end
-  
+sleep 3
 
 wait.until {d.find_element(:id,"item-image").displayed?}
 d.find_element(:id,"item-image").send_keys(item_image2)
