@@ -1,1 +1,0 @@
-# furima_checkApp
