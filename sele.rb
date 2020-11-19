@@ -4,12 +4,12 @@ d = Selenium::WebDriver.for :chrome
 
 
 #basic認証のidとpass
-b_id = "admin"
-b_password = "1111"
+b_id = "hiro"
+b_password = "0213"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-11111.herokuapp.com/"
+url = "#{http}furima-31766.herokuapp.com/"
 
 
 item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
