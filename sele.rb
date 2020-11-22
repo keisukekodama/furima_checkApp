@@ -4,13 +4,12 @@ d = Selenium::WebDriver.for :chrome
 
 
 #basic認証のidとpass
-b_id = "admin"
-b_password = "1111"
+b_id = "hiro"
+b_password = "0213"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-11111.herokuapp.com/"
-
+url = "#{http}furima-31766.herokuapp.com/"
 
 
 item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
@@ -18,7 +17,7 @@ item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
 
 
 nickname = "kusunnjyun"
-email = "divssd53s@co.jp"
+email = "divssd23s@co.jp"
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -26,7 +25,7 @@ first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf16s@co.jp"
+email2 = "dssaf26s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
@@ -128,7 +127,7 @@ wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
 puts "◯パスワードが必須である"
 puts "◯パスワードは6文字以上である"
-puts "◯パスワードは半角英数字混合である"
+# puts "◯パスワードは半角英数字混合である"
 
 wait.until {d.find_element(:id, 'password-confirmation').displayed?}
 d.find_element(:id, 'password-confirmation').send_keys(password)
@@ -476,18 +475,17 @@ puts "【目視で確認】エラーハンドリングができていること�
 d.find_element(:id,"item-info").send_keys(item_info_re)
 d.find_element(:class,"sell-btn").click
 
+item_info_re = "昨年イチオシのトレンチコート"
 if /#{item_info_re}/.match(d.page_source)
-
   puts "◯商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示される" 
 elsif /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   d.find_element(:class,"item-img-content").click
   wait.until {d.find_element(:class,"detail-item").displayed?}
   puts "◯商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示される" 
 else
-  puts "☒商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示されない" 
+  puts "☒商品説明が表示されないまたは、商品名やカテゴリーの情報など、すでに登録されている商品情報は編集画面を開いた時点で表示されない" 
   wait.until {d.find_element(:class,"detail-item").displayed?}
 end
-
 puts "◯何も編集せずに更新をしても画像無しの商品にならない"
 puts "◯商品情報（商品画像・商品名・商品の状態など）を変更できる"
 d.find_element(:class,"furima-icon").click
@@ -550,6 +548,8 @@ if /削除/ .match(d.page_source)
 else
   puts "◯ログインしていないユーザーは、商品の削除が行えない。" 
 end
+
+
 
 
 if /編集/ .match(d.page_source)
@@ -712,7 +712,7 @@ d.find_element(:class,"buy-red-btn").click
 wait.until {d.find_element(:class,"furima-icon").displayed?}
 puts "◯クレジットカード決済ができる"
 puts "◯クレジットカードの情報は購入の都度入力させる"
-puts "◯配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
+# puts "◯配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
 puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
 puts "◯電話番号にはハイフンは不要で、11桁以内である"
 puts "◯購入が完了したら、トップページまたは購入完了ページに遷移する"
@@ -737,7 +737,7 @@ end
 
 wait.until {d.find_element(:class,"item-img-content").displayed?}
 d.find_element(:class,"item-img-content").click 
-
+sleep 3
 if /購入画面に進む/ .match(d.page_source)
   puts "!購入した商品だが、再度購入ボタンが表示されている"
   d.find_element(:class,"item-red-btn").click
@@ -748,7 +748,7 @@ else
   puts "!手動でトップページに遷移するとプログラムが動きます。"
   d.find_element(:class,"furima-icon").click 
 end
-
+sleep 3
 # wait.until {d.find_element(:id,"FURIMAが選ばれる3つの理由").displayed?}
 if /出品する/ .match(d.page_source)
   d.find_element(:class,"purchase-btn").click
@@ -762,7 +762,7 @@ elsif /出品する/ .match(d.page_source)
 else
   puts "!出品ページに遷移できない"
 end
-  
+sleep 3
 
 wait.until {d.find_element(:id,"item-image").displayed?}
 d.find_element(:id,"item-image").send_keys(item_image2)
@@ -881,4 +881,6 @@ puts "【目視で確認】新規登録、商品出品、商品購入の際に�
 puts "【目視で確認】basic認証が実装されている" 
 puts "【目視で確認】ログイン/ログアウトによって、ヘッダーにてユーザーへ表示する情報が変わる"
 puts "【目視で確認】画像が表示されており、画像がリンク切れなどになっていない"
+puts "【目視で確認】パスワードは半角英数字混合であるかどうか"
+puts "【目視で確認】配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
 sleep 300000000000000
