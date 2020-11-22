@@ -58,8 +58,11 @@ addresses = "追手町１−１"
 phone_number = "02089001111"
 
 blank = "1"
-
+password_string = "aaaaaa"
+password_int = "111111"
+password_short4 = "aa11"
 url = "http://localhost:3000/"
+
 
 
 d.get(url)
@@ -97,7 +100,7 @@ puts "◯必須項目が一つでも欠けている場合は、ユーザー登�
 sleep 3
 puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 
-
+d.find_element(:id, 'nickname').clear
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').clear
 wait.until {d.find_element(:id, 'password').displayed?}
@@ -113,6 +116,139 @@ d.find_element(:id, 'first-name-kana').clear
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').clear
 
+#パスワードは半角英数字混合であること
+#文字だけの場合
+
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password_string)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password_string)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+#クリックのアクションがあるまで止めたい
+d.find_element(:class,"register-red-btn").click
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!パスワードは半角文字のみだとユーザー登録できない。" 
+else
+  puts "!パスワードは半角文字のみでもユーザー登録できる。" 
+  puts "☒パスワードは半角英数字混合であること" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+
+
+
+
+
+#パスワード半角英数であるかどうか
+#数字だけの場合
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password_int)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password_int)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+
+d.find_element(:class,"register-red-btn").click
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!パスワードは半角数字のみだとユーザー登録できない。" 
+else
+  puts "!パスワードは半角数字のみでもユーザー登録できる。" 
+  puts "☒パスワードは半角英数字混合であること" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+sleep 3
+
+d.find_element(:id, 'nickname').clear
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
+
+
+
+#パスワードは6文字以上であること
+
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password_short4)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password_short4)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+
+d.find_element(:class,"register-red-btn").click
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!パスワードは6文字以下だとユーザー登録できない。" 
+else
+  puts "!パスワードは半6文字以下でもユーザー登録できる。" 
+  puts "☒パスワードは6文字以上であること" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+
+d.find_element(:id, 'nickname').clear
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
+sleep 500000
+
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
 puts "◯ニックネームが必須である"
@@ -127,7 +263,7 @@ wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
 puts "◯パスワードが必須である"
 puts "◯パスワードは6文字以上である"
-puts "◯パスワードは半角英数字混合である"
+# puts "◯パスワードは半角英数字混合である"
 
 wait.until {d.find_element(:id, 'password-confirmation').displayed?}
 d.find_element(:id, 'password-confirmation').send_keys(password)
@@ -712,7 +848,7 @@ d.find_element(:class,"buy-red-btn").click
 wait.until {d.find_element(:class,"furima-icon").displayed?}
 puts "◯クレジットカード決済ができる"
 puts "◯クレジットカードの情報は購入の都度入力させる"
-puts "◯配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
+# puts "◯配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
 puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
 puts "◯電話番号にはハイフンは不要で、11桁以内である"
 puts "◯購入が完了したら、トップページまたは購入完了ページに遷移する"
@@ -881,4 +1017,6 @@ puts "【目視で確認】新規登録、商品出品、商品購入の際に�
 puts "【目視で確認】basic認証が実装されている" 
 puts "【目視で確認】ログイン/ログアウトによって、ヘッダーにてユーザーへ表示する情報が変わる"
 puts "【目視で確認】画像が表示されており、画像がリンク切れなどになっていない"
+puts "【目視で確認】パスワードは半角英数字混合であるかどうか"
+puts "【目視で確認】配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
 sleep 300000000000000
