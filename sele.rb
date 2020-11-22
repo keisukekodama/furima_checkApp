@@ -136,7 +136,6 @@ d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 
-#クリックのアクションがあるまで止めたい
 d.find_element(:class,"register-red-btn").click
 
 if /会員情報入力/ .match(d.page_source)
