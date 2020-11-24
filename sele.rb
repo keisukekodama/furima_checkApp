@@ -4,12 +4,12 @@ d = Selenium::WebDriver.for :chrome
 
 
 #basic認証のidとpass
-b_id = "hiro"
-b_password = "0213"
+b_id = "admin"
+b_password = "1111"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-31766.herokuapp.com/"
+url = "#{http}furima-11111.herokuapp.com/"
 
 
 item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
@@ -61,6 +61,11 @@ blank = "1"
 password_string = "aaaaaa"
 password_int = "111111"
 password_short4 = "aa11"
+year = 1998
+month = 11
+day = 13
+phone_number_hyphen  ="080-9999-0000"
+postal_code_nohyphen = "9650873"
 url = "http://localhost:3000/"
 
 
@@ -85,7 +90,13 @@ d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 
-
+# wait.until {d.find_element(:id, 'user_birthday_1i').displayed?}
+# d.find_element(:id, 'user_birthday_1i').send_keys(year)
+# wait.until {d.find_element(:id, 'user_birthday_2i').displayed?}
+# d.find_element(:id, 'user_birthday_2i').send_keys(month)
+# wait.until {d.find_element(:id, 'user_birthday_3i').displayed?}
+# d.find_element(:id, 'user_birthday_3i').send_keys(day)
+# sleep 3
 d.find_element(:class,"register-red-btn").click
 
 
@@ -116,137 +127,153 @@ d.find_element(:id, 'first-name-kana').clear
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').clear
 
-#パスワードは半角英数字混合であること
-#文字だけの場合
+# #パスワードは半角英数字混合であること
+# #文字だけの場合
+# wait.until {d.find_element(:id, 'nickname').displayed?}
+# d.find_element(:id, 'nickname').send_keys(nickname)
+# wait.until {d.find_element(:id, 'email').displayed?}
+# d.find_element(:id, 'email').send_keys(email)
+# wait.until {d.find_element(:id, 'password').displayed?}
+# d.find_element(:id, 'password').send_keys(password_string)
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').send_keys(password_string)
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').send_keys(first_name)
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').send_keys(last_name)
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+# wait.until {d.find_element(:id, 'user_birthday_1i').displayed?}
+# puts 1
+# d.find_element(:id, 'user_birthday_1i').send_keys(year)
+# puts 2
+# wait.until {d.find_element(:id, 'user_birthday_2i').displayed?}
+# puts 3
+# d.find_element(:id, 'user_birthday_2i').send_keys(month)
+# puts 4
+# wait.until {d.find_element(:id, 'user_birthday_3i').displayed?}
+# puts 5
+# d.find_element(:id, 'user_birthday_3i').send_keys(day)
+# puts 6
 
-wait.until {d.find_element(:id, 'nickname').displayed?}
-d.find_element(:id, 'nickname').send_keys(nickname)
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').send_keys(email)
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').send_keys(password_string)
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').send_keys(password_string)
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').send_keys(first_name)
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').send_keys(last_name)
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+# puts "生年月日を入力してください。入力後、登録ボタンを押してください"
 
-d.find_element(:class,"register-red-btn").click
+# sleep 400
 
-if /会員情報入力/ .match(d.page_source)
-  puts "!パスワードは半角文字のみだとユーザー登録できない。" 
-else
-  puts "!パスワードは半角文字のみでもユーザー登録できる。" 
-  puts "☒パスワードは半角英数字混合であること" 
-  wait.until {d.find_element(:id,"nickname").displayed?}
-end
-
-
-
-
-
-#パスワード半角英数であるかどうか
-#数字だけの場合
-wait.until {d.find_element(:id, 'nickname').displayed?}
-d.find_element(:id, 'nickname').send_keys(nickname)
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').send_keys(email)
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').send_keys(password_int)
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').send_keys(password_int)
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').send_keys(first_name)
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').send_keys(last_name)
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-
-
-d.find_element(:class,"register-red-btn").click
-
-if /会員情報入力/ .match(d.page_source)
-  puts "!パスワードは半角数字のみだとユーザー登録できない。" 
-else
-  puts "!パスワードは半角数字のみでもユーザー登録できる。" 
-  puts "☒パスワードは半角英数字混合であること" 
-  wait.until {d.find_element(:id,"nickname").displayed?}
-end
-sleep 3
-
-d.find_element(:id, 'nickname').clear
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').clear
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').clear
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').clear
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').clear
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').clear
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').clear
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').clear
+# if d.find_element(:id,'form-header-text').text == "会員情報入力"
+#   puts "!パスワードは半角文字のみだとユーザー登録できない。" 
+# elseif d.find_element(:id,'service-title').text == "人生を変えるフリマアプリ"
+#   puts "!パスワードは半角文字のみでもユーザー登録できる。" 
+#   puts "☒パスワードは半角英数字混合であること" 
+# end
 
 
 
+# sleep 3
 
-#パスワードは6文字以上であること
+# #パスワード半角英数であるかどうか
+# #数字だけの場合
+# wait.until {d.find_element(:id, 'nickname').displayed?}
+# d.find_element(:id, 'nickname').send_keys(nickname)
+# wait.until {d.find_element(:id, 'email').displayed?}
+# d.find_element(:id, 'email').send_keys(email)
+# wait.until {d.find_element(:id, 'password').displayed?}
+# d.find_element(:id, 'password').send_keys(password_int)
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').send_keys(password_int)
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').send_keys(first_name)
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').send_keys(last_name)
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 
-wait.until {d.find_element(:id, 'nickname').displayed?}
-d.find_element(:id, 'nickname').send_keys(nickname)
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').send_keys(email)
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').send_keys(password_short4)
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').send_keys(password_short4)
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').send_keys(first_name)
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').send_keys(last_name)
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 
 
-d.find_element(:class,"register-red-btn").click
+# puts "生年月日を入力してください。入力後、登録ボタンを押してください"
 
-if /会員情報入力/ .match(d.page_source)
-  puts "!パスワードは6文字以下だとユーザー登録できない。" 
-else
-  puts "!パスワードは半6文字以下でもユーザー登録できる。" 
-  puts "☒パスワードは6文字以上であること" 
-  wait.until {d.find_element(:id,"nickname").displayed?}
-end
 
-d.find_element(:id, 'nickname').clear
-wait.until {d.find_element(:id, 'email').displayed?}
-d.find_element(:id, 'email').clear
-wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').clear
-wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-d.find_element(:id, 'password-confirmation').clear
-wait.until {d.find_element(:id, 'first-name').displayed?}
-d.find_element(:id, 'first-name').clear
-wait.until {d.find_element(:id, 'last-name').displayed?}
-d.find_element(:id, 'last-name').clear
-wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-d.find_element(:id, 'first-name-kana').clear
-wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-d.find_element(:id, 'last-name-kana').clear
+# if /会員情報入力/ .match(d.page_source)
+#   puts "!パスワードは半角数字のみだとユーザー登録できない。" 
+# else
+#   puts "!パスワードは半角数字のみでもユーザー登録できる。" 
+#   puts "☒パスワードは半角英数字混合であること" 
+#   wait.until {d.find_element(:id,"nickname").displayed?}
+# end
+# sleep 3
+# d.navigate.refresh
+# d.manage.delete_all_cookies
+# sleep 3
+# d.find_element(:id, 'nickname').clear
+# wait.until {d.find_element(:id, 'email').displayed?}
+# d.find_element(:id, 'email').clear
+# wait.until {d.find_element(:id, 'password').displayed?}
+# d.find_element(:id, 'password').clear
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').clear
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').clear
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').clear
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').clear
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').clear
 
-sleep 500000
+
+
+
+# #パスワードは6文字以上であること
+
+# wait.until {d.find_element(:id, 'nickname').displayed?}
+# d.find_element(:id, 'nickname').send_keys(nickname)
+# wait.until {d.find_element(:id, 'email').displayed?}
+# d.find_element(:id, 'email').send_keys(email)
+# wait.until {d.find_element(:id, 'password').displayed?}
+# d.find_element(:id, 'password').send_keys(password_short4)
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').send_keys(password_short4)
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').send_keys(first_name)
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').send_keys(last_name)
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+
+
+# d.find_element(:class,"register-red-btn").click
+
+# if /会員情報入力/ .match(d.page_source)
+#   puts "!パスワードは6文字以下だとユーザー登録できない。" 
+# else
+#   puts "!パスワードは半6文字以下でもユーザー登録できる。" 
+#   puts "☒パスワードは6文字以上であること" 
+#   wait.until {d.find_element(:id,"nickname").displayed?}
+# end
+
+# d.find_element(:id, 'nickname').clear
+# wait.until {d.find_element(:id, 'email').displayed?}
+# d.find_element(:id, 'email').clear
+# wait.until {d.find_element(:id, 'password').displayed?}
+# d.find_element(:id, 'password').clear
+# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+# d.find_element(:id, 'password-confirmation').clear
+# wait.until {d.find_element(:id, 'first-name').displayed?}
+# d.find_element(:id, 'first-name').clear
+# wait.until {d.find_element(:id, 'last-name').displayed?}
+# d.find_element(:id, 'last-name').clear
+# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+# d.find_element(:id, 'first-name-kana').clear
+# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+# d.find_element(:id, 'last-name-kana').clear
+
+# sleep 500000
 
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
@@ -711,7 +738,7 @@ puts "◯ログインしていないユーザーは購入ページに遷移し�
 
 
 
-puts "【説明】購入ボタン自体を消しているてる場合があるので一度、サインアップする"
+puts "【説明】購入ボタン自体を消している場合があるので一度、サインアップする"
 
 wait.until {d.find_element(:class,"sign-up").displayed?}
 d.manage.delete_all_cookies
@@ -804,12 +831,114 @@ else
 end
 
 puts "◯クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できない"
+
 sleep 3
-puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
-#アラートが出るとエラーがでる
-
 d.navigate.refresh
+sleep 3
+#電話番号にはハイフンが含まれた場合。
+wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').send_keys(card_number)
+wait.until {d.find_element(:id, 'card-exp-month').displayed?}
+d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
+wait.until {d.find_element(:id, 'card-exp-year').displayed?}
+d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
+wait.until {d.find_element(:id, 'card-cvc').displayed?}
+d.find_element(:id, 'card-cvc').send_keys(card_cvc)
+wait.until {d.find_element(:id, 'postal-code').displayed?}
+d.find_element(:id, 'postal-code').send_keys(postal_code)
+wait.until {d.find_element(:id, 'prefecture').displayed?}
+d.find_element(:id, 'prefecture').send_keys(prefecture)
+wait.until {d.find_element(:id, 'city').displayed?}
+d.find_element(:id, 'city').send_keys(city)
+wait.until {d.find_element(:id, 'addresses').displayed?}
+d.find_element(:id, 'addresses').send_keys(addresses)
+wait.until {d.find_element(:id, 'phone-number').displayed?}
+d.find_element(:id, 'phone-number').send_keys(phone_number_hyphen)
 
+
+d.find_element(:class,"buy-red-btn").click
+
+
+if /クレジットカード情報入力/ .match(d.page_source)
+  puts "!電話番号にハイフンがはいっているとき、決済できない" 
+else
+  puts "!電話番号にハイフンがはいっているとき、決済できる" 
+  wait.until {d.find_element(:class,"sold-out").displayed?}
+end
+puts "◯電話番号にはハイフンは不要で、11桁以内である"
+
+sleep 3
+d.navigate.refresh
+sleep 3
+#郵便番号・都道府県・市区町村・番地・電話番号が必須であること
+wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').send_keys(card_number)
+wait.until {d.find_element(:id, 'card-exp-month').displayed?}
+d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
+wait.until {d.find_element(:id, 'card-exp-year').displayed?}
+d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
+wait.until {d.find_element(:id, 'card-cvc').displayed?}
+d.find_element(:id, 'card-cvc').send_keys(card_cvc)
+wait.until {d.find_element(:id, 'postal-code').displayed?}
+d.find_element(:id, 'postal-code').send_keys(postal_code)
+wait.until {d.find_element(:id, 'prefecture').displayed?}
+d.find_element(:id, 'prefecture').send_keys(prefecture)
+wait.until {d.find_element(:id, 'city').displayed?}
+d.find_element(:id, 'city').send_keys(city)
+# wait.until {d.find_element(:id, 'addresses').displayed?}
+# d.find_element(:id, 'addresses').send_keys(addresses)
+wait.until {d.find_element(:id, 'phone-number').displayed?}
+d.find_element(:id, 'phone-number').send_keys(phone_number)
+
+
+d.find_element(:class,"buy-red-btn").click
+
+
+if /クレジットカード情報入力/ .match(d.page_source)
+  puts "!郵便番号・都道府県・市区町村・番地・電話番号の値がないとき、決済できない" 
+else
+  puts "!郵便番号・都道府県・市区町村・番地・電話番号の値がないとき、決済できる" 
+  wait.until {d.find_element(:class,"sold-out").displayed?}
+end
+puts "◯郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
+
+sleep 3
+d.navigate.refresh
+sleep 3
+#郵便番号にはハイフンが必要であること（123-4567となる）
+wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').send_keys(card_number)
+wait.until {d.find_element(:id, 'card-exp-month').displayed?}
+d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
+wait.until {d.find_element(:id, 'card-exp-year').displayed?}
+d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
+wait.until {d.find_element(:id, 'card-cvc').displayed?}
+d.find_element(:id, 'card-cvc').send_keys(card_cvc)
+wait.until {d.find_element(:id, 'postal-code').displayed?}
+d.find_element(:id, 'postal-code').send_keys(postal_code_nohyphen)
+wait.until {d.find_element(:id, 'prefecture').displayed?}
+d.find_element(:id, 'prefecture').send_keys(prefecture)
+wait.until {d.find_element(:id, 'city').displayed?}
+d.find_element(:id, 'city').send_keys(city)
+wait.until {d.find_element(:id, 'addresses').displayed?}
+d.find_element(:id, 'addresses').send_keys(addresses)
+wait.until {d.find_element(:id, 'phone-number').displayed?}
+d.find_element(:id, 'phone-number').send_keys(phone_number)
+
+
+d.find_element(:class,"buy-red-btn").click
+
+
+if /クレジットカード情報入力/ .match(d.page_source)
+  puts "!郵便番号にはハイフンがあるとき、決済できない" 
+else
+  puts "!郵便番号にはハイフンがあるとき、、決済できる" 
+  wait.until {d.find_element(:class,"sold-out").displayed?}
+end
+puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
+sleep 3
+d.navigate.refresh
+sleep 3
 
 wait.until {d.find_element(:id, 'card-number').displayed?}
 d.find_element(:id, 'card-number').send_keys(card_number)
@@ -847,14 +976,11 @@ d.find_element(:class,"buy-red-btn").click
 wait.until {d.find_element(:class,"furima-icon").displayed?}
 puts "◯クレジットカード決済ができる"
 puts "◯クレジットカードの情報は購入の都度入力させる"
-# puts "◯配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
-puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
-puts "◯電話番号にはハイフンは不要で、11桁以内である"
 puts "◯購入が完了したら、トップページまたは購入完了ページに遷移する"
 
 
 if /Sold Out/ .match(d.page_source)
-  puts "◯売却済みの商品は、「sould out」の文字が表示されるようになっている" 
+  puts "◯売却済みの商品は、「sold out」の文字が表示されるようになっている" 
 else
   puts "☒売却済みの商品は、「sould out」の文字が表示されない" 
   wait.until {d.find_element(:class,"sold-out").displayed?}
@@ -1017,5 +1143,4 @@ puts "【目視で確認】basic認証が実装されている"
 puts "【目視で確認】ログイン/ログアウトによって、ヘッダーにてユーザーへ表示する情報が変わる"
 puts "【目視で確認】画像が表示されており、画像がリンク切れなどになっていない"
 puts "【目視で確認】パスワードは半角英数字混合であるかどうか"
-puts "【目視で確認】配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
 sleep 300000000000000
