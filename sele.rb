@@ -66,6 +66,8 @@ month = 11
 day = 13
 phone_number_hyphen  ="080-9999-0000"
 postal_code_nohyphen = "9650873"
+password_dummy = "bbb222"
+blank1 = "--"
 url = "http://localhost:3000/"
 
 
@@ -90,13 +92,25 @@ d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 
-# wait.until {d.find_element(:id, 'user_birthday_1i').displayed?}
-# d.find_element(:id, 'user_birthday_1i').send_keys(year)
-# wait.until {d.find_element(:id, 'user_birthday_2i').displayed?}
-# d.find_element(:id, 'user_birthday_2i').send_keys(month)
-# wait.until {d.find_element(:id, 'user_birthday_3i').displayed?}
-# d.find_element(:id, 'user_birthday_3i').send_keys(day)
-# sleep 3
+
+d.find_element(:id, 'user_birthday_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_day_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_BirthDay_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_date_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birthdate_1i').send_keys(year) rescue nil
+
+d.find_element(:id, 'user_birthday_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_2i').send_keys(month) rescue nil
+
+d.find_element(:id, 'user_birthday_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
+
 d.find_element(:class,"register-red-btn").click
 
 
@@ -108,8 +122,6 @@ else
 end
 
 puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
-sleep 3
-puts "◯【目視で確認】エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）"
 
 d.find_element(:id, 'nickname').clear
 wait.until {d.find_element(:id, 'email').displayed?}
@@ -127,153 +139,261 @@ d.find_element(:id, 'first-name-kana').clear
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').clear
 
-# #パスワードは半角英数字混合であること
-# #文字だけの場合
-# wait.until {d.find_element(:id, 'nickname').displayed?}
-# d.find_element(:id, 'nickname').send_keys(nickname)
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').send_keys(email)
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').send_keys(password_string)
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').send_keys(password_string)
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').send_keys(first_name)
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').send_keys(last_name)
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
-# wait.until {d.find_element(:id, 'user_birthday_1i').displayed?}
-# puts 1
-# d.find_element(:id, 'user_birthday_1i').send_keys(year)
-# puts 2
-# wait.until {d.find_element(:id, 'user_birthday_2i').displayed?}
-# puts 3
-# d.find_element(:id, 'user_birthday_2i').send_keys(month)
-# puts 4
-# wait.until {d.find_element(:id, 'user_birthday_3i').displayed?}
-# puts 5
-# d.find_element(:id, 'user_birthday_3i').send_keys(day)
-# puts 6
 
-# puts "生年月日を入力してください。入力後、登録ボタンを押してください"
+#パスワードは確認用を含めて2回入力する
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password_string)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password_dummy)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+d.find_element(:id, 'user_birthday_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_day_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_BirthDay_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_date_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birthdate_1i').send_keys(year) rescue nil
 
-# sleep 400
+d.find_element(:id, 'user_birthday_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_2i').send_keys(month) rescue nil
 
-# if d.find_element(:id,'form-header-text').text == "会員情報入力"
-#   puts "!パスワードは半角文字のみだとユーザー登録できない。" 
-# elseif d.find_element(:id,'service-title').text == "人生を変えるフリマアプリ"
-#   puts "!パスワードは半角文字のみでもユーザー登録できる。" 
-#   puts "☒パスワードは半角英数字混合であること" 
-# end
+d.find_element(:id, 'user_birthday_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
+
+sleep 3
+d.find_element(:class,"register-red-btn").click
 
 
-
-# sleep 3
-
-# #パスワード半角英数であるかどうか
-# #数字だけの場合
-# wait.until {d.find_element(:id, 'nickname').displayed?}
-# d.find_element(:id, 'nickname').send_keys(nickname)
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').send_keys(email)
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').send_keys(password_int)
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').send_keys(password_int)
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').send_keys(first_name)
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').send_keys(last_name)
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+if /会員情報入力/ .match(d.page_source)
+  puts "!パスワードは確認用を含めて2回入力しないと、ユーザー登録ができない。" 
+else
+  puts "!パスワードは確認用を含めて2回入力しなくても、ユーザー登録ができる" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+puts "◯パスワードは確認用を含めて2回入力する"
 
 
+d.find_element(:id, 'nickname').clear
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
 
-# puts "生年月日を入力してください。入力後、登録ボタンを押してください"
+#パスワードは半角英数字混合であること
+#文字だけの場合
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password_string)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password_string)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+d.find_element(:id, 'user_birthday_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_day_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_BirthDay_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_date_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birthdate_1i').send_keys(year) rescue nil
+
+d.find_element(:id, 'user_birthday_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_2i').send_keys(month) rescue nil
+
+d.find_element(:id, 'user_birthday_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
 
 
-# if /会員情報入力/ .match(d.page_source)
-#   puts "!パスワードは半角数字のみだとユーザー登録できない。" 
-# else
-#   puts "!パスワードは半角数字のみでもユーザー登録できる。" 
-#   puts "☒パスワードは半角英数字混合であること" 
-#   wait.until {d.find_element(:id,"nickname").displayed?}
-# end
-# sleep 3
-# d.navigate.refresh
-# d.manage.delete_all_cookies
-# sleep 3
-# d.find_element(:id, 'nickname').clear
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').clear
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').clear
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').clear
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').clear
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').clear
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').clear
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').clear
+d.find_element(:class,"register-red-btn").click
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!パスワードは文字のみだと、ユーザー登録ができない。" 
+else
+  puts "!パスワードは文字のみでも、ユーザー登録ができる" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+
+d.find_element(:id, 'nickname').clear
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
+#パスワード半角英数であるかどうか
+#数字だけの場合
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password_int)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password_int)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+d.find_element(:id, 'user_birthday_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_day_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_BirthDay_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_date_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birthdate_1i').send_keys(year) rescue nil
+
+d.find_element(:id, 'user_birthday_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_2i').send_keys(month) rescue nil
+
+d.find_element(:id, 'user_birthday_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
+
+d.find_element(:class,"register-red-btn").click
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!パスワードは数字のみだと、ユーザー登録ができない。" 
+else
+  puts "!パスワードは数字のみでも、ユーザー登録ができる" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
 
 
+d.find_element(:id, 'nickname').clear
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
+
+puts "◯パスワードは半角英数字混合であること"
 
 
-# #パスワードは6文字以上であること
+#パスワードは6文字以上であること
 
-# wait.until {d.find_element(:id, 'nickname').displayed?}
-# d.find_element(:id, 'nickname').send_keys(nickname)
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').send_keys(email)
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').send_keys(password_short4)
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').send_keys(password_short4)
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').send_keys(first_name)
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').send_keys(last_name)
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
+wait.until {d.find_element(:id, 'nickname').displayed?}
+d.find_element(:id, 'nickname').send_keys(nickname)
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').send_keys(email)
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').send_keys(password_short4)
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').send_keys(password_short4)
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').send_keys(first_name)
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').send_keys(last_name)
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').send_keys(first_name_kana)
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'user_birthday_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_day_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_BirthDay_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_date_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birthdate_1i').send_keys(year) rescue nil
+
+d.find_element(:id, 'user_birthday_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_2i').send_keys(month) rescue nil
+
+d.find_element(:id, 'user_birthday_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
+
+d.find_element(:class,"register-red-btn").click
+
+if /会員情報入力/ .match(d.page_source)
+  puts "!パスワードは6文字以下だとユーザー登録できない。" 
+else
+  puts "!パスワードは半6文字以下でもユーザー登録できる。" 
+  puts "☒パスワードは6文字以上であること" 
+  wait.until {d.find_element(:id,"nickname").displayed?}
+end
+puts "◯パスワードは6文字以上である"
+
+d.find_element(:id, 'nickname').clear
+wait.until {d.find_element(:id, 'email').displayed?}
+d.find_element(:id, 'email').clear
+wait.until {d.find_element(:id, 'password').displayed?}
+d.find_element(:id, 'password').clear
+wait.until {d.find_element(:id, 'password-confirmation').displayed?}
+d.find_element(:id, 'password-confirmation').clear
+wait.until {d.find_element(:id, 'first-name').displayed?}
+d.find_element(:id, 'first-name').clear
+wait.until {d.find_element(:id, 'last-name').displayed?}
+d.find_element(:id, 'last-name').clear
+wait.until {d.find_element(:id, 'first-name-kana').displayed?}
+d.find_element(:id, 'first-name-kana').clear
+wait.until {d.find_element(:id, 'last-name-kana').displayed?}
+d.find_element(:id, 'last-name-kana').clear
 
 
-# d.find_element(:class,"register-red-btn").click
-
-# if /会員情報入力/ .match(d.page_source)
-#   puts "!パスワードは6文字以下だとユーザー登録できない。" 
-# else
-#   puts "!パスワードは半6文字以下でもユーザー登録できる。" 
-#   puts "☒パスワードは6文字以上であること" 
-#   wait.until {d.find_element(:id,"nickname").displayed?}
-# end
-
-# d.find_element(:id, 'nickname').clear
-# wait.until {d.find_element(:id, 'email').displayed?}
-# d.find_element(:id, 'email').clear
-# wait.until {d.find_element(:id, 'password').displayed?}
-# d.find_element(:id, 'password').clear
-# wait.until {d.find_element(:id, 'password-confirmation').displayed?}
-# d.find_element(:id, 'password-confirmation').clear
-# wait.until {d.find_element(:id, 'first-name').displayed?}
-# d.find_element(:id, 'first-name').clear
-# wait.until {d.find_element(:id, 'last-name').displayed?}
-# d.find_element(:id, 'last-name').clear
-# wait.until {d.find_element(:id, 'first-name-kana').displayed?}
-# d.find_element(:id, 'first-name-kana').clear
-# wait.until {d.find_element(:id, 'last-name-kana').displayed?}
-# d.find_element(:id, 'last-name-kana').clear
-
-# sleep 500000
 
 wait.until {d.find_element(:id, 'nickname').displayed?}
 d.find_element(:id, 'nickname').send_keys(nickname)
@@ -288,12 +408,11 @@ puts "◯メールアドレスは@を含む必要がある"
 wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
 puts "◯パスワードが必須である"
-puts "◯パスワードは6文字以上である"
-# puts "◯パスワードは半角英数字混合である"
+
 
 wait.until {d.find_element(:id, 'password-confirmation').displayed?}
 d.find_element(:id, 'password-confirmation').send_keys(password)
-puts "◯パスワードは確認用を含めて2回入力する"
+
 
 wait.until {d.find_element(:id, 'first-name').displayed?}
 d.find_element(:id, 'first-name').send_keys(first_name)
@@ -310,9 +429,26 @@ d.find_element(:id, 'last-name-kana').send_keys(last_name_kana)
 puts "◯ユーザー本名のフリガナが、名字と名前でそれぞれ必須である"
 puts "◯ユーザー本名のフリガナは全角（カタカナ）で入力させる"
 
+d.find_element(:id, 'user_birthday_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_day_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_BirthDay_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_date_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birthdate_1i').send_keys(year) rescue nil
 
-puts "生年月日を入力してください。入力後、登録ボタンを押してください"
-wait.until {d.find_element(:class,"purchase-btn").displayed?}
+d.find_element(:id, 'user_birthday_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_2i').send_keys(month) rescue nil
+
+d.find_element(:id, 'user_birthday_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
+sleep 5
+d.find_element(:class,"register-red-btn").click
+
 puts "◯生年月日が必須である"
 
 
@@ -330,11 +466,9 @@ else
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
-# if /ログアウト/.match(d.page_source)
-d.find_element(:link_text,"ログアウト").click
-# else
 
-# end
+d.find_element(:link_text,"ログアウト").click
+
 
 wait.until {d.find_element(:class,"login").displayed?}
 d.find_element(:class,"login").click 
@@ -753,8 +887,25 @@ d.find_element(:id, 'first-name').send_keys(first_name2)
 d.find_element(:id, 'last-name').send_keys(user_last_name2)
 d.find_element(:id, 'first-name-kana').send_keys(first_name_kana2)
 d.find_element(:id, 'last-name-kana').send_keys(last_name_kana2)
-puts "生年月日を入力してください後、登録ボタンを押してください"
-wait.until {d.find_element(:class,"purchase-btn").displayed?}
+d.find_element(:id, 'user_birthday_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_day_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_BirthDay_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birth_date_1i').send_keys(year) rescue nil
+d.find_element(:id, 'user_birthdate_1i').send_keys(year) rescue nil
+
+d.find_element(:id, 'user_birthday_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_2i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_2i').send_keys(month) rescue nil
+
+d.find_element(:id, 'user_birthday_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_day_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_BirthDay_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
+d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
+
+d.find_element(:class,"register-red-btn").click
 puts "【説明】商品出品ページに遷移してしまうためトップページに遷移後、商品購入画面に遷移する。"
 
 
@@ -832,7 +983,7 @@ end
 
 puts "◯クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できない"
 
-sleep 3
+
 d.navigate.refresh
 sleep 3
 #電話番号にはハイフンが含まれた場合。
@@ -867,7 +1018,7 @@ else
 end
 puts "◯電話番号にはハイフンは不要で、11桁以内である"
 
-sleep 3
+
 d.navigate.refresh
 sleep 3
 #郵便番号・都道府県・市区町村・番地・電話番号が必須であること
@@ -902,7 +1053,7 @@ else
 end
 puts "◯郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
 
-sleep 3
+
 d.navigate.refresh
 sleep 3
 #郵便番号にはハイフンが必要であること（123-4567となる）
@@ -936,7 +1087,7 @@ else
   wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
-sleep 3
+
 d.navigate.refresh
 sleep 3
 
@@ -1142,5 +1293,5 @@ puts "【目視で確認】新規登録、商品出品、商品購入の際に�
 puts "【目視で確認】basic認証が実装されている" 
 puts "【目視で確認】ログイン/ログアウトによって、ヘッダーにてユーザーへ表示する情報が変わる"
 puts "【目視で確認】画像が表示されており、画像がリンク切れなどになっていない"
-puts "【目視で確認】パスワードは半角英数字混合であるかどうか"
+
 sleep 300000000000000
