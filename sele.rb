@@ -5,11 +5,11 @@ d = Selenium::WebDriver.for :chrome
 
 #basic認証のidとpass
 b_id = "admin"
-b_password = "2222"
+b_password = "1111"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-31714.herokuapp.com/"
+url = "#{http}furima-11111.herokuapp.com/"
 
 
 
@@ -115,15 +115,16 @@ d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
 d.find_element(:class,"register-red-btn").click
 
 
-if /会員情報入力/ .match(d.page_source)
-  puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
-else
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
   puts "☒必須項目が一つでも欠けている場合でも、ユーザー登録ができる"
+  puts "!ログアウトして、ユーザー新規登録ページに遷移する動作を開始します。"
+  email = "div1s@co.jp"
   wait.until {d.find_element(:id,"nickname").displayed?}
+else
+  puts "!ニックネームを入力しないと、ユーザー登録ができない。"
 end
 
-puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
 
 d.find_element(:id, 'nickname').clear
 wait.until {d.find_element(:id, 'email').displayed?}
@@ -148,7 +149,7 @@ d.find_element(:id, 'nickname').send_keys(nickname)
 wait.until {d.find_element(:id, 'email').displayed?}
 d.find_element(:id, 'email').send_keys(email)
 wait.until {d.find_element(:id, 'password').displayed?}
-d.find_element(:id, 'password').send_keys(password_string)
+d.find_element(:id, 'password').send_keys(password)
 wait.until {d.find_element(:id, 'password-confirmation').displayed?}
 d.find_element(:id, 'password-confirmation').send_keys(password_dummy)
 wait.until {d.find_element(:id, 'first-name').displayed?}
@@ -181,14 +182,17 @@ sleep 3
 d.find_element(:class,"register-red-btn").click
 
 
-if /会員情報入力/ .match(d.page_source)
-  puts "!パスワードは確認用を含めて2回入力しないと、ユーザー登録ができない。" 
-else
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "!パスワードは確認用を含めて2回入力しなくても、ユーザー登録ができる" 
   puts "☒パスワードは確認用を含めて2回入力しない"
+  puts "!ログアウトして、ユーザー新規登録ページに遷移する動作を開始します。"
+  email = "div2s@co.jp"
   wait.until {d.find_element(:id,"nickname").displayed?}
+else
+  puts "!パスワードは確認用を含めて2回入力しないと、ユーザー登録ができない。" 
+  puts "◯パスワードは確認用を含めて2回入力する"
 end
-puts "◯パスワードは確認用を含めて2回入力する"
+
 
 
 d.find_element(:id, 'nickname').clear
@@ -246,12 +250,14 @@ d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
 
 d.find_element(:class,"register-red-btn").click
 
-if /会員情報入力/ .match(d.page_source)
-  puts "!パスワードは文字のみだと、ユーザー登録ができない。" 
-else
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "!パスワードは文字のみでも、ユーザー登録ができる"
   puts "☒パスワードは半角英数字混合でない"
+  puts "!ログアウトして、ユーザー新規登録ページに遷移する動作を開始します。"
+  email = "div3s@co.jp"
   wait.until {d.find_element(:id,"nickname").displayed?}
+else
+  puts "!パスワードは文字のみだと、ユーザー登録ができない。" 
 end
 
 d.find_element(:id, 'nickname').clear
@@ -308,12 +314,15 @@ d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
 
 d.find_element(:class,"register-red-btn").click
 
-if /会員情報入力/ .match(d.page_source)
-  puts "!パスワードは数字のみだと、ユーザー登録ができない。" 
-else
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "!パスワードは数字のみでも、ユーザー登録ができる" 
   puts "☒パスワードは半角英数字混合でない"
+  puts "!ログアウトして、ユーザー新規登録ページに遷移する動作を開始します。"
+  email = "div4s@co.jp"
   wait.until {d.find_element(:id,"nickname").displayed?}
+else
+  puts "!パスワードは数字のみだと、ユーザー登録ができない。" 
+  puts "◯パスワードは半角英数字混合であること"
 end
 
 
@@ -333,7 +342,7 @@ d.find_element(:id, 'first-name-kana').clear
 wait.until {d.find_element(:id, 'last-name-kana').displayed?}
 d.find_element(:id, 'last-name-kana').clear
 
-puts "◯パスワードは半角英数字混合であること"
+
 
 
 #パスワードは6文字以上であること
@@ -373,14 +382,17 @@ d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
 
 d.find_element(:class,"register-red-btn").click
 
-if /会員情報入力/ .match(d.page_source)
-  puts "!パスワードは6文字以下だとユーザー登録できない。" 
-else
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "!パスワードは半6文字以下でもユーザー登録できる。" 
   puts "☒パスワードは6文字以上でない" 
+  puts "!ログアウトして、ユーザー新規登録ページに遷移する動作を開始します。"
+  email = "div5s@co.jp"
   wait.until {d.find_element(:id,"nickname").displayed?}
+else
+  puts "!パスワードは6文字以下だとユーザー登録できない。" 
+  puts "◯パスワードは6文字以上である"
 end
-puts "◯パスワードは6文字以上である"
+
 
 d.find_element(:id, 'nickname').clear
 wait.until {d.find_element(:id, 'email').displayed?}
@@ -454,7 +466,7 @@ sleep 5
 d.find_element(:class,"register-red-btn").click
 
 puts "◯生年月日が必須である"
-
+puts "◯必須項目が一つでも欠けている場合は、ユーザー登録ができない"
 
 # #ログイン
 # d.find_element(:class,"login").click 
@@ -961,46 +973,38 @@ puts "コート購入画面のURL→  "+ order_url_coat
 #クレジットカード情報入力画面に遷移
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
-
 wait.until {d.find_element(:id, 'card-exp-year').displayed?}
 d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
-
 wait.until {d.find_element(:id, 'card-cvc').displayed?}
 d.find_element(:id, 'card-cvc').send_keys(card_cvc)
-
 wait.until {d.find_element(:id, 'postal-code').displayed?}
 d.find_element(:id, 'postal-code').send_keys(postal_code)
-
 wait.until {d.find_element(:id, 'prefecture').displayed?}
 d.find_element(:id, 'prefecture').send_keys(prefecture)
-
 wait.until {d.find_element(:id, 'city').displayed?}
 d.find_element(:id, 'city').send_keys(city)
-
 wait.until {d.find_element(:id, 'addresses').displayed?}
 d.find_element(:id, 'addresses').send_keys(addresses)
-
 wait.until {d.find_element(:id, 'phone-number').displayed?}
 d.find_element(:id, 'phone-number').send_keys(phone_number)
 
-
 d.find_element(:class,"buy-red-btn").click
-
-
-if /クレジットカード情報入力/ .match(d.page_source)
-  puts "!カード番号が入力されていない無い場合は、決済できない" 
-else
-  puts "!カード番号が入力されていない無い場合でも、決済できる" 
+sleep 3
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts "☒クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときでも決済できる。"
   wait.until {d.find_element(:class,"sold-out").displayed?}
+else
+  puts "◯クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できない"
 end
 
-puts "◯クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できない"
+
 
 
 d.navigate.refresh
 sleep 3
 #電話番号にはハイフンが含まれた場合。
 wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').clear
 d.find_element(:id, 'card-number').send_keys(card_number)
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
@@ -1022,20 +1026,24 @@ d.find_element(:id, 'phone-number').send_keys(phone_number_hyphen)
 
 d.find_element(:class,"buy-red-btn").click
 
-
-if /クレジットカード情報入力/ .match(d.page_source)
-  puts "!電話番号にハイフンがはいっているとき、決済できない" 
-else
+sleep 5
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "!電話番号にハイフンがはいっているとき、決済できる" 
+  puts "☒電話番号にはハイフンは不要で、11桁以内でなくても決済できる"
   wait.until {d.find_element(:class,"sold-out").displayed?}
+  
+else
+  puts "◯電話番号にはハイフンは不要で、11桁以内である"
 end
-puts "◯電話番号にはハイフンは不要で、11桁以内である"
+sleep 5
+
 
 
 d.navigate.refresh
 sleep 3
 #郵便番号・都道府県・市区町村・番地・電話番号が必須であること
 wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').clear
 d.find_element(:id, 'card-number').send_keys(card_number)
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
@@ -1057,20 +1065,21 @@ d.find_element(:id, 'phone-number').send_keys(phone_number)
 
 d.find_element(:class,"buy-red-btn").click
 
-
-if /クレジットカード情報入力/ .match(d.page_source)
-  puts "!郵便番号・都道府県・市区町村・番地・電話番号の値がないとき、決済できない" 
-else
-  puts "!郵便番号・都道府県・市区町村・番地・電話番号の値がないとき、決済できる" 
+sleep 3
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+  puts "☒郵便番号・都道府県・市区町村・番地・電話番号が必須でない"
   wait.until {d.find_element(:class,"sold-out").displayed?}
+else
+  puts "◯郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
 end
-puts "◯郵便番号・都道府県・市区町村・番地・電話番号が必須であること"
+
 
 
 d.navigate.refresh
 sleep 3
 #郵便番号にはハイフンが必要であること（123-4567となる）
 wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').clear
 d.find_element(:id, 'card-number').send_keys(card_number)
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
@@ -1092,43 +1101,38 @@ d.find_element(:id, 'phone-number').send_keys(phone_number)
 
 d.find_element(:class,"buy-red-btn").click
 
-
-if /クレジットカード情報入力/ .match(d.page_source)
-  puts "!郵便番号にはハイフンがあるとき、決済できない" 
-else
-  puts "!郵便番号にはハイフンがあるとき、、決済できる" 
+sleep 3
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "☒郵便番号にはハイフンがなくても購入できる。"
   wait.until {d.find_element(:class,"sold-out").displayed?}
+ 
+else
+  puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
 end
-puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
+
+
 
 d.navigate.refresh
-sleep 3
+
 # 値をクリアにする必要がある。
 wait.until {d.find_element(:id, 'card-number').displayed?}
+d.find_element(:id, 'card-number').clear
 d.find_element(:id, 'card-number').send_keys(card_number)
-puts "【説明】クレジットカードの番号記入"
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
-puts "【説明】クレジットカードの有効月を記入"
 wait.until {d.find_element(:id, 'card-exp-year').displayed?}
 d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
-puts "【説明】クレジットカードの有効年を記入"
 wait.until {d.find_element(:id, 'card-cvc').displayed?}
 d.find_element(:id, 'card-cvc').send_keys(card_cvc)
 puts "◯購入時、クレジットカードの情報を都度入力できる"
 wait.until {d.find_element(:id, 'postal-code').displayed?}
 d.find_element(:id, 'postal-code').send_keys(postal_code)
-
 wait.until {d.find_element(:id, 'prefecture').displayed?}
 d.find_element(:id, 'prefecture').send_keys(prefecture)
-
 wait.until {d.find_element(:id, 'city').displayed?}
 d.find_element(:id, 'city').send_keys(city)
-
 wait.until {d.find_element(:id, 'addresses').displayed?}
 d.find_element(:id, 'addresses').send_keys(addresses)
-
 wait.until {d.find_element(:id, 'phone-number').displayed?}
 d.find_element(:id, 'phone-number').send_keys(phone_number)
 puts "◯購入時、配送先の住所情報も都度入力できる"
@@ -1143,7 +1147,7 @@ puts "◯クレジットカード決済ができる"
 puts "◯クレジットカードの情報は購入の都度入力させる"
 puts "◯購入が完了したら、トップページまたは購入完了ページに遷移する"
 
-
+sleep 3
 if /Sold Out/ .match(d.page_source)
   puts "◯売却済みの商品は、「sold out」の文字が表示されるようになっている" 
 else
