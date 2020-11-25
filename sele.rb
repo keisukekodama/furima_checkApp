@@ -12,6 +12,7 @@ http ="http://#{b_id}:#{b_password}@"
 url = "#{http}furima-31714.herokuapp.com/"
 
 
+
 item_image = ""
 item_image2 = ""
 
@@ -412,7 +413,6 @@ puts "◯メールアドレスは@を含む必要がある"
 wait.until {d.find_element(:id, 'password').displayed?}
 d.find_element(:id, 'password').send_keys(password)
 puts "◯パスワードが必須である"
-
 
 wait.until {d.find_element(:id, 'password-confirmation').displayed?}
 d.find_element(:id, 'password-confirmation').send_keys(password)
