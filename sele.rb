@@ -12,8 +12,8 @@ http ="http://#{b_id}:#{b_password}@"
 url = "#{http}furima-31714.herokuapp.com/"
 
 
-item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
-item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
+item_image = ""
+item_image2 = ""
 
 
 nickname = "kusunnjyun"
@@ -467,6 +467,8 @@ if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯必須項目を入力し、ユーザー登録ができる" 
 else
   puts "☒生年月日を手動で入力し、トップページに遷移しない場合は、必須項目を入力し、ユーザー登録ができていない" 
+  d.find_element(:id, 'password').send_keys(password)
+  d.find_element(:id, 'password-confirmation').send_keys(password)
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
