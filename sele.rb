@@ -5,11 +5,11 @@ d = Selenium::WebDriver.for :chrome
 
 #basic認証のidとpass
 b_id = "admin"
-b_password = "1111"
+b_password = "2222"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-11111.herokuapp.com/"
+url = "#{http}furima-31714.herokuapp.com/"
 
 
 item_image = "/Users/tech-camp/projects2/furima_checkApp/photo/coat.jpg"
@@ -68,7 +68,7 @@ phone_number_hyphen  ="080-9999-0000"
 postal_code_nohyphen = "9650873"
 password_dummy = "bbb222"
 blank1 = "--"
-url = "http://localhost:3000/"
+# url = "http://localhost:3000/"
 
 
 
@@ -118,6 +118,7 @@ if /会員情報入力/ .match(d.page_source)
   puts "!ニックネームを入力しないと、ユーザー登録ができない。" 
 else
   puts "!ニックネームを入力しなくても、ユーザー登録ができる" 
+  puts "☒必須項目が一つでも欠けている場合でも、ユーザー登録ができる"
   wait.until {d.find_element(:id,"nickname").displayed?}
 end
 
@@ -183,6 +184,7 @@ if /会員情報入力/ .match(d.page_source)
   puts "!パスワードは確認用を含めて2回入力しないと、ユーザー登録ができない。" 
 else
   puts "!パスワードは確認用を含めて2回入力しなくても、ユーザー登録ができる" 
+  puts "☒パスワードは確認用を含めて2回入力しない"
   wait.until {d.find_element(:id,"nickname").displayed?}
 end
 puts "◯パスワードは確認用を含めて2回入力する"
@@ -246,7 +248,8 @@ d.find_element(:class,"register-red-btn").click
 if /会員情報入力/ .match(d.page_source)
   puts "!パスワードは文字のみだと、ユーザー登録ができない。" 
 else
-  puts "!パスワードは文字のみでも、ユーザー登録ができる" 
+  puts "!パスワードは文字のみでも、ユーザー登録ができる"
+  puts "☒パスワードは半角英数字混合でない"
   wait.until {d.find_element(:id,"nickname").displayed?}
 end
 
@@ -308,6 +311,7 @@ if /会員情報入力/ .match(d.page_source)
   puts "!パスワードは数字のみだと、ユーザー登録ができない。" 
 else
   puts "!パスワードは数字のみでも、ユーザー登録ができる" 
+  puts "☒パスワードは半角英数字混合でない"
   wait.until {d.find_element(:id,"nickname").displayed?}
 end
 
@@ -372,7 +376,7 @@ if /会員情報入力/ .match(d.page_source)
   puts "!パスワードは6文字以下だとユーザー登録できない。" 
 else
   puts "!パスワードは半6文字以下でもユーザー登録できる。" 
-  puts "☒パスワードは6文字以上であること" 
+  puts "☒パスワードは6文字以上でない" 
   wait.until {d.find_element(:id,"nickname").displayed?}
 end
 puts "◯パスワードは6文字以上である"
@@ -462,7 +466,7 @@ puts "◯生年月日が必須である"
 if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
   puts "◯必須項目を入力し、ユーザー登録ができる" 
 else
-  puts "☒必須項目を入力し、ユーザー登録ができていない" 
+  puts "☒生年月日を手動で入力し、トップページに遷移しない場合は、必須項目を入力し、ユーザー登録ができていない" 
   wait.until {d.find_element(:class,"purchase-btn").displayed?}
 end
 
@@ -906,6 +910,13 @@ d.find_element(:id, 'user_birth_date_3i').send_keys(month) rescue nil
 d.find_element(:id, 'user_birthdate_3i').send_keys(month) rescue nil
 
 d.find_element(:class,"register-red-btn").click
+
+if /FURIMAが選ばれる3つの理由/ .match(d.page_source)
+   nil
+else
+  puts "!生年月日を手動で入力しましょう。" 
+  wait.until {d.find_element(:class,"purchase-btn").displayed?}
+end
 puts "【説明】商品出品ページに遷移してしまうためトップページに遷移後、商品購入画面に遷移する。"
 
 
@@ -1084,13 +1095,14 @@ if /クレジットカード情報入力/ .match(d.page_source)
   puts "!郵便番号にはハイフンがあるとき、決済できない" 
 else
   puts "!郵便番号にはハイフンがあるとき、、決済できる" 
+  puts "☒郵便番号にはハイフンがなくても購入できる。"
   wait.until {d.find_element(:class,"sold-out").displayed?}
 end
 puts "◯郵便番号にはハイフンが必要であること（123-4567となる）"
 
 d.navigate.refresh
 sleep 3
-
+# 値をクリアにする必要がある。
 wait.until {d.find_element(:id, 'card-number').displayed?}
 d.find_element(:id, 'card-number').send_keys(card_number)
 puts "【説明】クレジットカードの番号記入"
