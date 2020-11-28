@@ -5,11 +5,11 @@ d = Selenium::WebDriver.for :chrome
 
 #basic認証のidとpass
 b_id = "admin"
-b_password = "1111"
+b_password = "2222"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-11111.herokuapp.com/"
+url = "#{http}furima-32141.herokuapp.com/"
 
 
 
@@ -18,7 +18,7 @@ item_image2 = ""
 
 
 nickname = "kusunnjyun"
-email = "divssd23s@co.jp"
+email = "divssd20s@co.jp"
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -26,7 +26,7 @@ first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf26s@co.jp"
+email2 = "dssaf027s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
@@ -1007,8 +1007,10 @@ wait.until {d.find_element(:id, 'card-number').displayed?}
 d.find_element(:id, 'card-number').clear
 d.find_element(:id, 'card-number').send_keys(card_number)
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
+d.find_element(:id, 'card-exp-month').clear
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
 wait.until {d.find_element(:id, 'card-exp-year').displayed?}
+d.find_element(:id, 'card-exp-year').clear
 d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
 wait.until {d.find_element(:id, 'card-cvc').displayed?}
 d.find_element(:id, 'card-cvc').send_keys(card_cvc)
@@ -1021,6 +1023,7 @@ d.find_element(:id, 'city').send_keys(city)
 wait.until {d.find_element(:id, 'addresses').displayed?}
 d.find_element(:id, 'addresses').send_keys(addresses)
 wait.until {d.find_element(:id, 'phone-number').displayed?}
+d.find_element(:id, 'phone-number').clear
 d.find_element(:id, 'phone-number').send_keys(phone_number_hyphen)
 
 
@@ -1088,6 +1091,7 @@ d.find_element(:id, 'card-exp-year').send_keys(card_exp_year)
 wait.until {d.find_element(:id, 'card-cvc').displayed?}
 d.find_element(:id, 'card-cvc').send_keys(card_cvc)
 wait.until {d.find_element(:id, 'postal-code').displayed?}
+d.find_element(:id, 'postal-code').clear
 d.find_element(:id, 'postal-code').send_keys(postal_code_nohyphen)
 wait.until {d.find_element(:id, 'prefecture').displayed?}
 d.find_element(:id, 'prefecture').send_keys(prefecture)
@@ -1116,7 +1120,6 @@ d.navigate.refresh
 
 # 値をクリアにする必要がある。
 wait.until {d.find_element(:id, 'card-number').displayed?}
-d.find_element(:id, 'card-number').clear
 d.find_element(:id, 'card-number').send_keys(card_number)
 wait.until {d.find_element(:id, 'card-exp-month').displayed?}
 d.find_element(:id, 'card-exp-month').send_keys(card_exp_month)
@@ -1126,15 +1129,24 @@ wait.until {d.find_element(:id, 'card-cvc').displayed?}
 d.find_element(:id, 'card-cvc').send_keys(card_cvc)
 puts "◯購入時、クレジットカードの情報を都度入力できる"
 wait.until {d.find_element(:id, 'postal-code').displayed?}
+d.find_element(:id, 'postal-code').clear
 d.find_element(:id, 'postal-code').send_keys(postal_code)
+
 wait.until {d.find_element(:id, 'prefecture').displayed?}
 d.find_element(:id, 'prefecture').send_keys(prefecture)
+
 wait.until {d.find_element(:id, 'city').displayed?}
+d.find_element(:id, 'city').clear
 d.find_element(:id, 'city').send_keys(city)
+
 wait.until {d.find_element(:id, 'addresses').displayed?}
+d.find_element(:id, 'addresses').clear
 d.find_element(:id, 'addresses').send_keys(addresses)
+
 wait.until {d.find_element(:id, 'phone-number').displayed?}
+d.find_element(:id, 'phone-number').clear
 d.find_element(:id, 'phone-number').send_keys(phone_number)
+
 puts "◯購入時、配送先の住所情報も都度入力できる"
 
 
@@ -1294,7 +1306,7 @@ else
 end
 
 d.find_element(:class,"item-img-content").click 
-
+# ログアウトして商品詳細ページ見れないときの処理を加える。
 wait.until{d.find_element(:class,"item-explain-box")}
 if d.find_element(:class,"item-explain-box").text == item_info_re
   puts  "!【商品説明は表示できている】" + d.find_element(:class,"item-explain-box").text
