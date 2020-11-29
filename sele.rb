@@ -9,7 +9,7 @@ b_password = "2222"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-31756.herokuapp.com/"
+url = "#{http}furima-11111.herokuapp.com/"
 
 
 
