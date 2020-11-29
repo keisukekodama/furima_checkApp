@@ -9,7 +9,7 @@ b_password = "2222"
 http ="http://#{b_id}:#{b_password}@"
 # 受講生のURLをhttp://以降から記入
 
-url = "#{http}furima-32141.herokuapp.com/"
+url = "#{http}furima-31756.herokuapp.com/"
 
 
 
@@ -18,7 +18,7 @@ item_image2 = "/Users/tech-camp/projects2/furima_checkApp/photo/sunglass.jpg"
 
 
 nickname = "kusunnjyun"
-email = "divssd20s@co.jp"
+email = "divssd90s@co.jp"
 password = "aaa111"
 first_name = "愛"
 last_name= "不時着"
@@ -26,7 +26,7 @@ first_name_kana = "アイ"
 last_name_kana = "フジチャク"
 
 nickname2 = "class"
-email2 = "dssaf027s@co.jp"
+email2 = "dssaf097s@co.jp"
 first_name2 = "梨泰"
 user_last_name2 = "院"
 first_name_kana2 = "イテウォン"
@@ -780,7 +780,7 @@ if /商品の情報を入力/.match(d.page_source)
   puts "◯無効な情報で商品編集を行うと、商品編集ができない" 
 else
   puts "☒無効な情報でも商品編集を行うと、商品編集ができる" 
-  wait.until {d.find_element(:id,"sell-btn").displayed?}
+  wait.until {d.find_element(:class,"sell-btn").displayed?}
 end
 
 sleep 3
