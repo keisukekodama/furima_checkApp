@@ -8,12 +8,12 @@ require './check_list'
 @d.manage.timeouts.implicit_wait = 3
 
 #basic認証のidとpass
-b_id = "admin"
-b_password = "1111"
+b_id = "akiramiya1911"
+b_password = "climber5112"
 @http ="http://#{b_id}:#{b_password}@"
 # 受講生の@URLをhttp://以降から記入
 
-@url = "#{@http}furima-11111.herokuapp.com/"
+@url = "#{@http}furima-31721.herokuapp.com/"
 # @url = "http://localhost:3000/"
 
 
